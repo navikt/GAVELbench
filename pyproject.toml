@@ -4,7 +4,16 @@ version = "0.1.0"
 description = "Mal for Python-prosjekt med 'best-practice' i 2025"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "bert-score>=0.3.13",
+    "google-cloud-bigquery>=3.40.1",
+    "google-genai>=1.64.0",
+    "numpy>=2.4.2",
+    "rouge-score>=0.1.2",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.0",
+    "tqdm>=4.67.3",
+]
 
 [dependency-groups]
 dev = [
