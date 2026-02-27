@@ -98,7 +98,7 @@ def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, float
     return {"jsd": float(np.mean(scores))}
 
 
-_NLI_MODEL = "alexandrainst/scandi-nli-small"
+_NLI_MODEL = "alexandrainst/scandi-nli-base"
 
 
 @register_metric("nli_entailment")

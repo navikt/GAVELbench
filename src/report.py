@@ -75,41 +75,25 @@ def format_table(
     results_by_model: dict[str, dict[str, float]],
     n_pairs_by_model: dict[str, int],
 ) -> list[str]:
-    """Formats a comparison table (metrics as rows, models as columns).
+    """Formats a standard Markdown comparison table (metrics as rows, models as columns).
 
-    Returns a list of strings, one per table row, suitable for both
-    terminal output and Markdown files.
+    Returns a list of strings, one per table row.
     """
     models = list(results_by_model.keys())
     all_score_names: list[str] = list(
         dict.fromkeys(s for scores in results_by_model.values() for s in scores)
     )
 
-    col_metric = max(len(s) for s in all_score_names + ["Metric"]) + 2
-    col_model = max((len(m) for m in models), default=8) + 2
-    col_model = max(col_model, 8)
+    def row(cells: list[str]) -> str:
+        return "| " + " | ".join(cells) + " |"
 
-    def sep_row() -> str:
-        return (
-            "+"
-            + "-" * (col_metric + 2)
-            + "+"
-            + ("+".join(["-" * (col_model + 2)] * len(models)))
-            + "+"
-        )
+    header = row(["Metric"] + models)
+    separator = row(["---"] + ["---:" for _ in models])
+    pairs = row(
+        ["pairs evaluated"] + [f"n={n_pairs_by_model.get(m, '?')}" for m in models]
+    )
 
-    def header_row() -> str:
-        cells = "".join(f" {m:<{col_model}} |" for m in models)
-        return f"| {'Metric':<{col_metric}} |{cells}"
-
-    def pairs_row() -> str:
-        cells = "".join(
-            f" {'n=' + str(n_pairs_by_model.get(m, '?')):<{col_model}} |"
-            for m in models
-        )
-        return f"| {'pairs evaluated':<{col_metric}} |{cells}"
-
-    lines = [sep_row(), header_row(), sep_row(), pairs_row(), sep_row()]
+    lines = [header, separator, pairs]
 
     for score_name in all_score_names:
         lower_is_better = score_name in LOWER_IS_BETTER
@@ -122,16 +106,16 @@ def format_table(
             else None
         )
 
-        cells = ""
+        cells = []
         for m in models:
             v = values[m]
-            cell = "N/A" if v is None else f"{v:.4f}" + (" ★" if v == best_val else "")
-            cells += f" {cell:<{col_model}} |"
+            cells.append(
+                "N/A" if v is None else f"{v:.4f}" + (" ★" if v == best_val else "")
+            )
 
         label = f"{score_name}{' ↓' if lower_is_better else ''}"
-        lines.append(f"| {label:<{col_metric}} |{cells}")
+        lines.append(row([label] + cells))
 
-    lines.append(sep_row())
     return lines
 
 
