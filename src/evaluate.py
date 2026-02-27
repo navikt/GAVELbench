@@ -203,7 +203,7 @@ def evaluate(
     bob_path: str,
     generated_paths: list[str],
     metrics: list[str] | None = None,
-    output_path: str = "data/evaluation_report.md",
+    output_path: str = "data/results/evaluation_report.md",
 ) -> dict[str, dict[str, float]]:
     """Runs evaluation metrics for one or more generated-answer files and writes a report.
 
@@ -251,8 +251,9 @@ def evaluate(
 if __name__ == "__main__":
     import glob
 
-    generated_files = sorted(glob.glob("data/generated_answers_*.jsonl"))
+    generated_files = sorted(glob.glob("data/generated/generated_answers_*.jsonl"))
     evaluate(
         bob_path="data/bob_data.jsonl",
         generated_paths=generated_files,
+        output_path="data/results/evaluation_report.md",
     )

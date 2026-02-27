@@ -141,4 +141,4 @@ def run_pipeline(
 
 
 if __name__ == "__main__":
-    run_pipeline()
+    run_pipeline(output_dir="data/generated")
