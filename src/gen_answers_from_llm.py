@@ -50,9 +50,10 @@ def load_model_configs(yaml_path: str = "src/models.yaml") -> list[ModelConfig]:
 
 
 def load_questions_answers(file_path: str) -> list[dict[str, str]]:
-    """Reads questions and reference answers from a JSONL file."""
-    with open(file_path) as f:
-        return [json.loads(line) for line in f if line.strip()]
+    """Reads questions and reference answers from a JSON file."""
+    with open(file_path, encoding="utf-8") as f:
+        data: list[dict[str, str]] = json.load(f)
+    return data
 
 
 def _build_prompt(question: str, max_words: int | None) -> str:
@@ -95,8 +96,8 @@ def run_model(
     lengths: list[int],
     output_dir: str = "data",
 ) -> None:
-    """Generates answers for all questions with one model and writes them to a JSONL file."""
-    out_path = os.path.join(output_dir, f"generated_answers_{config.id}.jsonl")
+    """Generates answers for all questions with one model and writes them to a JSON file."""
+    out_path = os.path.join(output_dir, f"generated_answers_{config.id}.json")
     print(f"\n[{config.id}] {config.description}")
     print(f"  Writing to {out_path}")
 
@@ -106,14 +107,13 @@ def run_model(
         answers.append({"question": question, "answer": answer})
 
     Path(output_dir).mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w") as f:
-        for qa in answers:
-            json.dump(qa, f, ensure_ascii=False)
-            f.write("\n")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(answers, f, indent=2, ensure_ascii=False)
+        f.write("\n")
 
 
 def run_pipeline(
-    bob_path: str = "data/bob_data.jsonl",
+    bob_path: str = "data/bob_data.json",
     models_yaml: str = "src/models.yaml",
     output_dir: str = "data",
     model_ids: list[str] | None = None,
@@ -121,7 +121,7 @@ def run_pipeline(
     """Runs the full answer-generation pipeline for all (or selected) models.
 
     Args:
-        bob_path: Path to the ground-truth JSONL file.
+        bob_path: Path to the ground-truth JSON file.
         models_yaml: Path to the models config YAML.
         output_dir: Directory where generated-answer files are written.
         model_ids: If provided, only run these model IDs (subset of what's in the YAML).

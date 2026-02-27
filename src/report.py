@@ -239,8 +239,11 @@ def write_report(
     print(f"\nReport written to {output_path}")
 
     json_path = output_path.replace(".md", ".json")
-    with open(json_path, "w") as f:
+    with open(json_path, "w", encoding="utf-8") as f:
         json.dump(
-            {"models": results_by_model, "n_pairs": n_pairs_by_model}, f, indent=2
+            {"models": results_by_model, "n_pairs": n_pairs_by_model},
+            f,
+            indent=2,
+            ensure_ascii=False,
         )
     print(f"Raw results written to {json_path}")

@@ -1,26 +1,30 @@
 """Gets Bob-data from BigQuery, with questions and answers, and saves it as a jsonl file."""
 
 import json
-from typing import Dict, List
 
 from google.cloud import bigquery
 
+_URI = "nks-aiautomatisering-prod-194a.testgrunnlag.unnest_annotation_prod"
+_QUERY = (
+    f"SELECT distinct contextualized_question, answer_content FROM `{_URI}` limit 100"
+)
 
-def get_nks_bob_questions_answers() -> List[Dict[str, str]]:
-    """Gets Bob-data from BigQuery, with questions and answers."""
-    URI = "nks-aiautomatisering-prod-194a.testgrunnlag.unnest_annotation_prod"
+
+def get_nks_bob_questions_answers() -> list[dict[str, str]]:
+    """Queries BigQuery and returns rows as a list of dicts."""
     client = bigquery.Client()
-    query = f"SELECT distinct contextualized_question, answer_content FROM `{URI}` limit 100"
-    query_job = client.query(query)
-    results = query_job.result()
+    results = client.query(_QUERY).result()
+    return [dict(row) for row in results]
 
-    rows = [dict(row) for row in results]
-    return rows
+
+def fetch_bob_data(output_path: str) -> None:
+    """Fetches Bob Q&A data from BigQuery and writes it to *output_path* as JSON."""
+    rows = get_nks_bob_questions_answers()
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(rows, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    print(f"Wrote {len(rows)} rows to {output_path}")
 
 
 if __name__ == "__main__":
-    rows = get_nks_bob_questions_answers()
-    with open("data/bob_data.jsonl", "w") as f:
-        for row in rows:
-            json.dump(row, f)
-            f.write("\n")
+    fetch_bob_data("data/bob_data.json")

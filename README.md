@@ -26,21 +26,36 @@ gcloud auth login --update-adc
 
 ## Kjøre analysen
 
-### Full pipeline (generering + evaluering)
+### Full pipeline (henting av data + generering + evaluering)
 
 ```bash
 uv run python src/main.py
 ```
 
-### Kun evaluering (hopp over generering, bruk eksisterende svarfiler)
+Pipelinen kjøres i tre steg:
+
+| Steg | Beskrivelse |
+|------|-------------|
+| 0 | Henter Bob-spørsmål og -svar fra BigQuery → `data/bob_data.jsonl` |
+| 1 | Genererer svar fra alle modeller i `models.yaml` → `data/generated/` |
+| 2 | Evaluerer svarene og skriver rapport → `data/results/` |
+
+### Hopp over steg
 
 ```bash
+# Hopp over BQ-henting (bruk eksisterende bob_data.jsonl)
+uv run python src/main.py --skip-fetch
+
+# Hopp over både BQ-henting og generering (kun evaluering)
 uv run python src/main.py --skip-generation
 ```
 
 ### Kjøre enkeltsteget
 
 ```bash
+# Kun henting av Bob-data fra BigQuery
+uv run python src/load_data_from_BQ.py
+
 # Kun generering av svar
 uv run python src/gen_answers_from_llm.py
 

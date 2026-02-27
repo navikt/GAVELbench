@@ -138,15 +138,16 @@ def compute_nli_entailment(
 
 
 def load_jsonl(path: str) -> list[dict[str, str]]:
-    """Loads a JSONL file and returns a list of dicts."""
-    with open(path) as f:
-        return [json.loads(line) for line in f if line.strip()]
+    """Loads a JSON file (array of objects) and returns a list of dicts."""
+    with open(path, encoding="utf-8") as f:
+        data: list[dict[str, str]] = json.load(f)
+    return data
 
 
 def model_name_from_path(path: str) -> str:
     """Derives a short model label from a generated-answers file path.
 
-    Expects filenames like ``generated_answers_<model>.jsonl``.
+    Expects filenames like ``generated_answers_<model>.json``.
     Falls back to the bare filename stem.
     """
     stem = os.path.splitext(os.path.basename(path))[0]
@@ -208,11 +209,11 @@ def evaluate(
     """Runs evaluation metrics for one or more generated-answer files and writes a report.
 
     Args:
-        bob_path: Path to the bob_data.jsonl file (ground truth).
-        generated_paths: One or more paths to generated-answer JSONL files.
-            Each file is expected to have ``question`` and ``answer`` fields.
+        bob_path: Path to the bob_data.json file (ground truth).
+        generated_paths: One or more paths to generated-answer JSON files.
+            Each file is a JSON array with ``question`` and ``answer`` fields.
             The model name is inferred from the filename
-            (``generated_answers_<model>.jsonl``).
+            (``generated_answers_<model>.json``).
         metrics: Metric names to run. Defaults to all registered metrics.
         output_path: Where to write the Markdown report.
 
@@ -251,9 +252,9 @@ def evaluate(
 if __name__ == "__main__":
     import glob
 
-    generated_files = sorted(glob.glob("data/generated/generated_answers_*.jsonl"))
+    generated_files = sorted(glob.glob("data/generated/generated_answers_*.json"))
     evaluate(
-        bob_path="data/bob_data.jsonl",
+        bob_path="data/bob_data.json",
         generated_paths=generated_files,
         output_path="data/results/evaluation_report.md",
     )
