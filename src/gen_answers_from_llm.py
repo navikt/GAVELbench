@@ -1,67 +1,144 @@
 """Generates answers from a language model based on questions from Bob."""
 
 import json
-from typing import Any, Dict, List
+import os
+from dataclasses import dataclass, field
+from pathlib import Path
 
+import yaml
 from google import genai
 from tqdm import tqdm
 
 
-def read_questions_answers_from_file(file_path: str) -> List[Dict[str, str]]:
-    """Reads generated answers from a jsonl file."""
-    answers = []
-    with open(file_path, "r") as f:
-        for line in f:
-            answers.append(json.loads(line))
-    return answers
+@dataclass
+class ModelConfig:
+    """Configuration for a single model."""
+
+    id: str
+    provider: str
+    description: str = ""
+    project: str = ""
+    location: str = ""
+    extra: dict[str, str] = field(default_factory=dict)
 
 
-def generate_answers_from_llm(
-    question: str,
-    model: str = "gemini-2.0-flash-001",
-    lenght_of_answer: int | None = None,
-) -> str | Any:
-    """Generates answers from a language model based on the provided questions."""
-    system_instruction = """
-            Du er en hjelpsom assistent som svarer på spørsmål basert på informasjonen du har fått.
-            Hent fortrinnsvis relevant informasjon fra offisielle kilder som nav.no.
-            Svar med maks 200 ord, og inkluder lenker til kildene du har brukt.
-            Spørsmålet er som følger: \n
-        """
-    if lenght_of_answer:
-        system_instruction += f"Svar med maks {lenght_of_answer} ord. \n"
-    system_instruction += f"{question}"
-    if model == "gemini-2.0-flash-001":
-        client = genai.Client(
-            vertexai=True, project="tada-prod-4dac", location="europe-west1"
+def load_model_configs(yaml_path: str = "src/models.yaml") -> list[ModelConfig]:
+    """Loads model configurations from a YAML file.
+
+    Top-level ``defaults`` are merged into each model entry so shared settings
+    (e.g. project, location) don't need to be repeated per model.
+    """
+    with open(yaml_path) as f:
+        raw = yaml.safe_load(f)
+
+    defaults: dict[str, str] = raw.get("defaults", {})
+    configs: list[ModelConfig] = []
+    for entry in raw.get("models", []):
+        merged = {**defaults, **entry}
+        known = {"id", "provider", "description", "project", "location"}
+        configs.append(
+            ModelConfig(
+                id=merged["id"],
+                provider=merged["provider"],
+                description=merged.get("description", ""),
+                project=merged.get("project", ""),
+                location=merged.get("location", ""),
+                extra={k: v for k, v in merged.items() if k not in known},
+            )
         )
-        response = client.models.generate_content(
-            model=model, contents=system_instruction
+    return configs
+
+
+def load_questions_answers(file_path: str) -> list[dict[str, str]]:
+    """Reads questions and reference answers from a JSONL file."""
+    with open(file_path) as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def _build_prompt(question: str, max_words: int | None) -> str:
+    """Builds the system prompt for a given question."""
+    prompt = (
+        "Du er en hjelpsom assistent som svarer på spørsmål basert på informasjonen du har fått.\n"
+        "Hent fortrinnsvis relevant informasjon fra offisielle kilder som nav.no.\n"
+        "Svar med maks 200 ord, og inkluder lenker til kildene du har brukt.\n"
+    )
+    if max_words:
+        prompt += f"Svar med maks {max_words} ord.\n"
+    prompt += f"Spørsmålet er som følger:\n{question}"
+    return prompt
+
+
+def generate_answer(
+    question: str, config: ModelConfig, max_words: int | None = None
+) -> str:
+    """Generates a single answer for *question* using the model described by *config*."""
+    prompt = _build_prompt(question, max_words)
+
+    if config.provider == "vertex_ai":
+        client = genai.Client(
+            vertexai=True, project=config.project, location=config.location
+        )
+        text: str = client.models.generate_content(
+            model=config.id, contents=prompt
         ).text
-    return response
+        return text
+
+    raise ValueError(
+        f"Unsupported provider '{config.provider}' for model '{config.id}'."
+        " Add a new branch in generate_answer() to support it."
+    )
 
 
-def answer_pipeline(
-    model: str, questions: List[str], lengths_of_answers: List[int]
+def run_model(
+    config: ModelConfig,
+    questions: list[str],
+    lengths: list[int],
+    output_dir: str = "data",
 ) -> None:
-    """Pipeline for generating answers from a language model based on the provided questions."""
+    """Generates answers for all questions with one model and writes them to a JSONL file."""
+    out_path = os.path.join(output_dir, f"generated_answers_{config.id}.jsonl")
+    print(f"\n[{config.id}] {config.description}")
+    print(f"  Writing to {out_path}")
+
     answers = []
-    for question, length_of_answer in zip(tqdm(questions), lengths_of_answers):
-        answer = generate_answers_from_llm(question, lenght_of_answer=length_of_answer)
+    for question, max_words in zip(tqdm(questions, desc=config.id), lengths):
+        answer = generate_answer(question, config, max_words=max_words)
         answers.append({"question": question, "answer": answer})
 
-    with open(f"data/generated_answers_{model}.jsonl", "w") as f:
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
         for qa in answers:
-            json.dump(qa, f)
+            json.dump(qa, f, ensure_ascii=False)
             f.write("\n")
 
 
-if __name__ == "__main__":
-    # Example usage
-    questions_answers = read_questions_answers_from_file("data/bob_data.jsonl")
-    questions = [qa["contextualized_question"] for qa in questions_answers]
-    lengths_of_answers = [
-        len(qa["answer_content"].strip().split()) for qa in questions_answers
-    ]
+def run_pipeline(
+    bob_path: str = "data/bob_data.jsonl",
+    models_yaml: str = "src/models.yaml",
+    output_dir: str = "data",
+    model_ids: list[str] | None = None,
+) -> None:
+    """Runs the full answer-generation pipeline for all (or selected) models.
 
-    answer_pipeline("gemini-2.0-flash-001", questions, lengths_of_answers)
+    Args:
+        bob_path: Path to the ground-truth JSONL file.
+        models_yaml: Path to the models config YAML.
+        output_dir: Directory where generated-answer files are written.
+        model_ids: If provided, only run these model IDs (subset of what's in the YAML).
+    """
+    records = load_questions_answers(bob_path)
+    questions = [r["contextualized_question"] for r in records]
+    lengths = [len(r["answer_content"].strip().split()) for r in records]
+
+    configs = load_model_configs(models_yaml)
+    if model_ids:
+        configs = [c for c in configs if c.id in model_ids]
+        if not configs:
+            raise ValueError(f"None of the requested model IDs found in {models_yaml}.")
+
+    for config in configs:
+        run_model(config, questions, lengths, output_dir=output_dir)
+
+
+if __name__ == "__main__":
+    run_pipeline()

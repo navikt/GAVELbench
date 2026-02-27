@@ -1,0 +1,16 @@
+defaults:
+  project: tada-prod-4dac
+  location: europe-west1
+
+models:
+  - id: gemini-2.0-flash-001
+    provider: vertex_ai
+    description: Fast, cost-efficient Gemini model
+
+  - id: gemini-2.0-flash-lite-001
+    provider: vertex_ai
+    description: Lightweight Gemini Flash model, faster and more concise
+
+  - id: gemini-2.5-pro
+    provider: vertex_ai
+    description: Gemini 2.5 Pro with reasoning, most capable available model

@@ -9,6 +9,7 @@ dependencies = [
     "google-cloud-bigquery>=3.40.1",
     "google-genai>=1.64.0",
     "numpy>=2.4.2",
+    "pyyaml>=6.0.3",
     "rouge-score>=0.1.2",
     "scikit-learn>=1.8.0",
     "scipy>=1.17.0",
@@ -19,6 +20,7 @@ dependencies = [
 dev = [
     "prek>=0.3.1",
     "ruff>=0.15.0",
+    "types-pyyaml>=6.0.12.20250915",
 ]
 notebooks = [
     "jupyter>=1.1.1",
