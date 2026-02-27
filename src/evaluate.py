@@ -4,7 +4,6 @@ import json
 import os
 import re
 from collections import Counter
-from datetime import datetime, timezone
 from typing import Callable
 
 import numpy as np
@@ -13,14 +12,14 @@ from rouge_score import rouge_scorer
 from scipy.spatial.distance import jensenshannon
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine
+from transformers import pipeline
+
+from report import print_report, write_report
 
 # A metric function takes (references, hypotheses) and returns a dict of score_name -> float.
 MetricFn = Callable[[list[str], list[str]], dict[str, float]]
 
 _METRICS: dict[str, MetricFn] = {}
-
-# Metrics where a lower value is better (used in commentary).
-_LOWER_IS_BETTER: set[str] = {"jsd"}
 
 
 def register_metric(name: str) -> Callable[[MetricFn], MetricFn]:
@@ -99,6 +98,40 @@ def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, float
     return {"jsd": float(np.mean(scores))}
 
 
+_NLI_MODEL = "alexandrainst/scandi-nli-small"
+
+
+@register_metric("nli_entailment")
+def compute_nli_entailment(
+    references: list[str], hypotheses: list[str]
+) -> dict[str, float]:
+    """Computes mean NLI entailment probability using a Scandinavian NLI model.
+
+    Framing:
+        premise   = model output (hypothesis/generated answer)
+        hypothesis = correct answer (reference from Bob)
+
+    A high entailment score means the model output supports / contains the
+    correct answer.
+    """
+    nli = pipeline(
+        "text-classification",
+        model=_NLI_MODEL,
+        device=-1,
+        top_k=None,
+        truncation=True,
+    )
+    pairs = [
+        {"text": hyp, "text_pair": ref} for hyp, ref in zip(hypotheses, references)
+    ]
+    results = nli(pairs)
+    scores = [
+        next(r["score"] for r in result if r["label"] == "entailment")
+        for result in results
+    ]
+    return {"nli_entailment": float(np.mean(scores))}
+
+
 # ---------------------------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------------------------
@@ -136,179 +169,6 @@ def align_pairs(
             references.append(record["answer_content"])
             hypotheses.append(generated_by_question[question])
     return references, hypotheses
-
-
-# ---------------------------------------------------------------------------
-# Report formatting
-# ---------------------------------------------------------------------------
-
-# Metrics where lower is better get a downward arrow annotation in the header.
-_DIRECTION_NOTE = "(↓ lower is better)"
-
-
-def _build_commentary(results_by_model: dict[str, dict[str, float]]) -> list[str]:
-    """Generates human-readable commentary comparing models across metrics.
-
-    Args:
-        results_by_model: ``{model_name: {score_name: value}}``.
-
-    Returns:
-        List of comment strings, one per metric plus a summary sentence.
-    """
-    if len(results_by_model) < 2:
-        return []
-
-    models = list(results_by_model.keys())
-    all_score_names: list[str] = list(
-        dict.fromkeys(s for scores in results_by_model.values() for s in scores)
-    )
-
-    lines: list[str] = []
-    best_counts: dict[str, int] = {m: 0 for m in models}
-
-    for score_name in all_score_names:
-        lower_is_better = score_name in _LOWER_IS_BETTER
-        values = {
-            m: results_by_model[m][score_name]
-            for m in models
-            if score_name in results_by_model[m]
-        }
-        if not values:
-            continue
-
-        best_model = (
-            min(values, key=values.__getitem__)
-            if lower_is_better
-            else max(values, key=values.__getitem__)
-        )
-        worst_model = (
-            max(values, key=values.__getitem__)
-            if lower_is_better
-            else min(values, key=values.__getitem__)
-        )
-        best_counts[best_model] += 1
-
-        direction = "lower" if lower_is_better else "higher"
-        delta = abs(values[best_model] - values[worst_model])
-        lines.append(
-            f"- **{score_name}**: `{best_model}` scores best ({values[best_model]:.4f}),"
-            f" `{worst_model}` scores worst ({values[worst_model]:.4f})."
-            f" Δ={delta:.4f} ({direction} is better)."
-        )
-
-    # Overall winner
-    overall_winner = max(best_counts, key=best_counts.__getitem__)
-    lines.append(
-        f"\n**Overall**: `{overall_winner}` leads on {best_counts[overall_winner]}"
-        f" of {len(all_score_names)} metric(s)."
-    )
-    return lines
-
-
-def _format_table(
-    results_by_model: dict[str, dict[str, float]],
-    n_pairs_by_model: dict[str, int],
-) -> list[str]:
-    """Formats a Markdown comparison table (metrics as rows, models as columns)."""
-    models = list(results_by_model.keys())
-    all_score_names: list[str] = list(
-        dict.fromkeys(s for scores in results_by_model.values() for s in scores)
-    )
-
-    col_metric = max(len(s) for s in all_score_names + ["Metric"]) + 2
-    col_model = max((len(m) for m in models), default=8) + 2
-    col_model = max(col_model, 8)
-
-    def sep_row() -> str:
-        return (
-            "+"
-            + "-" * (col_metric + 2)
-            + "+"
-            + ("+".join(["-" * (col_model + 2)] * len(models)))
-            + "+"
-        )
-
-    def header_row() -> str:
-        cells = "".join(f" {m:<{col_model}} |" for m in models)
-        return f"| {'Metric':<{col_metric}} |{cells}"
-
-    def pairs_row() -> str:
-        cells = "".join(
-            f" {'n=' + str(n_pairs_by_model.get(m, '?')):<{col_model}} |"
-            for m in models
-        )
-        return f"| {'pairs evaluated':<{col_metric}} |{cells}"
-
-    lines = [sep_row(), header_row(), sep_row(), pairs_row(), sep_row()]
-
-    for score_name in all_score_names:
-        lower_is_better = score_name in _LOWER_IS_BETTER
-        values = {m: results_by_model[m].get(score_name) for m in models}
-
-        # Identify best value for highlighting
-        present = {m: v for m, v in values.items() if v is not None}
-        best_val = (
-            (min(present.values()) if lower_is_better else max(present.values()))
-            if present
-            else None
-        )
-
-        cells = ""
-        for m in models:
-            v = values[m]
-            if v is None:
-                cell = "N/A"
-            else:
-                cell = f"{v:.4f}" + (" ★" if v == best_val else "")
-            cells += f" {cell:<{col_model}} |"
-
-        direction = " ↓" if lower_is_better else ""
-        label = f"{score_name}{direction}"
-        lines.append(f"| {label:<{col_metric}} |{cells}")
-
-    lines.append(sep_row())
-    return lines
-
-
-def _write_report(
-    results_by_model: dict[str, dict[str, float]],
-    n_pairs_by_model: dict[str, int],
-    output_path: str,
-) -> None:
-    """Writes a Markdown evaluation report to *output_path*."""
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    lines: list[str] = [
-        "# GAVELbench Evaluation Report",
-        f"\n_Generated: {timestamp}_\n",
-        "## Results\n",
-    ]
-    lines += _format_table(results_by_model, n_pairs_by_model)
-
-    commentary = _build_commentary(results_by_model)
-    if commentary:
-        lines += ["\n## Commentary\n"] + commentary
-
-    report_text = "\n".join(lines) + "\n"
-    with open(output_path, "w") as f:
-        f.write(report_text)
-    print(f"\nReport written to {output_path}")
-
-
-def _print_table(
-    results_by_model: dict[str, dict[str, float]],
-    n_pairs_by_model: dict[str, int],
-) -> None:
-    """Prints the comparison table to stdout."""
-    print("\n=== GAVELbench Evaluation Report ===\n")
-    for line in _format_table(results_by_model, n_pairs_by_model):
-        print(line)
-    commentary = _build_commentary(results_by_model)
-    if commentary:
-        print("\nCommentary:")
-        for c in commentary:
-            # Strip markdown bold markers for plain terminal output
-            print(re.sub(r"\*\*(.+?)\*\*", r"\1", c).replace("`", ""))
-    print()
 
 
 # ---------------------------------------------------------------------------
@@ -382,17 +242,8 @@ def evaluate(
     if not results_by_model:
         raise ValueError("No valid model results produced.")
 
-    _print_table(results_by_model, n_pairs_by_model)
-    _write_report(results_by_model, n_pairs_by_model, output_path)
-
-    results_path = output_path.replace(".md", ".json")
-    with open(results_path, "w") as f:
-        json.dump(
-            {"models": results_by_model, "n_pairs": n_pairs_by_model},
-            f,
-            indent=2,
-        )
-    print(f"Raw results written to {results_path}")
+    print_report(results_by_model, n_pairs_by_model)
+    write_report(results_by_model, n_pairs_by_model, output_path)
 
     return results_by_model
 

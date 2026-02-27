@@ -14,7 +14,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-02-20T14:22:33.584715Z"
+exclude-newer = "2026-02-20T14:58:56.372179Z"
 exclude-newer-span = "P1W"
 
 [[package]]
@@ -2700,6 +2700,7 @@ dependencies = [
     { name = "bert-score" },
     { name = "google-cloud-bigquery" },
     { name = "google-genai" },
+    { name = "matplotlib" },
     { name = "numpy" },
     { name = "pyyaml" },
     { name = "rouge-score" },
@@ -2726,6 +2727,7 @@ requires-dist = [
     { name = "bert-score", specifier = ">=0.3.13" },
     { name = "google-cloud-bigquery", specifier = ">=3.40.1" },
     { name = "google-genai", specifier = ">=1.64.0" },
+    { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "numpy", specifier = ">=2.4.2" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "rouge-score", specifier = ">=0.1.2" },

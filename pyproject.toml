@@ -8,6 +8,7 @@ dependencies = [
     "bert-score>=0.3.13",
     "google-cloud-bigquery>=3.40.1",
     "google-genai>=1.64.0",
+    "matplotlib>=3.10.8",
     "numpy>=2.4.2",
     "pyyaml>=6.0.3",
     "rouge-score>=0.1.2",
