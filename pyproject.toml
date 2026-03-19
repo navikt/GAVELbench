@@ -5,6 +5,7 @@ description = "Mal for Python-prosjekt med 'best-practice' i 2025"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "anthropic>=0.84.0",
     "bert-score>=0.3.13",
     "google-cloud-bigquery>=3.40.1",
     "google-genai>=1.64.0",
@@ -18,6 +19,10 @@ dependencies = [
 ]
 
 [dependency-groups]
+huggingface = [
+    "transformers>=4.40.0",
+    "accelerate>=0.27.0",
+]
 dev = [
     "prek>=0.3.1",
     "ruff>=0.15.0",

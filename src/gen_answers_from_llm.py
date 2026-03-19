@@ -4,10 +4,18 @@ import json
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
+import anthropic
 import yaml
 from google import genai
 from tqdm import tqdm
+
+if TYPE_CHECKING:
+    from transformers import Pipeline
+
+# Cache for loaded HuggingFace pipelines (model_id -> pipeline)
+_hf_pipelines: dict[str, "Pipeline"] = {}
 
 
 @dataclass
@@ -69,6 +77,34 @@ def _build_prompt(question: str, max_words: int | None) -> str:
     return prompt
 
 
+def _get_hf_pipeline(config: ModelConfig) -> "Pipeline":
+    """Returns a cached HuggingFace text-generation pipeline for *config*.
+
+    The pipeline is loaded once per model and reused across calls.
+    Requires ``transformers``, ``accelerate``, and a compatible ``torch``
+    installation (``pip install transformers accelerate torch``).
+    """
+    if config.id not in _hf_pipelines:
+        try:
+            from transformers import pipeline
+        except ImportError as exc:
+            raise ImportError(
+                "The 'transformers' package is required for HuggingFace models. "
+                "Install it with: uv sync --group huggingface"
+            ) from exc
+
+        hf_token: str | None = config.extra.get("hf_token") or os.environ.get(
+            "HF_TOKEN"
+        )
+        _hf_pipelines[config.id] = pipeline(
+            "text-generation",
+            model=config.id,
+            device_map="auto",
+            token=hf_token,
+        )
+    return _hf_pipelines[config.id]
+
+
 def generate_answer(
     question: str, config: ModelConfig, max_words: int | None = None
 ) -> str:
@@ -84,6 +120,29 @@ def generate_answer(
         ).text
         return text
 
+    if config.provider == "vertex_anthropic":
+        client_anthropic = anthropic.AnthropicVertex(
+            region=config.location, project_id=config.project
+        )
+        max_tokens: int = int(config.extra.get("max_tokens", 1024))
+        message = client_anthropic.messages.create(
+            model=config.id,
+            max_tokens=max_tokens,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return str(message.content[0].text)
+
+    if config.provider == "huggingface":
+        pipe = _get_hf_pipeline(config)
+        max_new_tokens: int = int(config.extra.get("max_new_tokens", 512))
+        messages = [{"role": "user", "content": prompt}]
+        result: Any = pipe(messages, max_new_tokens=max_new_tokens)
+        # transformers returns a list of dicts; the last message is the reply
+        generated: Any = result[0]["generated_text"]
+        if isinstance(generated, list):
+            return str(generated[-1]["content"])
+        return str(generated)
+
     raise ValueError(
         f"Unsupported provider '{config.provider}' for model '{config.id}'."
         " Add a new branch in generate_answer() to support it."
@@ -97,7 +156,8 @@ def run_model(
     output_dir: str = "data",
 ) -> None:
     """Generates answers for all questions with one model and writes them to a JSON file."""
-    out_path = os.path.join(output_dir, f"generated_answers_{config.id}.json")
+    safe_id = config.id.replace("/", "__")
+    out_path = os.path.join(output_dir, f"generated_answers_{safe_id}.json")
     print(f"\n[{config.id}] {config.description}")
     print(f"  Writing to {out_path}")
 
