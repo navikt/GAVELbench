@@ -6,7 +6,7 @@ from google.cloud import bigquery
 
 _URI = "nks-aiautomatisering-prod-194a.testgrunnlag.unnest_annotation_prod"
 _QUERY = (
-    f"SELECT distinct contextualized_question, answer_content FROM `{_URI}` limit 100"
+    f"SELECT distinct contextualized_question, answer_content FROM `{_URI}` limit 20"
 )
 
 

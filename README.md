@@ -24,6 +24,9 @@ Google Cloud-autentisering er nødvendig for tilgang til Vertex AI-modeller:
 gcloud auth login --update-adc
 ```
 
+Trenger kanskje å oppdatere til å ha gjort noen av stegene i denne guiden:
+https://data.ansatt.nav.no/quarto/853b92c8-84a2-4f23-8219-457e4efd5e1c/index.html
+
 ## Kjøre analysen
 
 ### Full pipeline (henting av data + generering + evaluering)

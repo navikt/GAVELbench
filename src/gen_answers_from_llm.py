@@ -2,20 +2,50 @@
 
 import json
 import os
+import random
+import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 import anthropic
 import yaml
 from google import genai
+from google.genai import errors as genai_errors
 from tqdm import tqdm
 
-if TYPE_CHECKING:
-    from transformers import Pipeline
+_MAX_RETRIES = 6
+_BASE_WAIT_SECONDS = 10
 
-# Cache for loaded HuggingFace pipelines (model_id -> pipeline)
-_hf_pipelines: dict[str, "Pipeline"] = {}
+# Cache for loaded llama-cpp models (model_id -> Llama instance)
+_llama_models: dict[str, Any] = {}
+
+_LOCAL_MODEL_DIR = Path("models")
+
+
+def _call_with_retry(fn: Callable[[], str]) -> str:
+    """Calls fn(), retrying with exponential backoff on rate-limit (429) errors.
+
+    Handles both google.genai.errors.ClientError (Vertex AI) and
+    anthropic.RateLimitError (Anthropic on Vertex AI).
+    """
+    for attempt in range(_MAX_RETRIES):
+        try:
+            return fn()
+        except (genai_errors.ClientError, anthropic.RateLimitError) as exc:
+            is_rate_limit = isinstance(exc, anthropic.RateLimitError) or (
+                isinstance(exc, genai_errors.ClientError) and exc.status_code == 429
+            )
+            if not is_rate_limit or attempt == _MAX_RETRIES - 1:
+                raise
+            wait = _BASE_WAIT_SECONDS * (2**attempt) + random.uniform(0, 2)
+            print(
+                f"\n  [Rate limit 429] Waiting {wait:.0f}s before"
+                f" retry {attempt + 1}/{_MAX_RETRIES - 1}…"
+            )
+            time.sleep(wait)
+    raise RuntimeError("Unreachable")
 
 
 @dataclass
@@ -77,32 +107,86 @@ def _build_prompt(question: str, max_words: int | None) -> str:
     return prompt
 
 
-def _get_hf_pipeline(config: ModelConfig) -> "Pipeline":
-    """Returns a cached HuggingFace text-generation pipeline for *config*.
+def _import_huggingface_hub() -> Any:
+    """Imports huggingface_hub, raising a helpful error if missing."""
+    try:
+        import huggingface_hub
+    except ImportError as exc:
+        raise ImportError(
+            "The 'huggingface_hub' package is required for HuggingFace GGUF models. "
+            "Install it with: uv sync --group huggingface"
+        ) from exc
+    return huggingface_hub
 
-    The pipeline is loaded once per model and reused across calls.
-    Requires ``transformers``, ``accelerate``, and a compatible ``torch``
-    installation (``pip install transformers accelerate torch``).
+
+def _find_smallest_gguf_filename(repo_id: str) -> str:
+    """Returns the filename of the smallest quantized GGUF file in *repo_id*.
+
+    Quantization levels are ordered smallest-first: Q2 < Q3 < Q4 < Q5 < Q6 < Q8.
+    Raises ``ValueError`` if no GGUF files are found.
     """
-    if config.id not in _hf_pipelines:
+    hub = _import_huggingface_hub()
+    gguf_files = [f for f in hub.list_repo_files(repo_id) if f.endswith(".gguf")]
+    if not gguf_files:
+        raise ValueError(f"No GGUF files found in HuggingFace repo '{repo_id}'.")
+
+    quant_order = ["Q2", "Q3", "Q4", "Q5", "Q6", "Q8", "F16", "F32"]
+
+    def _quant_key(filename: str) -> int:
+        upper = filename.upper()
+        for i, q in enumerate(quant_order):
+            if q in upper:
+                return i
+        return len(quant_order)
+
+    return str(sorted(gguf_files, key=_quant_key)[0])
+
+
+def _ensure_gguf_downloaded(repo_id: str, filename: str, local_dir: Path) -> Path:
+    """Returns the local path to *filename*, downloading it from *repo_id* if needed."""
+    local_path = local_dir / filename
+    if local_path.exists():
+        return local_path
+
+    hub = _import_huggingface_hub()
+    print(f"  Downloading {filename} from {repo_id} → {local_dir}/")
+    local_dir.mkdir(parents=True, exist_ok=True)
+    downloaded = hub.hf_hub_download(
+        repo_id=repo_id,
+        filename=filename,
+        local_dir=str(local_dir),
+    )
+    return Path(downloaded)
+
+
+def _get_llama_model(config: ModelConfig, local_model_dir: Path) -> Any:
+    """Returns a cached llama-cpp ``Llama`` instance for *config*.
+
+    On first call the GGUF file is downloaded from HuggingFace Hub (if absent)
+    and the model is loaded into memory.  Subsequent calls return the cached
+    instance immediately.
+    """
+    if config.id not in _llama_models:
         try:
-            from transformers import pipeline
+            from llama_cpp import Llama
         except ImportError as exc:
             raise ImportError(
-                "The 'transformers' package is required for HuggingFace models. "
+                "The 'llama-cpp-python' package is required for HuggingFace GGUF models. "
                 "Install it with: uv sync --group huggingface"
             ) from exc
 
-        hf_token: str | None = config.extra.get("hf_token") or os.environ.get(
-            "HF_TOKEN"
+        gguf_filename: str = config.extra.get(
+            "gguf_filename"
+        ) or _find_smallest_gguf_filename(config.id)
+        model_path = _ensure_gguf_downloaded(config.id, gguf_filename, local_model_dir)
+
+        print(f"  Loading {gguf_filename}…")
+        _llama_models[config.id] = Llama(
+            model_path=str(model_path),
+            n_ctx=int(config.extra.get("n_ctx", 2048)),
+            verbose=False,
         )
-        _hf_pipelines[config.id] = pipeline(
-            "text-generation",
-            model=config.id,
-            device_map="auto",
-            token=hf_token,
-        )
-    return _hf_pipelines[config.id]
+    return _llama_models[config.id]
 
 
 def generate_answer(
@@ -115,33 +199,40 @@ def generate_answer(
         client = genai.Client(
             vertexai=True, project=config.project, location=config.location
         )
-        text: str = client.models.generate_content(
-            model=config.id, contents=prompt
-        ).text
-        return text
+        return _call_with_retry(
+            lambda: (
+                client.models.generate_content(model=config.id, contents=prompt).text
+            )
+        )
 
     if config.provider == "vertex_anthropic":
         client_anthropic = anthropic.AnthropicVertex(
             region=config.location, project_id=config.project
         )
         max_tokens: int = int(config.extra.get("max_tokens", 1024))
-        message = client_anthropic.messages.create(
-            model=config.id,
-            max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}],
+        return _call_with_retry(
+            lambda: str(
+                client_anthropic.messages.create(
+                    model=config.id,
+                    max_tokens=max_tokens,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                .content[0]
+                .text
+            )
         )
-        return str(message.content[0].text)
 
     if config.provider == "huggingface":
-        pipe = _get_hf_pipeline(config)
+        local_model_dir = Path(
+            config.extra.get("local_model_dir", str(_LOCAL_MODEL_DIR))
+        )
+        llm = _get_llama_model(config, local_model_dir)
         max_new_tokens: int = int(config.extra.get("max_new_tokens", 512))
         messages = [{"role": "user", "content": prompt}]
-        result: Any = pipe(messages, max_new_tokens=max_new_tokens)
-        # transformers returns a list of dicts; the last message is the reply
-        generated: Any = result[0]["generated_text"]
-        if isinstance(generated, list):
-            return str(generated[-1]["content"])
-        return str(generated)
+        result: Any = llm.create_chat_completion(
+            messages=messages, max_tokens=max_new_tokens
+        )
+        return str(result["choices"][0]["message"]["content"])
 
     raise ValueError(
         f"Unsupported provider '{config.provider}' for model '{config.id}'."
@@ -195,6 +286,10 @@ def run_pipeline(
         configs = [c for c in configs if c.id in model_ids]
         if not configs:
             raise ValueError(f"None of the requested model IDs found in {models_yaml}.")
+
+    # Run HuggingFace (local GGUF) models first: a download failure is caught
+    # early before any expensive cloud calls have been made.
+    configs.sort(key=lambda c: 0 if c.provider == "huggingface" else 1)
 
     for config in configs:
         run_model(config, questions, lengths, output_dir=output_dir)
