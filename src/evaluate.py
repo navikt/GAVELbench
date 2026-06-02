@@ -3,7 +3,7 @@
 import json
 import os
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import Callable
 
 import numpy as np
@@ -12,7 +12,7 @@ from rouge_score import rouge_scorer
 from scipy.spatial.distance import jensenshannon
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine
-from transformers import pipeline
+from transformers import Pipeline, pipeline
 
 from report import print_report, write_report
 
@@ -99,6 +99,20 @@ def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, float
 
 
 _NLI_MODEL = "alexandrainst/scandi-nli-base"
+_nli_pipeline: Pipeline | None = None
+
+
+def _get_nli_pipeline() -> Pipeline:
+    global _nli_pipeline
+    if _nli_pipeline is None:
+        _nli_pipeline = pipeline(
+            "text-classification",
+            model=_NLI_MODEL,
+            device=-1,
+            top_k=None,
+            truncation=True,
+        )
+    return _nli_pipeline
 
 
 @register_metric("nli_entailment")
@@ -114,13 +128,7 @@ def compute_nli_entailment(
     A high entailment score means the model output supports / contains the
     correct answer.
     """
-    nli = pipeline(
-        "text-classification",
-        model=_NLI_MODEL,
-        device=-1,
-        top_k=None,
-        truncation=True,
-    )
+    nli = _get_nli_pipeline()
     pairs = [
         {"text": hyp, "text_pair": ref} for hyp, ref in zip(hypotheses, references)
     ]
@@ -153,6 +161,26 @@ def model_name_from_path(path: str) -> str:
     stem = os.path.splitext(os.path.basename(path))[0]
     match = re.match(r"generated_answers_(.*)", stem)
     return match.group(1) if match else stem
+
+
+def align_pairs_with_meta(
+    bob_records: list[dict[str, str]], generated_records: list[dict[str, str]]
+) -> tuple[list[str], list[str], list[str | None]]:
+    """Aligns bob answers with generated answers and returns per-pair overkategori tags.
+
+    Returns (references, hypotheses, overkategorier) in matched order.
+    ``overkategorier[i]`` is the ``sampled_overkategori`` value for pair *i*, or
+    ``None`` when the field is absent.
+    """
+    generated_by_question = {r["question"]: r["answer"] for r in generated_records}
+    references, hypotheses, overkategorier = [], [], []
+    for record in bob_records:
+        question = record["contextualized_question"]
+        if question in generated_by_question:
+            references.append(record["answer_content"])
+            hypotheses.append(generated_by_question[question])
+            overkategorier.append(record.get("sampled_overkategori"))
+    return references, hypotheses, overkategorier
 
 
 def align_pairs(
@@ -205,17 +233,20 @@ def evaluate(
     generated_paths: list[str],
     metrics: list[str] | None = None,
     output_path: str = "data/results/evaluation_report.md",
+    kategori_mapping_path: str | None = None,
 ) -> dict[str, dict[str, float]]:
     """Runs evaluation metrics for one or more generated-answer files and writes a report.
 
     Args:
-        bob_path: Path to the bob_data.json file (ground truth).
+        bob_path: Path to the bob_data.json file (ground truth). Rows with a
+            ``sampled_overkategori`` field trigger per-overkategori evaluation.
         generated_paths: One or more paths to generated-answer JSON files.
             Each file is a JSON array with ``question`` and ``answer`` fields.
             The model name is inferred from the filename
             (``generated_answers_<model>.json``).
         metrics: Metric names to run. Defaults to all registered metrics.
         output_path: Where to write the Markdown report.
+        kategori_mapping_path: Unused; accepted for API compatibility.
 
     Returns:
         Nested dict ``{model_name: {score_name: value}}``.
@@ -227,11 +258,15 @@ def evaluate(
 
     results_by_model: dict[str, dict[str, float]] = {}
     n_pairs_by_model: dict[str, int] = {}
+    scores_by_overkategori: dict[str, dict[str, dict[str, float]]] = {}
+    n_pairs_by_overkategori: dict[str, dict[str, int]] = {}
 
     for path in generated_paths:
         model = model_name_from_path(path)
         generated_records = load_jsonl(path)
-        references, hypotheses = align_pairs(bob_records, generated_records)
+        references, hypotheses, overkategorier = align_pairs_with_meta(
+            bob_records, generated_records
+        )
         if not references:
             print(f"  [{model}] WARNING: no matching pairs found, skipping.")
             continue
@@ -240,11 +275,34 @@ def evaluate(
             references, hypotheses, metrics, model
         )
 
+        # Per-overkategori evaluation when bob_data carries sampled_overkategori tags.
+        overkategori_groups: dict[str, list[tuple[str, str]]] = defaultdict(list)
+        for ref, hyp, ovk in zip(references, hypotheses, overkategorier):
+            if ovk is not None:
+                overkategori_groups[ovk].append((ref, hyp))
+
+        if overkategori_groups:
+            scores_by_overkategori[model] = {}
+            n_pairs_by_overkategori[model] = {}
+            for ovk, pairs in sorted(overkategori_groups.items()):
+                ovk_refs = [p[0] for p in pairs]
+                ovk_hyps = [p[1] for p in pairs]
+                scores_by_overkategori[model][ovk] = _run_metrics_for_model(
+                    ovk_refs, ovk_hyps, metrics, f"{model} [{ovk}]"
+                )
+                n_pairs_by_overkategori[model][ovk] = len(pairs)
+
     if not results_by_model:
         raise ValueError("No valid model results produced.")
 
     print_report(results_by_model, n_pairs_by_model)
-    write_report(results_by_model, n_pairs_by_model, output_path)
+    write_report(
+        results_by_model,
+        n_pairs_by_model,
+        output_path,
+        scores_by_overkategori=scores_by_overkategori or None,
+        n_pairs_by_overkategori=n_pairs_by_overkategori or None,
+    )
 
     return results_by_model
 

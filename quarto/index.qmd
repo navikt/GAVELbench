@@ -1,0 +1,110 @@
+# Evaluering av språkmodeller opp mot Bob-svar
+
+```{python}
+#| echo: false
+import json, os, sys
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import yaml
+
+RESULTS_DIR = "../data/results"
+MODELS_YAML = "../src/models.yaml"
+LOWER_IS_BETTER = {"jsd"}
+
+report_path = os.path.join(RESULTS_DIR, "evaluation_report.json")
+if not os.path.exists(report_path):
+    print("⚠️ Ingen resultater funnet. Kjør evalueringen først (`uv run python src/main.py`).")
+    raise SystemExit
+
+with open(report_path, encoding="utf-8") as f:
+    report = json.load(f)
+
+agg_all = report["models"]        # {model: {metric: val}}
+n_pairs_all = report["n_pairs"]   # {model: n}
+
+# Filter to only models currently defined in models.yaml
+if os.path.exists(MODELS_YAML):
+    with open(MODELS_YAML, encoding="utf-8") as f:
+        _spec = yaml.safe_load(f)
+    _active_ids = {m["id"].replace("/", "__") for m in _spec.get("models", [])}
+    models = [m for m in agg_all if m in _active_ids]
+    _skipped = [m for m in agg_all if m not in _active_ids]
+    if _skipped:
+        print(f"ℹ️ Hopper over modeller ikke i models.yaml: {_skipped}")
+else:
+    models = list(agg_all.keys())
+
+agg = {m: agg_all[m] for m in models}
+n_pairs = {m: n_pairs_all[m] for m in models}
+metrics = list(agg[models[0]].keys()) if models else []
+```
+
+Denne rapporten sammenligner språkmodeller mot svar fra Bob på tvers av ulike målemetoder.
+
+## Resultater
+
+```{python}
+#| echo: false
+rows = []
+for metric in metrics:
+    lower = metric in LOWER_IS_BETTER
+    values = {m: agg[m].get(metric) for m in models}
+    present = {m: v for m, v in values.items() if v is not None}
+    best = (min(present, key=present.__getitem__) if lower else max(present, key=present.__getitem__)) if present else None
+    row = {"Metrikk": metric + (" ↓" if lower else "")}
+    for m in models:
+        v = values.get(m)
+        row[m] = f"{v:.4f}" + (" ★" if m == best else "") if v is not None else "N/A"
+    rows.append(row)
+
+df = pd.DataFrame(rows).set_index("Metrikk")
+n_row = {"Metrikk": "Antall par"}
+for m in models:
+    n_row[m] = str(n_pairs.get(m, "?"))
+display(df)
+print(f"\nAntall evaluerte par per modell: { {m: n_pairs[m] for m in models} }")
+```
+
+## Radarplot
+
+```{python}
+#| echo: false
+#| fig-cap: "Modellsammenligning (alle akser: høyere = bedre)"
+score_names = metrics
+n = len(score_names)
+if n >= 3:
+    values_matrix = np.array(
+        [
+            [
+                (1.0 - agg[m].get(s, 0.0)) if s in LOWER_IS_BETTER else agg[m].get(s, 0.0)
+                for s in score_names
+            ]
+            for m in models
+        ],
+        dtype=float,
+    )
+    angles = np.linspace(0, 2 * np.pi, n, endpoint=False).tolist()
+    angles += angles[:1]
+
+    fig, ax = plt.subplots(figsize=(7, 7), subplot_kw={"polar": True})
+    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    for i, model in enumerate(models):
+        vals = values_matrix[i].tolist() + values_matrix[i][:1].tolist()
+        color = colors[i % len(colors)]
+        ax.plot(angles, vals, linewidth=2, linestyle="solid", label=model, color=color)
+        ax.fill(angles, vals, alpha=0.15, color=color)
+
+    labels = [f"{s}\n(↓ inv.)" if s in LOWER_IS_BETTER else s for s in score_names]
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(labels, size=9)
+    ax.set_yticks([0.25, 0.5, 0.75, 1.0])
+    ax.set_yticklabels(["0.25", "0.5", "0.75", "1"], size=7, color="grey")
+    ax.set_ylim(0, 1)
+    ax.legend(loc="upper right", bbox_to_anchor=(1.35, 1.15), fontsize=9)
+    ax.set_title("Modellsammenligning (absolutt skala, høyere = bedre)", pad=20, size=11)
+    fig.tight_layout()
+    plt.show()
+else:
+    print("For få metrikker til radarplot (trenger ≥ 3).")
+```

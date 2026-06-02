@@ -1,10 +1,11 @@
 """Generates answers from a language model based on questions from Bob."""
 
+import asyncio
 import json
 import os
 import random
 import time
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -13,10 +14,12 @@ import anthropic
 import yaml
 from google import genai
 from google.genai import errors as genai_errors
+from google.genai.types import HttpOptions
 from tqdm import tqdm
 
 _MAX_RETRIES = 6
 _BASE_WAIT_SECONDS = 10
+_DEFAULT_CONCURRENCY = 10
 
 # Cache for loaded llama-cpp models (model_id -> Llama instance)
 _llama_models: dict[str, Any] = {}
@@ -35,7 +38,7 @@ def _call_with_retry(fn: Callable[[], str]) -> str:
             return fn()
         except (genai_errors.ClientError, anthropic.RateLimitError) as exc:
             is_rate_limit = isinstance(exc, anthropic.RateLimitError) or (
-                isinstance(exc, genai_errors.ClientError) and exc.status_code == 429
+                isinstance(exc, genai_errors.ClientError) and exc.code == 429
             )
             if not is_rate_limit or attempt == _MAX_RETRIES - 1:
                 raise
@@ -45,6 +48,30 @@ def _call_with_retry(fn: Callable[[], str]) -> str:
                 f" retry {attempt + 1}/{_MAX_RETRIES - 1}…"
             )
             time.sleep(wait)
+    raise RuntimeError("Unreachable")
+
+
+async def _async_call_with_retry(coro_fn: Callable[[], Awaitable[str]]) -> str:
+    """Calls an async callable, retrying with exponential backoff on rate-limit errors.
+
+    *coro_fn* must return a fresh coroutine on every call (e.g. a lambda wrapping
+    an async function call) so that retries are not re-awaiting a spent coroutine.
+    """
+    for attempt in range(_MAX_RETRIES):
+        try:
+            return await coro_fn()
+        except (genai_errors.ClientError, anthropic.RateLimitError) as exc:
+            is_rate_limit = isinstance(exc, anthropic.RateLimitError) or (
+                isinstance(exc, genai_errors.ClientError) and exc.code == 429
+            )
+            if not is_rate_limit or attempt == _MAX_RETRIES - 1:
+                raise
+            wait = _BASE_WAIT_SECONDS * (2**attempt) + random.uniform(0, 2)
+            print(
+                f"\n  [Rate limit 429] Waiting {wait:.0f}s before"
+                f" retry {attempt + 1}/{_MAX_RETRIES - 1}…"
+            )
+            await asyncio.sleep(wait)
     raise RuntimeError("Unreachable")
 
 
@@ -184,6 +211,7 @@ def _get_llama_model(config: ModelConfig, local_model_dir: Path) -> Any:
         _llama_models[config.id] = Llama(
             model_path=str(model_path),
             n_ctx=int(config.extra.get("n_ctx", 2048)),
+            n_gpu_layers=int(config.extra.get("n_gpu_layers", -1)),
             verbose=False,
         )
     return _llama_models[config.id]
@@ -197,7 +225,10 @@ def generate_answer(
 
     if config.provider == "vertex_ai":
         client = genai.Client(
-            vertexai=True, project=config.project, location=config.location
+            vertexai=True,
+            project=config.project,
+            location=config.location,
+            http_options=HttpOptions(api_version="v1"),
         )
         return _call_with_retry(
             lambda: (
@@ -240,22 +271,125 @@ def generate_answer(
     )
 
 
-def run_model(
+async def _vertex_ai_generate(client: genai.Client, model_id: str, prompt: str) -> str:
+    """Single async Vertex AI generation call."""
+    response = await client.aio.models.generate_content(model=model_id, contents=prompt)
+    return str(response.text)
+
+
+async def _vertex_anthropic_generate(
+    client: anthropic.AsyncAnthropicVertex,
+    model_id: str,
+    prompt: str,
+    max_tokens: int,
+) -> str:
+    """Single async Anthropic-on-Vertex generation call."""
+    response = await client.messages.create(
+        model=model_id,
+        max_tokens=max_tokens,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return str(response.content[0].text)
+
+
+async def run_model(
     config: ModelConfig,
     questions: list[str],
     lengths: list[int],
     output_dir: str = "data",
 ) -> None:
-    """Generates answers for all questions with one model and writes them to a JSON file."""
+    """Generates answers for all questions with one model and writes them to a JSON file.
+
+    Cloud providers (vertex_ai, vertex_anthropic) run concurrently using asyncio
+    with a per-model semaphore controlling the parallelism.  Local models
+    (huggingface) run sequentially in a thread to avoid blocking the event loop.
+    """
     safe_id = config.id.replace("/", "__")
     out_path = os.path.join(output_dir, f"generated_answers_{safe_id}.json")
     print(f"\n[{config.id}] {config.description}")
     print(f"  Writing to {out_path}")
 
-    answers = []
-    for question, max_words in zip(tqdm(questions, desc=config.id), lengths):
-        answer = generate_answer(question, config, max_words=max_words)
-        answers.append({"question": question, "answer": answer})
+    concurrency = int(config.extra.get("concurrency", _DEFAULT_CONCURRENCY))
+    prompts = [_build_prompt(q, mw) for q, mw in zip(questions, lengths)]
+
+    if config.provider == "vertex_ai":
+        client = genai.Client(
+            vertexai=True,
+            project=config.project,
+            location=config.location,
+            http_options=HttpOptions(api_version="v1"),
+        )
+        sem = asyncio.Semaphore(concurrency)
+
+        async def _vai_task(prompt: str) -> str:
+            async with sem:
+
+                async def _call() -> str:
+                    return await _vertex_ai_generate(client, config.id, prompt)
+
+                return await _async_call_with_retry(_call)
+
+        with tqdm(total=len(prompts), desc=config.id) as pbar:
+
+            async def _vai_tracked(prompt: str) -> str:
+                result = await _vai_task(prompt)
+                pbar.update(1)
+                return result
+
+            results = list(await asyncio.gather(*[_vai_tracked(p) for p in prompts]))
+
+    elif config.provider == "vertex_anthropic":
+        client_anthropic = anthropic.AsyncAnthropicVertex(
+            region=config.location, project_id=config.project
+        )
+        max_tokens: int = int(config.extra.get("max_tokens", 1024))
+        sem = asyncio.Semaphore(concurrency)
+
+        async def _anth_task(prompt: str) -> str:
+            async with sem:
+
+                async def _call() -> str:
+                    return await _vertex_anthropic_generate(
+                        client_anthropic, config.id, prompt, max_tokens
+                    )
+
+                return await _async_call_with_retry(_call)
+
+        with tqdm(total=len(prompts), desc=config.id) as pbar:
+
+            async def _anth_tracked(prompt: str) -> str:
+                result = await _anth_task(prompt)
+                pbar.update(1)
+                return result
+
+            results = list(await asyncio.gather(*[_anth_tracked(p) for p in prompts]))
+
+    elif config.provider == "huggingface":
+
+        def _run_huggingface_sync() -> list[str]:
+            local_model_dir = Path(
+                config.extra.get("local_model_dir", str(_LOCAL_MODEL_DIR))
+            )
+            llm = _get_llama_model(config, local_model_dir)
+            max_new_tokens: int = int(config.extra.get("max_new_tokens", 512))
+            sync_results: list[str] = []
+            for prompt in tqdm(prompts, desc=config.id):
+                messages = [{"role": "user", "content": prompt}]
+                result: Any = llm.create_chat_completion(
+                    messages=messages, max_tokens=max_new_tokens
+                )
+                sync_results.append(str(result["choices"][0]["message"]["content"]))
+            return sync_results
+
+        results = await asyncio.to_thread(_run_huggingface_sync)
+
+    else:
+        raise ValueError(
+            f"Unsupported provider '{config.provider}' for model '{config.id}'."
+            " Add a new branch in run_model() to support it."
+        )
+
+    answers = [{"question": q, "answer": a} for q, a in zip(questions, results)]
 
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
@@ -263,13 +397,16 @@ def run_model(
         f.write("\n")
 
 
-def run_pipeline(
+async def run_pipeline(
     bob_path: str = "data/bob_data.json",
     models_yaml: str = "src/models.yaml",
     output_dir: str = "data",
     model_ids: list[str] | None = None,
 ) -> None:
     """Runs the full answer-generation pipeline for all (or selected) models.
+
+    Models are processed one at a time to avoid cross-model rate-limit
+    conflicts, but individual questions within each model run concurrently.
 
     Args:
         bob_path: Path to the ground-truth JSON file.
@@ -292,8 +429,8 @@ def run_pipeline(
     configs.sort(key=lambda c: 0 if c.provider == "huggingface" else 1)
 
     for config in configs:
-        run_model(config, questions, lengths, output_dir=output_dir)
+        await run_model(config, questions, lengths, output_dir=output_dir)
 
 
 if __name__ == "__main__":
-    run_pipeline(output_dir="data/generated")
+    asyncio.run(run_pipeline(output_dir="data/generated"))

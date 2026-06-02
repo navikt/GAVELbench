@@ -1,0 +1,144 @@
+# Resultater per kategori
+
+```{python}
+#| echo: false
+import json, os
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import yaml
+
+RESULTS_DIR = "../data/results"
+MAPPING_PATH = "../data/kategorier_mapping.json"
+MODELS_YAML = "../src/models.yaml"
+LOWER_IS_BETTER = {"jsd"}
+
+report_path = os.path.join(RESULTS_DIR, "evaluation_report.json")
+ok_path = os.path.join(RESULTS_DIR, "evaluation_report_scores_per_overkategori.json")
+
+if not os.path.exists(report_path):
+    print("⚠️ Ingen resultater funnet. Kjør evalueringen først (`uv run python src/main.py`).")
+    raise SystemExit
+
+with open(report_path, encoding="utf-8") as f:
+    report = json.load(f)
+
+agg_all = report["models"]
+
+# Filter to only models currently defined in models.yaml
+if os.path.exists(MODELS_YAML):
+    with open(MODELS_YAML, encoding="utf-8") as f:
+        _spec = yaml.safe_load(f)
+    _active_ids = {m["id"].replace("/", "__") for m in _spec.get("models", [])}
+    models = [m for m in agg_all if m in _active_ids]
+    _skipped = [m for m in agg_all if m not in _active_ids]
+    if _skipped:
+        print(f"ℹ️ Hopper over modeller ikke i models.yaml: {_skipped}")
+else:
+    models = list(agg_all.keys())
+
+metrics = list(agg_all[models[0]].keys()) if models else []
+
+# Load or compute per-overkategori aggregates on the fly
+if os.path.exists(ok_path):
+    with open(ok_path, encoding="utf-8") as f:
+        raw = json.load(f)
+    # File format: {"scores": {model: {ok: {metric: val}}}, "n_pairs": {model: {ok: n}}}
+    scores_raw = raw.get("scores", raw)  # fallback: treat whole file as scores dict
+    n_pairs_raw = raw.get("n_pairs", {})
+    by_ok = {}
+    for model, ok_scores in scores_raw.items():
+        if model not in models:
+            continue
+        by_ok[model] = {}
+        for ok, score_dict in ok_scores.items():
+            by_ok[model][ok] = dict(score_dict)
+            by_ok[model][ok]["n"] = n_pairs_raw.get(model, {}).get(ok, "")
+else:
+    print("⚠️ Ingen per-overkategori resultater funnet. Kjør evalueringen med --n-per-overkategori.")
+    raise SystemExit
+
+all_overkategorier = sorted({ok for model_data in by_ok.values() for ok in model_data})
+```
+
+Denne siden viser evalueringsresultater gruppert etter **overkategori** fra `kategorier_mapping.json`.
+Spørsmål kan tilhøre flere overkategorier, og inngår i beregningene for hver av dem.
+
+```{python}
+#| echo: false
+print(f"Modeller: {models}")
+print(f"Overkategorier med data: {all_overkategorier}")
+```
+
+## Tabeller per metrikk
+
+```{python}
+#| echo: false
+for metric in metrics:
+    lower = metric in LOWER_IS_BETTER
+    rows = []
+    for ok in all_overkategorier:
+        row = {"Overkategori": ok}
+        values = {}
+        for model in models:
+            v = by_ok.get(model, {}).get(ok, {}).get(metric)
+            values[model] = v
+            n = by_ok.get(model, {}).get(ok, {}).get("n", "")
+            row[model] = f"{v:.4f} (n={n})" if v is not None else "–"
+        present = {m: v for m, v in values.items() if v is not None}
+        if present:
+            best = min(present, key=present.__getitem__) if lower else max(present, key=present.__getitem__)
+            for model in models:
+                if values.get(model) is not None and model == best:
+                    row[model] += " ★"
+        rows.append(row)
+
+    df = pd.DataFrame(rows).set_index("Overkategori")
+    label = metric + (" (↓ lavere er bedre)" if lower else "")
+    print(f"\n### {label}\n")
+    display(df)
+```
+
+## Søylediagram per overkategori
+
+```{python}
+#| echo: false
+#| fig-cap: "Gjennomsnittsscore per overkategori og modell"
+for metric in metrics:
+    lower = metric in LOWER_IS_BETTER
+    fig, ax = plt.subplots(figsize=(max(8, len(all_overkategorier) * 1.2), 4))
+    x = np.arange(len(all_overkategorier))
+    width = 0.8 / max(len(models), 1)
+    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+
+    for i, model in enumerate(models):
+        vals = [by_ok.get(model, {}).get(ok, {}).get(metric, float("nan")) for ok in all_overkategorier]
+        ax.bar(x + i * width, vals, width, label=model, color=colors[i % len(colors)], alpha=0.8)
+
+    ax.set_xticks(x + width * (len(models) - 1) / 2)
+    ax.set_xticklabels(all_overkategorier, rotation=30, ha="right", fontsize=9)
+    ax.set_ylabel(metric)
+    arrow = "↓ lavere er bedre" if lower else "↑ høyere er bedre"
+    ax.set_title(f"{metric} per overkategori ({arrow})")
+    ax.legend()
+    ax.set_ylim(0, 1)
+    fig.tight_layout()
+    plt.show()
+```
+
+## Radarplott per overkategori
+
+```{python}
+#| echo: false
+from IPython.display import Image, display as ipy_display
+
+for ok in all_overkategorier:
+    filename = "radar_" + ok.replace(" ", "_") + ".png"
+    path = os.path.join(RESULTS_DIR, filename)
+    if os.path.exists(path):
+        print(f"\n### {ok}\n")
+        ipy_display(Image(filename=path))
+    else:
+        print(f"\n### {ok}\n")
+        print(f"_(Ingen radarplott funnet: {filename})_")
+```

@@ -4,10 +4,15 @@ import json
 
 from google.cloud import bigquery
 
+_CITATION_PATTERN = r"\{[a-z0-9]+\}"
+
 _URI = "nks-aiautomatisering-prod-194a.testgrunnlag.unnest_annotation_prod"
-_QUERY = (
-    f"SELECT distinct contextualized_question, answer_content FROM `{_URI}` limit 20"
-)
+_QUERY = f"""
+    SELECT distinct contextualized_question, answer_content FROM `{_URI}`
+    WHERE NOT REGEXP_CONTAINS(answer_content, r'{_CITATION_PATTERN}')
+    and context_title is not null
+    limit 200
+    """
 
 
 def get_nks_bob_questions_answers() -> list[dict[str, str]]:

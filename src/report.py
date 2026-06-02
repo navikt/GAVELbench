@@ -198,10 +198,48 @@ def plot_radar(
     print(f"Radar plot saved to {output_path}")
 
 
+def plot_radar_per_overkategori(
+    scores_by_overkategori: dict[str, dict[str, dict[str, float]]],
+    output_dir: str,
+) -> dict[str, str]:
+    """Saves one radar plot per overkategori, comparing all models on that category.
+
+    Args:
+        scores_by_overkategori: ``{model: {overkategori: {score_name: value}}}``.
+        output_dir: Directory where PNG files are written.
+
+    Returns:
+        ``{overkategori: plot_path}`` for each generated plot.
+    """
+    overkategorier = sorted(
+        {
+            ovk
+            for model_scores in scores_by_overkategori.values()
+            for ovk in model_scores
+        }
+    )
+    paths: dict[str, str] = {}
+    for ovk in overkategorier:
+        ovk_results = {
+            model: scores_by_overkategori[model][ovk]
+            for model in scores_by_overkategori
+            if ovk in scores_by_overkategori[model]
+        }
+        if not ovk_results:
+            continue
+        safe_name = re.sub(r"[^\w]", "_", ovk).strip("_")
+        radar_path = os.path.join(output_dir, f"radar_{safe_name}.png")
+        plot_radar(ovk_results, radar_path)
+        paths[ovk] = radar_path
+    return paths
+
+
 def write_report(
     results_by_model: dict[str, dict[str, float]],
     n_pairs_by_model: dict[str, int],
     output_path: str,
+    scores_by_overkategori: dict[str, dict[str, dict[str, float]]] | None = None,
+    n_pairs_by_overkategori: dict[str, dict[str, int]] | None = None,
 ) -> None:
     """Writes a Markdown report and a JSON results file.
 
@@ -212,6 +250,9 @@ def write_report(
         results_by_model: ``{model_name: {score_name: value}}``.
         n_pairs_by_model: ``{model_name: n_pairs}``.
         output_path: Destination path for the Markdown report.
+        scores_by_overkategori: Optional ``{model: {overkategori: {score: value}}}``
+            for per-overkategori radar plots.
+        n_pairs_by_overkategori: Optional ``{model: {overkategori: n_pairs}}``.
     """
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     radar_path = output_path.replace(".md", "_radar.png")
@@ -224,11 +265,47 @@ def write_report(
     ]
     lines += format_table(results_by_model, n_pairs_by_model)
 
-    # Embed radar plot using a relative path so the Markdown renders locally.
+    # Embed overall radar plot.
     lines += [
         "\n## Radar Plot\n",
         f"![Radar plot]({os.path.basename(radar_path)})\n",
     ]
+
+    # Per-overkategori radar plots.
+    if scores_by_overkategori:
+        output_dir = os.path.dirname(output_path) or "."
+        overkategori_paths = plot_radar_per_overkategori(
+            scores_by_overkategori, output_dir
+        )
+        if overkategori_paths:
+            lines += ["\n## Resultater per overkategori\n"]
+            for ovk, path in sorted(overkategori_paths.items()):
+                n_info = ""
+                if n_pairs_by_overkategori:
+                    counts = n_pairs_by_overkategori
+                    totals = {
+                        m: counts[m].get(ovk, 0) for m in counts if ovk in counts[m]
+                    }
+                    if totals:
+                        n_info = ", ".join(
+                            f"{m}: n={v}" for m, v in sorted(totals.items())
+                        )
+                        n_info = f" ({n_info})"
+                lines += [
+                    f"\n### {ovk}{n_info}\n",
+                    f"![Radar: {ovk}]({os.path.basename(path)})\n",
+                ]
+
+        # Write per-overkategori scores to JSON.
+        ovk_json_path = output_path.replace(".md", "_scores_per_overkategori.json")
+        with open(ovk_json_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {"scores": scores_by_overkategori, "n_pairs": n_pairs_by_overkategori},
+                f,
+                indent=2,
+                ensure_ascii=False,
+            )
+        print(f"Per-overkategori scores written to {ovk_json_path}")
 
     commentary = build_commentary(results_by_model)
     if commentary:
