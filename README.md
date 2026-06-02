@@ -18,6 +18,12 @@ Krever Python ≥ 3.12 og [uv](https://docs.astral.sh/uv/).
 uv sync
 ```
 
+For lokale HuggingFace-modeller (GGUF) på Apple Silicon (M1/M2/M3), installer med Metal-støtte:
+
+```bash
+CMAKE_ARGS="-DGGML_METAL=on" uv sync --group huggingface
+```
+
 Google Cloud-autentisering er nødvendig for tilgang til Vertex AI-modeller:
 
 ```bash

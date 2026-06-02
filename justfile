@@ -26,11 +26,6 @@ preview:
 render:
     uv run --group quarto quarto render .
 
-# Bygg prosjektet i Docker
-[arg('image', pattern='chainguard_python.Dockerfile|Dockerfile')]
-build image='Dockerfile':
-    docker build -f {{image}} .
-
 # Sjekk etter sårbarheter i Python-avhengigheter
 audit:
     uv run --all-groups --with pip-audit pip-audit --local

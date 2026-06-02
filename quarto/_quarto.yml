@@ -1,0 +1,30 @@
+project:
+  type: book
+  output-dir: _book
+date: now
+date-format: DD.MM.YYYY
+author-title: Eier
+book:
+  title: 'Evaluering av språkmodeller mot Bobs svar'
+  description: Evaluering av språkmodeller mot Bobs svar
+  author: Tada
+  chapters:
+  - index.qmd
+  - per_kategori.qmd
+
+  page-navigation: true
+  page-footer: Nav - {{< meta date >}}
+  repo-url: https://github.com/navikt/gavelbench
+  reader-mode: false
+  search: true
+  navbar:
+    logo: assets/nav_logo_hvit.png
+    logo-alt: Logo til Nav - Arbeids- og velferdsetaten
+format:
+  html:
+    lang: nb
+    toc: true
+    toc-depth: 3
+    theme:
+      light: flatly
+      dark: darkly
