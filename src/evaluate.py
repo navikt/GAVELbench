@@ -14,8 +14,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine
 from transformers import Pipeline, pipeline
 
-# A metric function takes (references, hypotheses) and returns a dict of score_name -> float.
-MetricFn = Callable[[list[str], list[str]], dict[str, float]]
+# A metric function takes (references, hypotheses) and returns a dict of
+# score_name -> list of per-pair scores (one score per reference/hypothesis pair).
+# Per-pair scores let the aggregator report both the mean and an uncertainty
+# (standard error of the mean) used for error bars on the bar charts.
+MetricFn = Callable[[list[str], list[str]], dict[str, list[float]]]
 
 _METRICS: dict[str, MetricFn] = {}
 
@@ -36,33 +39,37 @@ def register_metric(name: str) -> Callable[[MetricFn], MetricFn]:
 
 
 @register_metric("rouge_l")
-def compute_rouge_l(references: list[str], hypotheses: list[str]) -> dict[str, float]:
-    """Computes mean ROUGE-L F1 over all reference/hypothesis pairs."""
+def compute_rouge_l(
+    references: list[str], hypotheses: list[str]
+) -> dict[str, list[float]]:
+    """Computes per-pair ROUGE-L F1 over all reference/hypothesis pairs."""
     scorer = rouge_scorer.RougeScorer(["rougeL"], use_stemmer=False)
     scores = [
         scorer.score(ref, hyp)["rougeL"].fmeasure
         for ref, hyp in zip(references, hypotheses)
     ]
-    return {"rouge_l": float(np.mean(scores))}
+    return {"rouge_l": [float(s) for s in scores]}
 
 
 @register_metric("bertscore")
-def compute_bertscore(references: list[str], hypotheses: list[str]) -> dict[str, float]:
-    """Computes mean BERTScore F1 using a multilingual model."""
+def compute_bertscore(
+    references: list[str], hypotheses: list[str]
+) -> dict[str, list[float]]:
+    """Computes per-pair BERTScore F1 using a multilingual model."""
     _, _, f1 = bert_score_fn(
         hypotheses,
         references,
         model_type="bert-base-multilingual-cased",
         verbose=False,
     )
-    return {"bertscore_f1": float(f1.mean())}
+    return {"bertscore_f1": [float(s) for s in f1.tolist()]}
 
 
 @register_metric("cosine_similarity")
 def compute_cosine_similarity(
     references: list[str], hypotheses: list[str]
-) -> dict[str, float]:
-    """Computes mean pairwise TF-IDF cosine similarity."""
+) -> dict[str, list[float]]:
+    """Computes per-pair TF-IDF cosine similarity."""
     vectorizer = TfidfVectorizer()
     all_texts = references + hypotheses
     tfidf = vectorizer.fit_transform(all_texts)
@@ -70,7 +77,7 @@ def compute_cosine_similarity(
     ref_vecs = tfidf[:n]
     hyp_vecs = tfidf[n:]
     scores = [float(sklearn_cosine(ref_vecs[i], hyp_vecs[i])[0, 0]) for i in range(n)]
-    return {"cosine_similarity": float(np.mean(scores))}
+    return {"cosine_similarity": scores}
 
 
 def _text_to_distribution(text: str, vocab: list[str]) -> np.ndarray:
@@ -82,8 +89,8 @@ def _text_to_distribution(text: str, vocab: list[str]) -> np.ndarray:
 
 
 @register_metric("jsd")
-def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, float]:
-    """Computes mean Jensen-Shannon Divergence over shared vocabulary distributions."""
+def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, list[float]]:
+    """Computes per-pair Jensen-Shannon Divergence over shared vocab distributions."""
     vocab = list({w for text in references + hypotheses for w in text.lower().split()})
     scores = [
         float(
@@ -93,7 +100,7 @@ def compute_jsd(references: list[str], hypotheses: list[str]) -> dict[str, float
         )
         for ref, hyp in zip(references, hypotheses)
     ]
-    return {"jsd": float(np.mean(scores))}
+    return {"jsd": scores}
 
 
 _NLI_MODEL = "alexandrainst/scandi-nli-base"
@@ -116,8 +123,8 @@ def _get_nli_pipeline() -> Pipeline:
 @register_metric("nli_entailment")
 def compute_nli_entailment(
     references: list[str], hypotheses: list[str]
-) -> dict[str, float]:
-    """Computes mean NLI entailment probability using a Scandinavian NLI model.
+) -> dict[str, list[float]]:
+    """Computes per-pair NLI entailment probability using a Scandinavian NLI model.
 
     Framing:
         premise   = model output (hypothesis/generated answer)
@@ -135,7 +142,7 @@ def compute_nli_entailment(
         next(r["score"] for r in result if r["label"] == "entailment")
         for result in results
     ]
-    return {"nli_entailment": float(np.mean(scores))}
+    return {"nli_entailment": [float(s) for s in scores]}
 
 
 # ---------------------------------------------------------------------------
@@ -186,22 +193,43 @@ def align_pairs_with_meta(
 # ---------------------------------------------------------------------------
 
 
+def _standard_error(values: list[float]) -> float:
+    """Returns the standard error of the mean of *values*.
+
+    Uses the sample standard deviation (ddof=1) divided by sqrt(n). Returns 0.0
+    when there are fewer than two values (no spread can be estimated).
+    """
+    n = len(values)
+    if n < 2:
+        return 0.0
+    return float(np.std(values, ddof=1) / np.sqrt(n))
+
+
 def _run_metrics_for_model(
     references: list[str],
     hypotheses: list[str],
     metrics: list[str],
     model_label: str,
-) -> dict[str, float]:
-    """Runs all requested metrics for a single model and returns score dict."""
-    scores: dict[str, float] = {}
+) -> tuple[dict[str, float], dict[str, float]]:
+    """Runs all requested metrics for a single model.
+
+    Returns a ``(means, stderrs)`` tuple, where ``means[score_name]`` is the mean
+    score over all pairs and ``stderrs[score_name]`` is the standard error of the
+    mean (used for error bars on the bar charts).
+    """
+    means: dict[str, float] = {}
+    stderrs: dict[str, float] = {}
     for metric_name in metrics:
         if metric_name not in _METRICS:
             raise ValueError(
                 f"Unknown metric '{metric_name}'. Available: {list(_METRICS)}"
             )
         print(f"  [{model_label}] Computing {metric_name}...")
-        scores.update(_METRICS[metric_name](references, hypotheses))
-    return scores
+        per_pair = _METRICS[metric_name](references, hypotheses)
+        for score_name, values in per_pair.items():
+            means[score_name] = float(np.mean(values)) if values else float("nan")
+            stderrs[score_name] = _standard_error(values)
+    return means, stderrs
 
 
 # ---------------------------------------------------------------------------
@@ -220,6 +248,7 @@ def evaluate(
     dict[str, int],
     dict[str, dict[str, dict[str, float]]],
     dict[str, dict[str, int]],
+    dict[str, dict[str, dict[str, float]]],
 ]:
     """Runs evaluation metrics for one or more generated-answer files.
 
@@ -236,7 +265,10 @@ def evaluate(
 
     Returns:
         Tuple of ``(results_by_model, n_pairs_by_model,
-        scores_by_overkategori, n_pairs_by_overkategori)``.
+        scores_by_overkategori, n_pairs_by_overkategori,
+        stderr_by_overkategori)``. ``stderr_by_overkategori`` mirrors
+        ``scores_by_overkategori`` but holds the standard error of the mean for
+        each score, used to draw error bars on the per-overkategori bar charts.
     """
     if metrics is None:
         metrics = list(_METRICS.keys())
@@ -247,6 +279,7 @@ def evaluate(
     n_pairs_by_model: dict[str, int] = {}
     scores_by_overkategori: dict[str, dict[str, dict[str, float]]] = {}
     n_pairs_by_overkategori: dict[str, dict[str, int]] = {}
+    stderr_by_overkategori: dict[str, dict[str, dict[str, float]]] = {}
 
     for path in generated_paths:
         model = model_name_from_path(path)
@@ -258,7 +291,7 @@ def evaluate(
             print(f"  [{model}] WARNING: no matching pairs found, skipping.")
             continue
         n_pairs_by_model[model] = len(references)
-        results_by_model[model] = _run_metrics_for_model(
+        results_by_model[model], _ = _run_metrics_for_model(
             references, hypotheses, metrics, model
         )
 
@@ -271,12 +304,15 @@ def evaluate(
         if overkategori_groups:
             scores_by_overkategori[model] = {}
             n_pairs_by_overkategori[model] = {}
+            stderr_by_overkategori[model] = {}
             for ovk, pairs in sorted(overkategori_groups.items()):
                 ovk_refs = [p[0] for p in pairs]
                 ovk_hyps = [p[1] for p in pairs]
-                scores_by_overkategori[model][ovk] = _run_metrics_for_model(
+                means, stderrs = _run_metrics_for_model(
                     ovk_refs, ovk_hyps, metrics, f"{model} [{ovk}]"
                 )
+                scores_by_overkategori[model][ovk] = means
+                stderr_by_overkategori[model][ovk] = stderrs
                 n_pairs_by_overkategori[model][ovk] = len(pairs)
 
     if not results_by_model:
@@ -287,6 +323,7 @@ def evaluate(
         n_pairs_by_model,
         scores_by_overkategori or {},
         n_pairs_by_overkategori or {},
+        stderr_by_overkategori or {},
     )
 
 
@@ -309,7 +346,7 @@ if __name__ == "__main__":
             "No generated answer files match active models in src/models.yaml. Aborting."
         )
     else:
-        results, n_pairs, scores_ovk, n_pairs_ovk = evaluate(
+        results, n_pairs, scores_ovk, n_pairs_ovk, stderr_ovk = evaluate(
             bob_path="data/bob_data.json",
             generated_paths=generated_files,
         )
@@ -320,4 +357,5 @@ if __name__ == "__main__":
             "data/results/evaluation_report.md",
             scores_by_overkategori=scores_ovk or None,
             n_pairs_by_overkategori=n_pairs_ovk or None,
+            stderr_by_overkategori=stderr_ovk or None,
         )

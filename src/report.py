@@ -237,16 +237,21 @@ def plot_radar_per_overkategori(
 def plot_bar_charts(
     scores_by_overkategori: dict[str, dict[str, dict[str, float]]],
     output_dir: str,
+    stderr_by_overkategori: dict[str, dict[str, dict[str, float]]] | None = None,
 ) -> dict[str, str]:
     """Saves one bar chart PNG per metric comparing models across all overkategorier.
 
     Args:
         scores_by_overkategori: ``{model: {overkategori: {score_name: value}}}``.
         output_dir: Directory where PNG files are written.
+        stderr_by_overkategori: Optional ``{model: {overkategori: {score_name: sem}}}``
+            of standard errors. When provided, symmetric error bars are drawn on
+            each bar.
 
     Returns:
         ``{metric: plot_path}`` for each generated chart.
     """
+    stderr_by_overkategori = stderr_by_overkategori or {}
     models = list(scores_by_overkategori.keys())
     all_overkategorier = sorted(
         {
@@ -280,6 +285,11 @@ def plot_bar_charts(
                 .get(metric, float("nan"))
                 for ovk in all_overkategorier
             ]
+            errs = [
+                stderr_by_overkategori.get(model, {}).get(ovk, {}).get(metric, 0.0)
+                for ovk in all_overkategorier
+            ]
+            has_err = any(e > 0 for e in errs)
             ax.bar(
                 x + i * width,
                 vals,
@@ -287,6 +297,9 @@ def plot_bar_charts(
                 label=model,
                 color=colors[i % len(colors)],
                 alpha=0.8,
+                yerr=errs if has_err else None,
+                capsize=3,
+                error_kw={"elinewidth": 1, "ecolor": "#333333"},
             )
 
         ax.set_xticks(x + width * (len(models) - 1) / 2)
@@ -514,6 +527,7 @@ def write_report(
     scores_by_overkategori: dict[str, dict[str, dict[str, float]]] | None = None,
     n_pairs_by_overkategori: dict[str, dict[str, int]] | None = None,
     quarto_dir: str = "quarto",
+    stderr_by_overkategori: dict[str, dict[str, dict[str, float]]] | None = None,
 ) -> None:
     """Writes all report artifacts: JSON results, radar/bar PNGs, and static QMD files.
 
@@ -524,6 +538,9 @@ def write_report(
         scores_by_overkategori: Optional ``{model: {overkategori: {score: value}}}``.
         n_pairs_by_overkategori: Optional ``{model: {overkategori: n_pairs}}``.
         quarto_dir: Directory where the static QMD files are written.
+        stderr_by_overkategori: Optional ``{model: {overkategori: {score: sem}}}`` of
+            standard errors, used to draw error bars on the per-overkategori bar
+            charts and persisted alongside the scores.
     """
     output_dir = os.path.dirname(output_path) or "."
     os.makedirs(output_dir, exist_ok=True)
@@ -541,15 +558,21 @@ def write_report(
         ovk_radar_paths = plot_radar_per_overkategori(
             scores_by_overkategori, output_dir
         )
-        bar_chart_paths = plot_bar_charts(scores_by_overkategori, output_dir)
+        bar_chart_paths = plot_bar_charts(
+            scores_by_overkategori, output_dir, stderr_by_overkategori
+        )
 
-        # Write per-overkategori scores to JSON
+        # Write per-overkategori scores (and standard errors) to JSON
         ovk_json_path = os.path.join(
             output_dir, "evaluation_report_scores_per_overkategori.json"
         )
         with open(ovk_json_path, "w", encoding="utf-8") as f:
             json.dump(
-                {"scores": scores_by_overkategori, "n_pairs": n_pairs_by_overkategori},
+                {
+                    "scores": scores_by_overkategori,
+                    "n_pairs": n_pairs_by_overkategori,
+                    "stderr": stderr_by_overkategori or {},
+                },
                 f,
                 indent=2,
                 ensure_ascii=False,
@@ -620,11 +643,13 @@ def regenerate_report(
 
     scores_by_overkategori = None
     n_pairs_by_overkategori = None
+    stderr_by_overkategori = None
     if ovk_json_path and os.path.exists(ovk_json_path):
         with open(ovk_json_path, encoding="utf-8") as f:
             ovk_data = json.load(f)
         scores_by_overkategori = ovk_data.get("scores")
         n_pairs_by_overkategori = ovk_data.get("n_pairs")
+        stderr_by_overkategori = ovk_data.get("stderr")
         if (
             scores_by_overkategori
             and models_yaml_path
@@ -636,6 +661,9 @@ def regenerate_report(
             n_pairs_by_overkategori = {
                 m: v for m, v in (n_pairs_by_overkategori or {}).items() if m in active
             } or None
+            stderr_by_overkategori = {
+                m: v for m, v in (stderr_by_overkategori or {}).items() if m in active
+            } or None
 
     write_report(
         results_by_model,
@@ -644,4 +672,5 @@ def regenerate_report(
         scores_by_overkategori=scores_by_overkategori,
         n_pairs_by_overkategori=n_pairs_by_overkategori,
         quarto_dir=quarto_dir,
+        stderr_by_overkategori=stderr_by_overkategori,
     )

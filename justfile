@@ -15,6 +15,10 @@ pipeline *ARGS:
 skip-fetch *ARGS:
     uv run python src/main.py --skip-bq-fetch {{ARGS}}
 
+# Only generate answers from all models (no fetch, evaluate or report)
+generate:
+    uv run python src/generate.py
+
 # Skip fetch and generation; re-evaluate existing generated answers and write report
 eval *ARGS:
     uv run python src/main.py --skip-generation {{ARGS}}

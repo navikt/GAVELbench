@@ -204,7 +204,7 @@ async def main(
     )
 
     print("\n=== Step 2: Evaluating answers ===")
-    results, n_pairs, scores_ovk, n_pairs_ovk = evaluate(
+    results, n_pairs, scores_ovk, n_pairs_ovk, stderr_ovk = evaluate(
         bob_path=BOB_PATH,
         generated_paths=generated_files,
     )
@@ -217,6 +217,7 @@ async def main(
         REPORT_PATH,
         scores_by_overkategori=scores_ovk or None,
         n_pairs_by_overkategori=n_pairs_ovk or None,
+        stderr_by_overkategori=stderr_ovk or None,
     )
     if not skip_bucket:
         print("  Uploading results to bucket …")
