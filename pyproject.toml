@@ -9,6 +9,7 @@ dependencies = [
     "anthropic>=0.84.0",
     "bert-score>=0.3.13",
     "google-cloud-bigquery>=3.40.1",
+    "google-cloud-storage>=3.11.0",
     "google-genai>=1.64.0",
     "jsonref>=1.1.0",
     "jupyter>=1.1.1",

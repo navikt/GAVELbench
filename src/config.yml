@@ -1,0 +1,4 @@
+bucket:
+  project: tada-prod-4dac
+  location: europe-north1
+  name: tada-llm-benchmarks

@@ -29,7 +29,22 @@ report:
 test-api:
     uv run python tests/test_api_access.py
 
-# ── Code quality ──────────────────────────────────────────────────────────────
+# Smoke-test GCS bucket connectivity defined in src/config.yml
+test-bucket:
+    uv run python tests/test_bucket_access.py
+
+# Unit-test sampling / resampling of unanswered questions (no services needed)
+test-sampling:
+    uv run python tests/test_sampling.py
+
+# Upload all current data artifacts to the GCS bucket
+upload-data *ARGS:
+    uv run python scripts/upload_data.py {{ARGS}}
+
+# List which models are available in the Vertex AI project/location vs. models.yaml
+list-models *ARGS:
+    uv run python scripts/list_available_models.py {{ARGS}}
+
 
 # Klargjør prosjektet ved å installere `prek` og oppdatere avhengigheter fra malen
 prepare:

@@ -82,6 +82,48 @@ def load_questions_answers(file_path: str) -> list[dict[str, str]]:
     return data
 
 
+def _generated_file_path(output_dir: str, safe_id: str) -> str:
+    """Returns the path to the generated-answers file for a safe model ID."""
+    return os.path.join(output_dir, f"generated_answers_{safe_id}.json")
+
+
+def _questions_in_generated_file(path: str) -> set[str]:
+    """Returns the set of questions present in a generated-answers JSON file.
+
+    Returns an empty set if the file does not exist.
+    """
+    if not os.path.exists(path):
+        return set()
+    with open(path, encoding="utf-8") as f:
+        return {rec["question"] for rec in json.load(f)}
+
+
+def answered_questions(output_dir: str, active_safe_ids: set[str]) -> set[str]:
+    """Returns questions already answered by *every* active model.
+
+    The generated-answer files are the durable record of which questions have
+    been answered (the local copy is assumed to mirror the bucket). A question
+    counts as answered only when it is present in the generated file of every
+    active model — so a newly added model (whose file is missing or incomplete)
+    keeps the affected questions eligible for (re)generation.
+
+    Args:
+        output_dir: Directory containing ``generated_answers_<safe_id>.json`` files.
+        active_safe_ids: Safe model IDs (``/`` replaced with ``__``) of active models.
+
+    Returns:
+        The intersection of answered-question sets across all active models, or an
+        empty set when there are no active models.
+    """
+    if not active_safe_ids:
+        return set()
+    per_model = [
+        _questions_in_generated_file(_generated_file_path(output_dir, safe_id))
+        for safe_id in active_safe_ids
+    ]
+    return set.intersection(*per_model) if per_model else set()
+
+
 def _build_prompt(question: str, max_words: int | None) -> str:
     """Builds the system prompt for a given question."""
     prompt = (
@@ -261,17 +303,58 @@ async def run_model(
 ) -> None:
     """Generates answers for all questions with one model and writes them to a JSON file.
 
+    If the output file already exists (e.g. pulled from the bucket before this
+    call), answers for questions already present in that file are reused and only
+    the remaining questions are sent to the model.  Previously answered questions
+    are *retained* even when they are not part of the current *questions* batch:
+    the file is a durable, append-only record of every question this model has
+    answered (the local copy is assumed to mirror the bucket). This lets the
+    sampler exclude already-answered questions and resample fresh ones.
+
     Cloud providers (vertex_ai, vertex_anthropic) run concurrently using asyncio
     with a per-model semaphore controlling the parallelism.  Local models
     (huggingface) run sequentially in a thread to avoid blocking the event loop.
     """
     safe_id = config.id.replace("/", "__")
-    out_path = os.path.join(output_dir, f"generated_answers_{safe_id}.json")
+    out_path = _generated_file_path(output_dir, safe_id)
     print(f"\n[{config.id}] {config.description}")
     print(f"  Writing to {out_path}")
 
+    # Load cached answers from an existing file so we can skip already-answered
+    # questions. ``existing_order`` preserves the on-disk order so the durable
+    # history is kept stable across runs.
+    existing: dict[str, str] = {}
+    existing_order: list[str] = []
+    if os.path.exists(out_path):
+        with open(out_path, encoding="utf-8") as _f:
+            for rec in json.load(_f):
+                if rec["question"] not in existing:
+                    existing_order.append(rec["question"])
+                existing[rec["question"]] = rec["answer"]
+        print(f"  Found {len(existing)} cached answer(s) — skipping those questions.")
+
+    def _write_history(answer_map: dict[str, str], new_questions: list[str]) -> None:
+        """Writes the accumulated history (existing order + newly answered)."""
+        ordered = existing_order + [q for q in new_questions if q not in existing]
+        answers = [{"question": q, "answer": answer_map[q]} for q in ordered]
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(answers, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+
+    pending_questions = [q for q in questions if q not in existing]
+    pending_lengths = [lengths[i] for i, q in enumerate(questions) if q not in existing]
+
+    if not pending_questions:
+        print("  All questions already answered — nothing to generate.")
+        # Preserve the durable history exactly as-is (no pruning to this batch).
+        _write_history(existing, [])
+        return
+
     concurrency = int(config.extra.get("concurrency", _DEFAULT_CONCURRENCY))
-    prompts = [_build_prompt(q, mw) for q, mw in zip(questions, lengths)]
+    prompts = [
+        _build_prompt(q, mw) for q, mw in zip(pending_questions, pending_lengths)
+    ]
 
     if config.provider == "vertex_ai":
         client = genai.Client(
@@ -297,7 +380,9 @@ async def run_model(
                 pbar.update(1)
                 return result
 
-            results = list(await asyncio.gather(*[_vai_tracked(p) for p in prompts]))
+            new_results = list(
+                await asyncio.gather(*[_vai_tracked(p) for p in prompts])
+            )
 
     elif config.provider == "vertex_anthropic":
         client_anthropic = anthropic.AsyncAnthropicVertex(
@@ -323,7 +408,9 @@ async def run_model(
                 pbar.update(1)
                 return result
 
-            results = list(await asyncio.gather(*[_anth_tracked(p) for p in prompts]))
+            new_results = list(
+                await asyncio.gather(*[_anth_tracked(p) for p in prompts])
+            )
 
     elif config.provider == "huggingface":
 
@@ -342,7 +429,7 @@ async def run_model(
                 sync_results.append(str(result["choices"][0]["message"]["content"]))
             return sync_results
 
-        results = await asyncio.to_thread(_run_huggingface_sync)
+        new_results = await asyncio.to_thread(_run_huggingface_sync)
 
     else:
         raise ValueError(
@@ -350,12 +437,11 @@ async def run_model(
             " Add a new branch in run_model() to support it."
         )
 
-    answers = [{"question": q, "answer": a} for q, a in zip(questions, results)]
-
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(answers, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+    # Append newly generated answers to the durable history, preserving the
+    # existing on-disk order and adding new questions in batch order.
+    new_by_question = dict(zip(pending_questions, new_results))
+    merged = {**existing, **new_by_question}
+    _write_history(merged, pending_questions)
 
 
 async def run_pipeline(

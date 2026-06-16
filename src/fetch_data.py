@@ -47,6 +47,7 @@ def sample_by_overkategori(
     mapping_path: str,
     n_per_overkategori: int,
     seed: int = 42,
+    exclude_questions: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Samples up to *n_per_overkategori* Q&A entries for each overarching category.
 
@@ -59,11 +60,17 @@ def sample_by_overkategori(
         mapping_path: Path to ``kategorier_mapping.json``.
         n_per_overkategori: Maximum number of Q&A pairs to sample per overkategori.
         seed: Random seed for reproducibility.
+        exclude_questions: Questions (by ``contextualized_question``) that are
+            already answered and should be excluded from the sampling pools. This
+            lets the pipeline resample a fresh batch of still-unanswered questions
+            instead of redrawing the same already-answered set.
 
     Returns:
         List of Q&A dicts, each extended with a ``sampled_overkategori`` key.
     """
     import random
+
+    exclude = exclude_questions or set()
 
     with open(source_path, encoding="utf-8") as f:
         qa_data: list[dict[str, Any]] = json.load(f)
@@ -75,9 +82,12 @@ def sample_by_overkategori(
         entry["kategori"]: entry["overkategori"] for entry in mapping_list
     }
 
-    # Build pool: overkategori -> list of Q&A entries that belong to it
+    # Build pool: overkategori -> list of Q&A entries that belong to it,
+    # excluding questions that have already been answered.
     pools: dict[str, list[dict[str, Any]]] = {}
     for entry in qa_data:
+        if entry.get("contextualized_question") in exclude:
+            continue
         for kategori in entry.get("data_categories") or []:
             for overkategori in kategori_to_overkategorier.get(
                 str(kategori).strip(), []
