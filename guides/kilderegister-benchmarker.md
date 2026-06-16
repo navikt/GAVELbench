@@ -2,7 +2,7 @@
 
 Vedlegg til [veiledningen om benchmarker ved modellvalg](ansvarlig-ki-benchmarker.md).
 
-**Sist gjennomgått:** juni 2026  
+**Sist gjennomgått:** juni 2026
 **Revideres:** halvårlig, eller når en kilde endrer metodikk, navn eller dekning
 
 Registeret er øyeblikksbilde, ikke fasit. Sjekk alltid dato og modellversjon i kilden selv før dere bruker et resultat.

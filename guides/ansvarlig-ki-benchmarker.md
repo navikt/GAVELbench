@@ -1,6 +1,6 @@
 # Ansvarlig KI: hvordan bruke benchmarker når dere velger modell
 
-Veiledning til team som skal velge, sammenligne eller dokumentere bruk av språkmodeller.  Fremfor å peke ut én «trygg» modell, er hensikten med teksten å hjelpe dere å bruke benchmarkresultater til det de duger til: screening og beslutningsstøtte. 
+Veiledning til team som skal velge, sammenligne eller dokumentere bruk av språkmodeller.  Fremfor å peke ut én «trygg» modell, er hensikten med teksten å hjelpe dere å bruke benchmarkresultater til det de duger til: screening og beslutningsstøtte.
 
 ## Kortversjonen
 
@@ -50,7 +50,7 @@ Tre områder gjelder for praktisk talt alle Nav-relevante brukstilfeller. Dem ve
 - **Skjevhet og diskriminering.** Den mest rettighetskritiske aksen i offentlig sektor, og den dårligst dekkede i generelle benchmarker.
 - **Personvern og lekkasje.** Risiko for gjengivelse av treningsdata, personopplysninger eller informasjon fra kontekst som ikke skulle brukes.
 
-Resten utløses av brukstilfellet, ikke bare hva som teamet synes er interessant. 
+Resten utløses av brukstilfellet, ikke bare hva som teamet synes er interessant.
 
 Bruk disse utløserne:
 

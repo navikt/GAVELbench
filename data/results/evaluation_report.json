@@ -1,0 +1,46 @@
+{
+  "models": {
+    "claude-sonnet-4-6": {
+      "rouge_l": 0.22275420744483693,
+      "bertscore_f1": 0.700186014175415,
+      "cosine_similarity": 0.3403572994488996,
+      "jsd": 0.6687984612483253,
+      "nli_entailment": 0.34285914041101934
+    },
+    "gemini-2.0-flash": {
+      "rouge_l": 0.2260329115930793,
+      "bertscore_f1": 0.7045748233795166,
+      "cosine_similarity": 0.3335971053590159,
+      "jsd": 0.6475931296194044,
+      "nli_entailment": 0.34024275706421275
+    },
+    "gemini-2.5-flash": {
+      "rouge_l": 0.24935984848586362,
+      "bertscore_f1": 0.7104960083961487,
+      "cosine_similarity": 0.3573922653998569,
+      "jsd": 0.638843254061178,
+      "nli_entailment": 0.34120670539559794
+    },
+    "gemini-2.5-pro": {
+      "rouge_l": 0.23949620726003007,
+      "bertscore_f1": 0.71995609998703,
+      "cosine_similarity": 0.3617905663172139,
+      "jsd": 0.6384003305133994,
+      "nli_entailment": 0.35578070604242384
+    },
+    "norallm__normistral-7b-warm-instruct": {
+      "rouge_l": 0.21740112259951624,
+      "bertscore_f1": 0.7099916934967041,
+      "cosine_similarity": 0.32349527582488147,
+      "jsd": 0.6359639707700088,
+      "nli_entailment": 0.4260276182826298
+    }
+  },
+  "n_pairs": {
+    "claude-sonnet-4-6": 60,
+    "gemini-2.0-flash": 60,
+    "gemini-2.5-flash": 60,
+    "gemini-2.5-pro": 60,
+    "norallm__normistral-7b-warm-instruct": 60
+  }
+}

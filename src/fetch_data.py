@@ -1,4 +1,4 @@
-"""Gets Bob-data from BigQuery, with questions and answers, and saves it as a jsonl file."""
+"""Fetches Q&A data from BigQuery and samples it by overarching category."""
 
 import json
 from typing import Any
@@ -98,16 +98,12 @@ if __name__ == "__main__":
     fetch_bob_data("data/kunnskapsbase_kategorier.json")
     with open("data/kunnskapsbase_kategorier.json", "r", encoding="utf-8") as f:
         data = json.load(f)
-        # Iterates over each entry, and concatenates all the entries of the "data_categories" field into a single set
     categories = set()
     for entry in data:
         if entry["data_categories"] is not None:
             categories.update(entry["data_categories"])
     print(f"Found {len(categories)} unique categories:")
-    # Removes space before the category name
     categories = {category.strip() for category in categories}
-
-    # Write to text file, one category per line
     with open("data/kunnskapsbase_kategorier.txt", "w", encoding="utf-8") as f:
         for category in sorted(categories):
             f.write(category + "\n")

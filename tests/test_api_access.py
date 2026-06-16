@@ -6,7 +6,7 @@ reported without stopping the remaining tests.
 
 Usage::
 
-    uv run python src/test_gemini_access.py
+    uv run python tests/test_api_access.py
 """
 
 import sys
@@ -15,7 +15,8 @@ import anthropic
 from google import genai
 from google.genai.types import HttpOptions
 
-from gen_answers_from_llm import load_model_configs
+sys.path.insert(0, "src")
+from models import load_model_configs  # noqa: E402
 
 _TEST_PROMPT = "Svar på norsk med én setning: Hva er NAV?"
 

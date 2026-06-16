@@ -1,0 +1,266 @@
+{
+  "scores": {
+    "claude-sonnet-4-6": {
+      "Andre": {
+        "rouge_l": 0.21526265890469273,
+        "bertscore_f1": 0.7101680040359497,
+        "cosine_similarity": 0.3597050728690485,
+        "jsd": 0.6538975191048374,
+        "nli_entailment": 0.3818450169637799
+      },
+      "Arbeid": {
+        "rouge_l": 0.25527319804886656,
+        "bertscore_f1": 0.7081641554832458,
+        "cosine_similarity": 0.35746126910523607,
+        "jsd": 0.6530857119769162,
+        "nli_entailment": 0.47619914151728154
+      },
+      "Familie og barn": {
+        "rouge_l": 0.21567547849414054,
+        "bertscore_f1": 0.7069486975669861,
+        "cosine_similarity": 0.3326638928942997,
+        "jsd": 0.6710800793209335,
+        "nli_entailment": 0.40089785791933535
+      },
+      "Helse og sykdom": {
+        "rouge_l": 0.18990522817419683,
+        "bertscore_f1": 0.6970796585083008,
+        "cosine_similarity": 0.3093729948416744,
+        "jsd": 0.6787626178823163,
+        "nli_entailment": 0.21398013234138488
+      },
+      "Pensjon": {
+        "rouge_l": 0.22319606638328543,
+        "bertscore_f1": 0.6868253946304321,
+        "cosine_similarity": 0.37663180697032633,
+        "jsd": 0.6712846741636771,
+        "nli_entailment": 0.3545560842379928
+      },
+      "Sosiale tjenester og veiledning": {
+        "rouge_l": 0.23721261466383958,
+        "bertscore_f1": 0.6919304132461548,
+        "cosine_similarity": 0.28586978007148345,
+        "jsd": 0.684680170546431,
+        "nli_entailment": 0.22967660948634147
+      }
+    },
+    "gemini-2.0-flash": {
+      "Andre": {
+        "rouge_l": 0.23462433995551996,
+        "bertscore_f1": 0.7181910276412964,
+        "cosine_similarity": 0.38067843940660756,
+        "jsd": 0.6306528283378918,
+        "nli_entailment": 0.5051445305347443
+      },
+      "Arbeid": {
+        "rouge_l": 0.2522359698051586,
+        "bertscore_f1": 0.7209432125091553,
+        "cosine_similarity": 0.3758899588732975,
+        "jsd": 0.6115158634360967,
+        "nli_entailment": 0.4338645972311497
+      },
+      "Familie og barn": {
+        "rouge_l": 0.27474448235626886,
+        "bertscore_f1": 0.7148169279098511,
+        "cosine_similarity": 0.3928252653739411,
+        "jsd": 0.615892910879299,
+        "nli_entailment": 0.37569910399615764
+      },
+      "Helse og sykdom": {
+        "rouge_l": 0.1460053594240997,
+        "bertscore_f1": 0.6621252298355103,
+        "cosine_similarity": 0.21665103452512186,
+        "jsd": 0.7060745275749138,
+        "nli_entailment": 0.16586142651503905
+      },
+      "Pensjon": {
+        "rouge_l": 0.20856386890765438,
+        "bertscore_f1": 0.6947667002677917,
+        "cosine_similarity": 0.34156389432873036,
+        "jsd": 0.6540071755498473,
+        "nli_entailment": 0.3586995530873537
+      },
+      "Sosiale tjenester og veiledning": {
+        "rouge_l": 0.24002344910977422,
+        "bertscore_f1": 0.7166056632995605,
+        "cosine_similarity": 0.28679856210925236,
+        "jsd": 0.6674154768373961,
+        "nli_entailment": 0.20218733102083206
+      }
+    },
+    "gemini-2.5-flash": {
+      "Andre": {
+        "rouge_l": 0.23165861206665853,
+        "bertscore_f1": 0.722796618938446,
+        "cosine_similarity": 0.3516204697268025,
+        "jsd": 0.6324527201221246,
+        "nli_entailment": 0.5250392690300941
+      },
+      "Arbeid": {
+        "rouge_l": 0.24910562717608808,
+        "bertscore_f1": 0.7188419103622437,
+        "cosine_similarity": 0.34376278981106634,
+        "jsd": 0.6226521558681556,
+        "nli_entailment": 0.39267215095460417
+      },
+      "Familie og barn": {
+        "rouge_l": 0.2442845069588171,
+        "bertscore_f1": 0.7173399329185486,
+        "cosine_similarity": 0.3730638647532342,
+        "jsd": 0.6298155529935373,
+        "nli_entailment": 0.372452187910676
+      },
+      "Helse og sykdom": {
+        "rouge_l": 0.21810336991213192,
+        "bertscore_f1": 0.6869072914123535,
+        "cosine_similarity": 0.323629748079354,
+        "jsd": 0.6631369828175393,
+        "nli_entailment": 0.24963200928177684
+      },
+      "Pensjon": {
+        "rouge_l": 0.3217828706018512,
+        "bertscore_f1": 0.7210740447044373,
+        "cosine_similarity": 0.42971882829435737,
+        "jsd": 0.61652797247963,
+        "nli_entailment": 0.2774243215098977
+      },
+      "Sosiale tjenester og veiledning": {
+        "rouge_l": 0.23122410419963488,
+        "bertscore_f1": 0.6960161924362183,
+        "cosine_similarity": 0.30700417306570865,
+        "jsd": 0.6684741450051223,
+        "nli_entailment": 0.23002029368653892
+      }
+    },
+    "gemini-2.5-pro": {
+      "Andre": {
+        "rouge_l": 0.23301684811464912,
+        "bertscore_f1": 0.724908173084259,
+        "cosine_similarity": 0.405638427807932,
+        "jsd": 0.6291186477538131,
+        "nli_entailment": 0.5646096557378769
+      },
+      "Arbeid": {
+        "rouge_l": 0.27649363402235894,
+        "bertscore_f1": 0.7335673570632935,
+        "cosine_similarity": 0.3762535299233108,
+        "jsd": 0.6097294723856079,
+        "nli_entailment": 0.4846322566270828
+      },
+      "Familie og barn": {
+        "rouge_l": 0.23617305699726593,
+        "bertscore_f1": 0.7215264439582825,
+        "cosine_similarity": 0.38654063242195474,
+        "jsd": 0.627051603194486,
+        "nli_entailment": 0.3472336669452488
+      },
+      "Helse og sykdom": {
+        "rouge_l": 0.22541600595184125,
+        "bertscore_f1": 0.7135651111602783,
+        "cosine_similarity": 0.3566672515539322,
+        "jsd": 0.6543420833303814,
+        "nli_entailment": 0.21253448091447352
+      },
+      "Pensjon": {
+        "rouge_l": 0.1968721801191416,
+        "bertscore_f1": 0.7037981152534485,
+        "cosine_similarity": 0.35446260355483317,
+        "jsd": 0.6543359303787311,
+        "nli_entailment": 0.266339117847383
+      },
+      "Sosiale tjenester og veiledning": {
+        "rouge_l": 0.26900551835492365,
+        "bertscore_f1": 0.7223713994026184,
+        "cosine_similarity": 0.3218133465423763,
+        "jsd": 0.655824250508541,
+        "nli_entailment": 0.25933505818247793
+      }
+    },
+    "norallm__normistral-7b-warm-instruct": {
+      "Andre": {
+        "rouge_l": 0.1597967224372207,
+        "bertscore_f1": 0.6968344449996948,
+        "cosine_similarity": 0.2732523850767503,
+        "jsd": 0.654352948477262,
+        "nli_entailment": 0.5588559597730637
+      },
+      "Arbeid": {
+        "rouge_l": 0.20371368170552695,
+        "bertscore_f1": 0.7022035717964172,
+        "cosine_similarity": 0.2913209540703369,
+        "jsd": 0.6355898128940074,
+        "nli_entailment": 0.47420917078852654
+      },
+      "Familie og barn": {
+        "rouge_l": 0.25267728868405726,
+        "bertscore_f1": 0.7296937704086304,
+        "cosine_similarity": 0.36998253665886444,
+        "jsd": 0.6028090469021613,
+        "nli_entailment": 0.4940738149918616
+      },
+      "Helse og sykdom": {
+        "rouge_l": 0.18660200259444257,
+        "bertscore_f1": 0.6959322094917297,
+        "cosine_similarity": 0.28540105829411516,
+        "jsd": 0.6714178954887766,
+        "nli_entailment": 0.1509153279243037
+      },
+      "Pensjon": {
+        "rouge_l": 0.31505533222395354,
+        "bertscore_f1": 0.7390362024307251,
+        "cosine_similarity": 0.4331183567184351,
+        "jsd": 0.5975999495232105,
+        "nli_entailment": 0.35525391697883607
+      },
+      "Sosiale tjenester og veiledning": {
+        "rouge_l": 0.18656170795189647,
+        "bertscore_f1": 0.6962500810623169,
+        "cosine_similarity": 0.3486160676617671,
+        "jsd": 0.6540141743266082,
+        "nli_entailment": 0.5228575192391872
+      }
+    }
+  },
+  "n_pairs": {
+    "claude-sonnet-4-6": {
+      "Andre": 10,
+      "Arbeid": 10,
+      "Familie og barn": 10,
+      "Helse og sykdom": 10,
+      "Pensjon": 10,
+      "Sosiale tjenester og veiledning": 10
+    },
+    "gemini-2.0-flash": {
+      "Andre": 10,
+      "Arbeid": 10,
+      "Familie og barn": 10,
+      "Helse og sykdom": 10,
+      "Pensjon": 10,
+      "Sosiale tjenester og veiledning": 10
+    },
+    "gemini-2.5-flash": {
+      "Andre": 10,
+      "Arbeid": 10,
+      "Familie og barn": 10,
+      "Helse og sykdom": 10,
+      "Pensjon": 10,
+      "Sosiale tjenester og veiledning": 10
+    },
+    "gemini-2.5-pro": {
+      "Andre": 10,
+      "Arbeid": 10,
+      "Familie og barn": 10,
+      "Helse og sykdom": 10,
+      "Pensjon": 10,
+      "Sosiale tjenester og veiledning": 10
+    },
+    "norallm__normistral-7b-warm-instruct": {
+      "Andre": 10,
+      "Arbeid": 10,
+      "Familie og barn": 10,
+      "Helse og sykdom": 10,
+      "Pensjon": 10,
+      "Sosiale tjenester og veiledning": 10
+    }
+  }
+}

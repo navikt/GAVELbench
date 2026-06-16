@@ -1,0 +1,106 @@
+[
+    {
+        "kategori": "Alderspensjon",
+        "overkategori": ["Pensjon"]
+    },
+    {
+        "kategori": "Alderspensjon kapittel 19",
+        "overkategori": ["Pensjon"]
+    },
+    {
+        "kategori": "Alderspensjon kapittel 20",
+        "overkategori": ["Pensjon"]
+    },
+    {
+        "kategori": "Arbeidsavklaringspenger",
+        "overkategori": ["Arbeid", "Helse og sykdom"]
+    },
+    {
+        "kategori": "Barnebidrag",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Barnepensjon",
+        "overkategori": ["Familie og barn", "Pensjon"]
+    },
+    {
+        "kategori": "Barnetrygd",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Dagpenger",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Engangsstønad",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Foreldre og svangerskapspenger",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Gjenlevendepensjon",
+        "overkategori": ["Familie og barn", "Pensjon"]
+    },
+    {
+        "kategori": "Internasjonalt",
+        "overkategori": ["Andre"]
+    },
+    {
+        "kategori": "Kontantstøtte",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Lønnsgaranti",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Medlemskap",
+        "overkategori": ["Andre"]
+    },
+    {
+        "kategori": "Ménerstatning og yrkesskade",
+        "overkategori": ["Helse og sykdom"]
+    },
+    {
+        "kategori": "Omsorgspenger",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Omstillingsstonad",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Opplæringspenger",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Pleiepenger sykt barn",
+        "overkategori": ["Familie og barn"]
+    },
+    {
+        "kategori": "Sykepenger",
+        "overkategori": ["Helse og sykdom"]
+    },
+    {
+        "kategori": "Tilleggsstønader",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Tiltakspenger",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Trygdeavgift",
+        "overkategori": ["Arbeid"]
+    },
+    {
+        "kategori": "Uføretrygd",
+        "overkategori": ["Helse og sykdom", "Pensjon"]
+    },
+    {
+        "kategori": "Økonomisk sosialhjelp",
+        "overkategori": ["Sosiale tjenester og veiledning"]
+    }
+]

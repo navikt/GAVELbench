@@ -14,8 +14,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine
 from transformers import Pipeline, pipeline
 
-from report import print_report, write_report
-
 # A metric function takes (references, hypotheses) and returns a dict of score_name -> float.
 MetricFn = Callable[[list[str], list[str]], dict[str, float]]
 
@@ -183,23 +181,6 @@ def align_pairs_with_meta(
     return references, hypotheses, overkategorier
 
 
-def align_pairs(
-    bob_records: list[dict[str, str]], generated_records: list[dict[str, str]]
-) -> tuple[list[str], list[str]]:
-    """Aligns bob answers with generated answers by question text.
-
-    Returns (references, hypotheses) in matched order.
-    """
-    generated_by_question = {r["question"]: r["answer"] for r in generated_records}
-    references, hypotheses = [], []
-    for record in bob_records:
-        question = record["contextualized_question"]
-        if question in generated_by_question:
-            references.append(record["answer_content"])
-            hypotheses.append(generated_by_question[question])
-    return references, hypotheses
-
-
 # ---------------------------------------------------------------------------
 # Core evaluation logic
 # ---------------------------------------------------------------------------
@@ -234,8 +215,13 @@ def evaluate(
     metrics: list[str] | None = None,
     output_path: str = "data/results/evaluation_report.md",
     kategori_mapping_path: str | None = None,
-) -> dict[str, dict[str, float]]:
-    """Runs evaluation metrics for one or more generated-answer files and writes a report.
+) -> tuple[
+    dict[str, dict[str, float]],
+    dict[str, int],
+    dict[str, dict[str, dict[str, float]]],
+    dict[str, dict[str, int]],
+]:
+    """Runs evaluation metrics for one or more generated-answer files.
 
     Args:
         bob_path: Path to the bob_data.json file (ground truth). Rows with a
@@ -245,11 +231,12 @@ def evaluate(
             The model name is inferred from the filename
             (``generated_answers_<model>.json``).
         metrics: Metric names to run. Defaults to all registered metrics.
-        output_path: Where to write the Markdown report.
+        output_path: Accepted for API compatibility; no longer used here.
         kategori_mapping_path: Unused; accepted for API compatibility.
 
     Returns:
-        Nested dict ``{model_name: {score_name: value}}``.
+        Tuple of ``(results_by_model, n_pairs_by_model,
+        scores_by_overkategori, n_pairs_by_overkategori)``.
     """
     if metrics is None:
         metrics = list(_METRICS.keys())
@@ -295,24 +282,42 @@ def evaluate(
     if not results_by_model:
         raise ValueError("No valid model results produced.")
 
-    print_report(results_by_model, n_pairs_by_model)
-    write_report(
+    return (
         results_by_model,
         n_pairs_by_model,
-        output_path,
-        scores_by_overkategori=scores_by_overkategori or None,
-        n_pairs_by_overkategori=n_pairs_by_overkategori or None,
+        scores_by_overkategori or {},
+        n_pairs_by_overkategori or {},
     )
-
-    return results_by_model
 
 
 if __name__ == "__main__":
     import glob
 
-    generated_files = sorted(glob.glob("data/generated/generated_answers_*.json"))
-    evaluate(
-        bob_path="data/bob_data.json",
-        generated_paths=generated_files,
-        output_path="data/results/evaluation_report.md",
-    )
+    from models import active_model_ids
+    from report import print_report, write_report
+
+    _active_ids = active_model_ids("src/models.yaml")
+
+    all_generated = sorted(glob.glob("data/generated/generated_answers_*.json"))
+    generated_files = [
+        p
+        for p in all_generated
+        if any(p.endswith(f"generated_answers_{mid}.json") for mid in _active_ids)
+    ]
+    if not generated_files:
+        print(
+            "No generated answer files match active models in src/models.yaml. Aborting."
+        )
+    else:
+        results, n_pairs, scores_ovk, n_pairs_ovk = evaluate(
+            bob_path="data/bob_data.json",
+            generated_paths=generated_files,
+        )
+        print_report(results, n_pairs)
+        write_report(
+            results,
+            n_pairs,
+            "data/results/evaluation_report.md",
+            scores_by_overkategori=scores_ovk or None,
+            n_pairs_by_overkategori=n_pairs_ovk or None,
+        )

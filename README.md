@@ -2,13 +2,16 @@
 
 Benchmark for å evaluere hvor godt LLM-er svarer på spørsmål om Navs tjenester, ved hjelp av ekte spørsmål og referansesvar fra Bob (Navs KI-støtte til kontaktsenteret).
 
-MERK: Denne filen er autogenerert fra kodeagent.
-
 ## Hva programmet gjør
 
-1. **Genererer svar** — sender spørsmål fra Bob til én eller flere LLM-er og lagrer svarene i `data/generated/`.
-2. **Evaluerer svar** — sammenligner genererte svar med Bobs referansesvar ved hjelp av flere metrikker.
-3. **Rapporterer resultater** — skriver en Markdown-rapport med sammenligningstabell, radarplot og kommentarer til `data/results/`.
+Pipelinen er delt i fire tydelige steg:
+
+| Steg | Modul | Beskrivelse |
+|------|-------|-------------|
+| 0 | `src/fetch_data.py` | Henter Bob-spørsmål og -svar fra BigQuery, sampler per overkategori |
+| 1 | `src/generate.py` | Genererer svar fra alle modeller i `models.yaml` |
+| 2 | `src/evaluate.py` | Evaluerer svarene mot referansesvar med flere metrikker |
+| 3 | `src/report.py` | Skriver JSON-resultater, radar- og søyleplott, og statiske Quarto-sider |
 
 ## Oppsett
 
@@ -30,82 +33,107 @@ Google Cloud-autentisering er nødvendig for tilgang til Vertex AI-modeller:
 gcloud auth login --update-adc
 ```
 
-Trenger kanskje å oppdatere til å ha gjort noen av stegene i denne guiden:
-https://data.ansatt.nav.no/quarto/853b92c8-84a2-4f23-8219-457e4efd5e1c/index.html
-
 ## Kjøre analysen
 
-### Full pipeline (henting av data + generering + evaluering)
+### Full pipeline
 
 ```bash
 uv run python src/main.py
 ```
 
-Pipelinen kjøres i tre steg:
-
-| Steg | Beskrivelse |
-|------|-------------|
-| 0 | Henter Bob-spørsmål og -svar fra BigQuery → `data/bob_data.jsonl` |
-| 1 | Genererer svar fra alle modeller i `models.yaml` → `data/generated/` |
-| 2 | Evaluerer svarene og skriver rapport → `data/results/` |
-
 ### Hopp over steg
 
 ```bash
-# Hopp over BQ-henting (bruk eksisterende bob_data.jsonl)
-uv run python src/main.py --skip-fetch
+# Hopp over BQ-henting (bruk eksisterende kunnskapsbase_kategorier.json)
+uv run python src/main.py --skip-bq-fetch
 
-# Hopp over både BQ-henting og generering (kun evaluering)
+# Hopp over BQ-henting og generering (kun evaluering + rapport)
 uv run python src/main.py --skip-generation
+
+# Regenerer kun rapport og plott fra eksisterende JSON-resultater
+uv run python src/main.py --only-report
 ```
 
 ### Kjøre enkeltsteget
 
 ```bash
-# Kun henting av Bob-data fra BigQuery
-uv run python src/load_data_from_BQ.py
+# Hente Bob-data fra BigQuery
+uv run python src/fetch_data.py
 
-# Kun generering av svar
-uv run python src/gen_answers_from_llm.py
+# Generere svar fra alle modeller
+uv run python src/generate.py
 
-# Kun evaluering
+# Evaluere og skrive rapport
 uv run python src/evaluate.py
 ```
 
-Resultater skrives til `data/results/`.
+### Quarto-rapport
 
+Etter at pipelinen har kjørt kan du forhåndsvise eller bygge Quarto-rapporten:
+
+```bash
+# Forhåndsvisning
+just preview
+
+# Bygg til HTML
+just render
+```
+
+QMD-filene er statiske (ingen Python-kode) og genereres automatisk av `src/report.py`. De trenger ikke redigeres manuelt.
 
 ### Metrikker
 
 | Metrikk | Beskrivelse | Retning |
 |---|---|---|
-| ROUGE-L | Lengste felles delsekvens F1 mellom generert og referansesvar | ↑ høyere er bedre |
+| ROUGE-L | Lengste felles delsekvens F1 | ↑ høyere er bedre |
 | BERTScore F1 | Kontekstuell embedding-likhet (`bert-base-multilingual-cased`) | ↑ høyere er bedre |
 | Cosinuslikhet | TF-IDF vektorcosinuslikhet | ↑ høyere er bedre |
-| Jensen-Shannon-divergens | Avstand mellom sannsynlighetsfordelinger over ordforråd | ↓ lavere er bedre |
-| NLI entailment | Sannsynlighet for at det genererte svaret impliserer referansesvaret (`alexandrainst/scandi-nli-small`) | ↑ høyere er bedre |
+| Jensen-Shannon-divergens | Avstand mellom ordfordelinger | ↓ lavere er bedre |
+| NLI entailment | Sannsynlighet for at generert svar impliserer referansesvaret (`alexandrainst/scandi-nli-base`) | ↑ høyere er bedre |
 
-Nye metrikker legges til ved å dekorere en funksjon med `@register_metric("navn")` i `src/evaluate.py` — ingen andre kodeendringer nødvendig.
+Nye metrikker legges til ved å dekorere en funksjon med `@register_metric("navn")` i `src/evaluate.py`.
+
+## Kodestruktur
+
+```
+src/
+├── models.yaml          # Modellkonfigurasjon
+├── main.py              # CLI-inngangspunkt for hele pipelinen
+├── models.py            # Delt: ModelConfig, load_model_configs(), active_model_ids()
+├── fetch_data.py        # Steg 0: hente og sample data fra BigQuery
+├── generate.py          # Steg 1: generere svar fra LLM-er
+├── evaluate.py          # Steg 2: beregne metrikker (returnerer data, skriver ingenting)
+└── report.py            # Steg 3: skrive JSON, plott og statiske QMD-filer
+
+tests/
+└── test_api_access.py   # Røyktest for API-tilgang til alle modeller
+
+scripts/
+├── explore_data_categories.py  # Utforskning av kategoridistribusjon
+└── ragas_evaluate.py           # RAGAS-basert faktakorrekthetsevaluering
+
+quarto/
+├── index.qmd            # Autogenerert (statisk) — kjør --only-report for å oppdatere
+└── per_kategori.qmd     # Autogenerert (statisk) — kjør --only-report for å oppdatere
+```
 
 ## Data
 
 ```
 data/
-├── bob_data.jsonl          ← fasitsvar og spørsmål fra Bob
-├── generated/              ← genererte svar, én fil per modell
-│   └── generated_answers_<modell-id>.jsonl
-└── results/                ← evalueringsresultater
-    ├── evaluation_report.md
-    ├── evaluation_report.json
-    └── evaluation_report_radar.png
+├── kunnskapsbase_kategorier.json  ← rådata fra BigQuery (privat, ikke i git)
+├── kategorier_mapping.json        ← mapping kategori → overkategori (i git)
+├── bob_data.json                  ← samplet treningssett (privat, ikke i git)
+├── generated/                     ← genererte svar per modell (privat, ikke i git)
+└── results/                       ← evalueringsresultater
+    ├── evaluation_report.json              ← aggregerte scores (i git)
+    ├── evaluation_report_scores_per_overkategori.json  ← per-kategori scores (i git)
+    └── *.png                               ← radar- og søyleplott (i git)
 ```
-
-Hver `generated_answers_*.jsonl`-fil har rader med feltene `question` og `answer`.
-`bob_data.jsonl` har feltene `contextualized_question` og `answer_content`.
 
 ## Modeller
 
-Modellene konfigureres i `src/models.yaml`. Å legge til en ny modell krever kun å endre yaml-en, ingen kodeendringer:
+Modellene konfigureres i `src/models.yaml`. Å legge til en ny modell krever kun å endre yaml-en:
 
 ```yaml
 defaults:
@@ -113,13 +141,14 @@ defaults:
   location: europe-west1
 
 models:
-  - id: gemini-2.0-flash-001
+  - id: gemini-2.0-flash
     provider: vertex_ai
     description: Rask og kostnadseffektiv Gemini-modell
+    concurrency: 10
 ```
 
-Hvert innslag arver `project` og `location` fra `defaults` med mindre det overstyres. Støttet tilbyder foreløpig: `vertex_ai`.
-For å legge til en ny tilbyder, legg til en branch i `generate_answer()` i `src/gen_answers_from_llm.py`.
+Støttede tilbydere: `vertex_ai`, `vertex_anthropic`, `huggingface`.
+For å legge til en ny tilbyder, legg til en branch i `run_model()` i `src/generate.py`.
 
 ## Utvikling
 
@@ -129,4 +158,7 @@ just lint
 
 # Automatisk fiks av formatering
 just fix
+
+# Test API-tilgang for alle modeller i models.yaml
+uv run python tests/test_api_access.py
 ```

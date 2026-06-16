@@ -1,144 +1,115 @@
+---
+# Denne filen er autogenerert av src/report.py — ikke rediger manuelt
+---
+
 # Resultater per kategori
 
-```{python}
-#| echo: false
-import json, os
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-import yaml
+_Generert: 2026-06-11 08:53 UTC_
 
-RESULTS_DIR = "../data/results"
-MAPPING_PATH = "../data/kategorier_mapping.json"
-MODELS_YAML = "../src/models.yaml"
-LOWER_IS_BETTER = {"jsd"}
-
-report_path = os.path.join(RESULTS_DIR, "evaluation_report.json")
-ok_path = os.path.join(RESULTS_DIR, "evaluation_report_scores_per_overkategori.json")
-
-if not os.path.exists(report_path):
-    print("⚠️ Ingen resultater funnet. Kjør evalueringen først (`uv run python src/main.py`).")
-    raise SystemExit
-
-with open(report_path, encoding="utf-8") as f:
-    report = json.load(f)
-
-agg_all = report["models"]
-
-# Filter to only models currently defined in models.yaml
-if os.path.exists(MODELS_YAML):
-    with open(MODELS_YAML, encoding="utf-8") as f:
-        _spec = yaml.safe_load(f)
-    _active_ids = {m["id"].replace("/", "__") for m in _spec.get("models", [])}
-    models = [m for m in agg_all if m in _active_ids]
-    _skipped = [m for m in agg_all if m not in _active_ids]
-    if _skipped:
-        print(f"ℹ️ Hopper over modeller ikke i models.yaml: {_skipped}")
-else:
-    models = list(agg_all.keys())
-
-metrics = list(agg_all[models[0]].keys()) if models else []
-
-# Load or compute per-overkategori aggregates on the fly
-if os.path.exists(ok_path):
-    with open(ok_path, encoding="utf-8") as f:
-        raw = json.load(f)
-    # File format: {"scores": {model: {ok: {metric: val}}}, "n_pairs": {model: {ok: n}}}
-    scores_raw = raw.get("scores", raw)  # fallback: treat whole file as scores dict
-    n_pairs_raw = raw.get("n_pairs", {})
-    by_ok = {}
-    for model, ok_scores in scores_raw.items():
-        if model not in models:
-            continue
-        by_ok[model] = {}
-        for ok, score_dict in ok_scores.items():
-            by_ok[model][ok] = dict(score_dict)
-            by_ok[model][ok]["n"] = n_pairs_raw.get(model, {}).get(ok, "")
-else:
-    print("⚠️ Ingen per-overkategori resultater funnet. Kjør evalueringen med --n-per-overkategori.")
-    raise SystemExit
-
-all_overkategorier = sorted({ok for model_data in by_ok.values() for ok in model_data})
-```
-
-Denne siden viser evalueringsresultater gruppert etter **overkategori** fra `kategorier_mapping.json`.
+Denne siden viser evalueringsresultater gruppert etter **overkategori**.
 Spørsmål kan tilhøre flere overkategorier, og inngår i beregningene for hver av dem.
-
-```{python}
-#| echo: false
-print(f"Modeller: {models}")
-print(f"Overkategorier med data: {all_overkategorier}")
-```
 
 ## Tabeller per metrikk
 
-```{python}
-#| echo: false
-for metric in metrics:
-    lower = metric in LOWER_IS_BETTER
-    rows = []
-    for ok in all_overkategorier:
-        row = {"Overkategori": ok}
-        values = {}
-        for model in models:
-            v = by_ok.get(model, {}).get(ok, {}).get(metric)
-            values[model] = v
-            n = by_ok.get(model, {}).get(ok, {}).get("n", "")
-            row[model] = f"{v:.4f} (n={n})" if v is not None else "–"
-        present = {m: v for m, v in values.items() if v is not None}
-        if present:
-            best = min(present, key=present.__getitem__) if lower else max(present, key=present.__getitem__)
-            for model in models:
-                if values.get(model) is not None and model == best:
-                    row[model] += " ★"
-        rows.append(row)
+### rouge_l
 
-    df = pd.DataFrame(rows).set_index("Overkategori")
-    label = metric + (" (↓ lavere er bedre)" if lower else "")
-    print(f"\n### {label}\n")
-    display(df)
-```
+| Overkategori | claude-sonnet-4-6 | gemini-2.0-flash | gemini-2.5-flash | gemini-2.5-pro | norallm__normistral-7b-warm-instruct |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Andre | 0.2153 (n=10) | 0.2346 (n=10) ★ | 0.2317 (n=10) | 0.2330 (n=10) | 0.1598 (n=10) |
+| Arbeid | 0.2553 (n=10) | 0.2522 (n=10) | 0.2491 (n=10) | 0.2765 (n=10) ★ | 0.2037 (n=10) |
+| Familie og barn | 0.2157 (n=10) | 0.2747 (n=10) ★ | 0.2443 (n=10) | 0.2362 (n=10) | 0.2527 (n=10) |
+| Helse og sykdom | 0.1899 (n=10) | 0.1460 (n=10) | 0.2181 (n=10) | 0.2254 (n=10) ★ | 0.1866 (n=10) |
+| Pensjon | 0.2232 (n=10) | 0.2086 (n=10) | 0.3218 (n=10) ★ | 0.1969 (n=10) | 0.3151 (n=10) |
+| Sosiale tjenester og veiledning | 0.2372 (n=10) | 0.2400 (n=10) | 0.2312 (n=10) | 0.2690 (n=10) ★ | 0.1866 (n=10) |
+
+### bertscore_f1
+
+| Overkategori | claude-sonnet-4-6 | gemini-2.0-flash | gemini-2.5-flash | gemini-2.5-pro | norallm__normistral-7b-warm-instruct |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Andre | 0.7102 (n=10) | 0.7182 (n=10) | 0.7228 (n=10) | 0.7249 (n=10) ★ | 0.6968 (n=10) |
+| Arbeid | 0.7082 (n=10) | 0.7209 (n=10) | 0.7188 (n=10) | 0.7336 (n=10) ★ | 0.7022 (n=10) |
+| Familie og barn | 0.7069 (n=10) | 0.7148 (n=10) | 0.7173 (n=10) | 0.7215 (n=10) | 0.7297 (n=10) ★ |
+| Helse og sykdom | 0.6971 (n=10) | 0.6621 (n=10) | 0.6869 (n=10) | 0.7136 (n=10) ★ | 0.6959 (n=10) |
+| Pensjon | 0.6868 (n=10) | 0.6948 (n=10) | 0.7211 (n=10) | 0.7038 (n=10) | 0.7390 (n=10) ★ |
+| Sosiale tjenester og veiledning | 0.6919 (n=10) | 0.7166 (n=10) | 0.6960 (n=10) | 0.7224 (n=10) ★ | 0.6963 (n=10) |
+
+### cosine_similarity
+
+| Overkategori | claude-sonnet-4-6 | gemini-2.0-flash | gemini-2.5-flash | gemini-2.5-pro | norallm__normistral-7b-warm-instruct |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Andre | 0.3597 (n=10) | 0.3807 (n=10) | 0.3516 (n=10) | 0.4056 (n=10) ★ | 0.2733 (n=10) |
+| Arbeid | 0.3575 (n=10) | 0.3759 (n=10) | 0.3438 (n=10) | 0.3763 (n=10) ★ | 0.2913 (n=10) |
+| Familie og barn | 0.3327 (n=10) | 0.3928 (n=10) ★ | 0.3731 (n=10) | 0.3865 (n=10) | 0.3700 (n=10) |
+| Helse og sykdom | 0.3094 (n=10) | 0.2167 (n=10) | 0.3236 (n=10) | 0.3567 (n=10) ★ | 0.2854 (n=10) |
+| Pensjon | 0.3766 (n=10) | 0.3416 (n=10) | 0.4297 (n=10) | 0.3545 (n=10) | 0.4331 (n=10) ★ |
+| Sosiale tjenester og veiledning | 0.2859 (n=10) | 0.2868 (n=10) | 0.3070 (n=10) | 0.3218 (n=10) | 0.3486 (n=10) ★ |
+
+### jsd (↓ lavere er bedre)
+
+| Overkategori | claude-sonnet-4-6 | gemini-2.0-flash | gemini-2.5-flash | gemini-2.5-pro | norallm__normistral-7b-warm-instruct |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Andre | 0.6539 (n=10) | 0.6307 (n=10) | 0.6325 (n=10) | 0.6291 (n=10) ★ | 0.6544 (n=10) |
+| Arbeid | 0.6531 (n=10) | 0.6115 (n=10) | 0.6227 (n=10) | 0.6097 (n=10) ★ | 0.6356 (n=10) |
+| Familie og barn | 0.6711 (n=10) | 0.6159 (n=10) | 0.6298 (n=10) | 0.6271 (n=10) | 0.6028 (n=10) ★ |
+| Helse og sykdom | 0.6788 (n=10) | 0.7061 (n=10) | 0.6631 (n=10) | 0.6543 (n=10) ★ | 0.6714 (n=10) |
+| Pensjon | 0.6713 (n=10) | 0.6540 (n=10) | 0.6165 (n=10) | 0.6543 (n=10) | 0.5976 (n=10) ★ |
+| Sosiale tjenester og veiledning | 0.6847 (n=10) | 0.6674 (n=10) | 0.6685 (n=10) | 0.6558 (n=10) | 0.6540 (n=10) ★ |
+
+### nli_entailment
+
+| Overkategori | claude-sonnet-4-6 | gemini-2.0-flash | gemini-2.5-flash | gemini-2.5-pro | norallm__normistral-7b-warm-instruct |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Andre | 0.3818 (n=10) | 0.5051 (n=10) | 0.5250 (n=10) | 0.5646 (n=10) ★ | 0.5589 (n=10) |
+| Arbeid | 0.4762 (n=10) | 0.4339 (n=10) | 0.3927 (n=10) | 0.4846 (n=10) ★ | 0.4742 (n=10) |
+| Familie og barn | 0.4009 (n=10) | 0.3757 (n=10) | 0.3725 (n=10) | 0.3472 (n=10) | 0.4941 (n=10) ★ |
+| Helse og sykdom | 0.2140 (n=10) | 0.1659 (n=10) | 0.2496 (n=10) ★ | 0.2125 (n=10) | 0.1509 (n=10) |
+| Pensjon | 0.3546 (n=10) | 0.3587 (n=10) ★ | 0.2774 (n=10) | 0.2663 (n=10) | 0.3553 (n=10) |
+| Sosiale tjenester og veiledning | 0.2297 (n=10) | 0.2022 (n=10) | 0.2300 (n=10) | 0.2593 (n=10) | 0.5229 (n=10) ★ |
 
 ## Søylediagram per overkategori
 
-```{python}
-#| echo: false
-#| fig-cap: "Gjennomsnittsscore per overkategori og modell"
-for metric in metrics:
-    lower = metric in LOWER_IS_BETTER
-    fig, ax = plt.subplots(figsize=(max(8, len(all_overkategorier) * 1.2), 4))
-    x = np.arange(len(all_overkategorier))
-    width = 0.8 / max(len(models), 1)
-    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+### bertscore_f1 (↑ høyere er bedre)
 
-    for i, model in enumerate(models):
-        vals = [by_ok.get(model, {}).get(ok, {}).get(metric, float("nan")) for ok in all_overkategorier]
-        ax.bar(x + i * width, vals, width, label=model, color=colors[i % len(colors)], alpha=0.8)
+![](../data/results/bar_bertscore_f1.png)
 
-    ax.set_xticks(x + width * (len(models) - 1) / 2)
-    ax.set_xticklabels(all_overkategorier, rotation=30, ha="right", fontsize=9)
-    ax.set_ylabel(metric)
-    arrow = "↓ lavere er bedre" if lower else "↑ høyere er bedre"
-    ax.set_title(f"{metric} per overkategori ({arrow})")
-    ax.legend()
-    ax.set_ylim(0, 1)
-    fig.tight_layout()
-    plt.show()
-```
+### cosine_similarity (↑ høyere er bedre)
+
+![](../data/results/bar_cosine_similarity.png)
+
+### jsd (↓ lavere er bedre)
+
+![](../data/results/bar_jsd.png)
+
+### nli_entailment (↑ høyere er bedre)
+
+![](../data/results/bar_nli_entailment.png)
+
+### rouge_l (↑ høyere er bedre)
+
+![](../data/results/bar_rouge_l.png)
 
 ## Radarplott per overkategori
 
-```{python}
-#| echo: false
-from IPython.display import Image, display as ipy_display
+### Andre
 
-for ok in all_overkategorier:
-    filename = "radar_" + ok.replace(" ", "_") + ".png"
-    path = os.path.join(RESULTS_DIR, filename)
-    if os.path.exists(path):
-        print(f"\n### {ok}\n")
-        ipy_display(Image(filename=path))
-    else:
-        print(f"\n### {ok}\n")
-        print(f"_(Ingen radarplott funnet: {filename})_")
-```
+![](../data/results/radar_Andre.png)
+
+### Arbeid
+
+![](../data/results/radar_Arbeid.png)
+
+### Familie og barn
+
+![](../data/results/radar_Familie_og_barn.png)
+
+### Helse og sykdom
+
+![](../data/results/radar_Helse_og_sykdom.png)
+
+### Pensjon
+
+![](../data/results/radar_Pensjon.png)
+
+### Sosiale tjenester og veiledning
+
+![](../data/results/radar_Sosiale_tjenester_og_veiledning.png)

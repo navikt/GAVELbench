@@ -6,16 +6,16 @@ import os
 import random
 import time
 from collections.abc import Awaitable, Callable
-from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import anthropic
-import yaml
 from google import genai
 from google.genai import errors as genai_errors
 from google.genai.types import HttpOptions
 from tqdm import tqdm
+
+from models import ModelConfig, load_model_configs
 
 _MAX_RETRIES = 6
 _BASE_WAIT_SECONDS = 10
@@ -73,45 +73,6 @@ async def _async_call_with_retry(coro_fn: Callable[[], Awaitable[str]]) -> str:
             )
             await asyncio.sleep(wait)
     raise RuntimeError("Unreachable")
-
-
-@dataclass
-class ModelConfig:
-    """Configuration for a single model."""
-
-    id: str
-    provider: str
-    description: str = ""
-    project: str = ""
-    location: str = ""
-    extra: dict[str, str] = field(default_factory=dict)
-
-
-def load_model_configs(yaml_path: str = "src/models.yaml") -> list[ModelConfig]:
-    """Loads model configurations from a YAML file.
-
-    Top-level ``defaults`` are merged into each model entry so shared settings
-    (e.g. project, location) don't need to be repeated per model.
-    """
-    with open(yaml_path) as f:
-        raw = yaml.safe_load(f)
-
-    defaults: dict[str, str] = raw.get("defaults", {})
-    configs: list[ModelConfig] = []
-    for entry in raw.get("models", []):
-        merged = {**defaults, **entry}
-        known = {"id", "provider", "description", "project", "location"}
-        configs.append(
-            ModelConfig(
-                id=merged["id"],
-                provider=merged["provider"],
-                description=merged.get("description", ""),
-                project=merged.get("project", ""),
-                location=merged.get("location", ""),
-                extra={k: v for k, v in merged.items() if k not in known},
-            )
-        )
-    return configs
 
 
 def load_questions_answers(file_path: str) -> list[dict[str, str]]:
