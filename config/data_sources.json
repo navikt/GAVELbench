@@ -1,0 +1,7 @@
+{
+    "bob_answers": "./data/bob_data.json",
+    "norallm__normistral-7b-warm-instruct": "./data/generated/generated_answers_norallm__normistral-7b-warm-instruct.json",
+    "claude-sonnet-4-6": "./data/generated/generated_answers_claude-sonnet-4-6.json",
+    "gemini-2.5-pro": "./data/generated/generated_answers_gemini-2.5-pro.json",
+    "NBAiLab__borealis-open-4b-gguf": "./data/generated/generated_answers_NBAiLab__borealis-open-4b-gguf.json"
+}
