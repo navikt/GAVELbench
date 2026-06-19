@@ -209,7 +209,7 @@ async def evaluate_dataset_batch(
     total_rows = len(dataset)
     all_results = []
 
-    print(f"🚀 Starting batch evaluation of {total_rows} rows...")
+    print(f"...:Starting batch evaluation of {total_rows} rows...")
     for i in tqdm(
         range(0, total_rows, batch_size), desc="Processing batches", leave=False
     ):
