@@ -1,0 +1,5 @@
+model_id,Composite_andre,Composite_arbeid,Composite_familie_og_barn,Composite_helse_og_sykdom,Composite_pensjon,Global_Composite_Score,AP1,AP2,AP3,AP4,AP5,AP6
+gemini-2.5-pro,0.0415,0.3042,0.301,0.303,0.3048,0.2037,N/A,N/A,N/A,N/A,N/A,N/A
+claude-sonnet-4-6,0.0412,0.3011,0.298,0.2996,0.2919,0.2004,N/A,N/A,N/A,N/A,N/A,N/A
+norallm__normistral-7b-warm-instruct,,0.0413,0.0417,0.0414,0.0418,0.0415,N/A,N/A,N/A,N/A,N/A,N/A
+NBAiLab__borealis-open-4b-gguf,,0.0408,0.0416,0.0413,,0.0412,N/A,N/A,N/A,N/A,N/A,N/A

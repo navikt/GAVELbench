@@ -1,0 +1,504 @@
+---
+title: "Gavelbench Leaderboard"
+format: html
+execute:
+  freeze: auto
+  echo: false
+---
+
+
+:::{.callout-warning}
+This leaderboard is under active development. The scores are preliminary and cannot be trusted. Do not use this leaderboard for decision-making.
+:::
+
+
+
+### Gavelbench Master Leaderboard
+
+```{ojs}
+//| layout-ncol: 1
+//| title: "Master Leaderboard"
+
+{
+// --- Sparkbar ---
+function sparkbar(max) {
+  return x => htl.html`<div style="
+    background: #E6BBAD;
+    width: ${100 * x / 1}%;
+    float: right;
+    padding-right: 3px;
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    justify-content: end;">${x.toLocaleString("en")}`
+}
+
+// --- Icon loader ---
+const iconCache = {};
+
+async function loadAkselIcon(iconName) {
+  if (iconCache[iconName]) return iconCache[iconName];
+  const url = `https://cdn.jsdelivr.net/npm/@navikt/aksel-icons@8.13.0/dist/svg/${iconName}.svg`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const svgText = await res.text();
+    const parser = new DOMParser();
+    const svgEl = parser.parseFromString(svgText, "image/svg+xml").documentElement;
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    svgEl.setAttribute('viewBox', '0 0 24 24');
+    iconCache[iconName] = svgEl;
+    return svgEl;
+  } catch (e) {
+    const fb = html`<span style="display:inline-flex;width:1.1em;height:1.1em;align-items:center;justify-content:center;background:#666;color:#fff;border-radius:4px;font-size:0.6em;font-weight:bold;">${iconName[0]}</span>`;
+    iconCache[iconName] = fb;
+    return fb;
+  }
+}
+
+function cloneIcon(iconName) {
+  const cached = iconCache[iconName] || iconCache["Briefcase"];
+  const clone = cached.cloneNode(true);
+  clone.style.display = 'inline-block';
+  clone.style.verticalAlign = 'left';
+  clone.style.width = '1.2em';
+  clone.style.height = '1.2em';
+  clone.style.flexShrink = '0';
+  return clone;
+}
+
+// --- Category config ---
+const categoryConfig = {
+  arbeid:          { icon: "Briefcase",   border: '#5B9BD5', bg: 'rgba(91, 155, 213, 0.1)' },
+  familie_og_barn: { icon: "Stroller",    border: '#70AD47', bg: 'rgba(112, 173, 71, 0.1)' },
+  helse_og_sykdom: { icon: "Stethoscope", border: '#DC143C', bg: 'rgba(220, 20, 60, 0.1)' },
+  pensjon:         { icon: "Piggybank",   border: '#ED7D31', bg: 'rgba(237, 125, 49, 0.1)' },
+  andre:           { icon: "HandHeart",   border: '#7030A0', bg: 'rgba(112, 48, 160, 0.1)' },
+};
+
+await Promise.all(Object.values(categoryConfig).map(c => loadAkselIcon(c.icon)));
+
+
+// --- Header builder: icon + label on ONE LINE ---
+function makeHeader(categoryKey, label) {
+  const cfg = categoryConfig[categoryKey];
+  const icon = cloneIcon(cfg.icon);
+  icon.style.fill = cfg.border;
+  return html`<div style="
+    display:flex;
+    align-items:center;
+    gap:0.8em;
+    white-space:nowrap;
+    font-size:0.85em;
+    color:${cfg.border};
+    font-weight:700;">
+    ${icon}
+    <span>${label}</span>
+  </div>`;
+}
+
+// --- Simple cell formatter: only background color ---
+function makeSimpleCell(categoryKey) {
+  const cfg = categoryConfig[categoryKey];
+  return x => htl.html`<div style="
+    background:${cfg.bg};
+    color:${cfg.border};
+    padding:4px 8px;
+    font-weight:600;
+    text-align:center;">${typeof x === 'number' ? x.toFixed(4) : x}</div>`;
+}
+
+// --- Load data ---
+const masterData = await FileAttachment("leaderboards/master_leaderboard_geometric_mean.csv").csv({ typed: true });
+
+// --- Column configs with min-widths ---
+const columnConfigs = {
+  Composite_arbeid:             { label: makeHeader("arbeid",          "Nav Arbeid"),           minWidth: 150 },
+  Composite_familie_og_barn:    { label: makeHeader("familie_og_barn", "Nav Familie og barn"),  minWidth: 200 },
+  Composite_helse_og_sykdom:    { label: makeHeader("helse_og_sykdom", "Nav Helse og sykdom"),  minWidth: 210 },
+  Composite_pensjon:            { label: makeHeader("pensjon",         "Nav Pensjon"),          minWidth: 180 },
+  Composite_andre:              { label: makeHeader("andre",           "Nav Andre"),            minWidth: 180 },
+};
+
+// --- Render table ---
+const tableDiv = Inputs.table(masterData, {
+  columns: [
+    "model_id",
+    "Global_Composite_Score",
+    "Composite_arbeid",
+    "Composite_familie_og_barn",
+    "Composite_helse_og_sykdom",
+    "Composite_pensjon",
+    "Composite_andre",
+    "AP1",
+    "AP2",
+    "AP3",
+    "AP4",
+    "AP5",
+    "AP6",
+  ],
+  header: {
+    model_id: "Model",
+    Global_Composite_Score: "Global Composite Score",
+    Composite_arbeid:             columnConfigs.Composite_arbeid.label,
+    Composite_familie_og_barn:    columnConfigs.Composite_familie_og_barn.label,
+    Composite_helse_og_sykdom:    columnConfigs.Composite_helse_og_sykdom.label,
+    Composite_pensjon:            columnConfigs.Composite_pensjon.label,
+    Composite_andre:              columnConfigs.Composite_andre.label,
+    AP1: "Sustainability",
+    AP2: "Privacy and Legal Compliance",
+    AP3: "Bias and stereotyping",
+    AP4: "Transparency and openness",
+    AP5: "Safety",
+    AP6: "prinsipp",
+  },
+  format: {
+    Composite_arbeid:             makeSimpleCell("arbeid"),
+    Composite_familie_og_barn:    makeSimpleCell("familie_og_barn"),
+    Composite_helse_og_sykdom:    makeSimpleCell("helse_og_sykdom"),
+    Composite_pensjon:            makeSimpleCell("pensjon"),
+    Composite_andre:              makeSimpleCell("andre"),
+    Global_Composite_Score:       x => htl.html`<div style="font-weight:700;text-align:center;">${typeof x === 'number' ? x.toFixed(3) : x}</div>`,
+  },
+});
+
+// Apply EQUAL WIDTH to all columns except first (model_id)
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    const thElements = Array.from(tableDiv.querySelectorAll('th'));
+    const numColumns = thElements.length;
+
+    // Calculate target width dynamically based on container space
+    const totalAvailable = Math.floor(1200); // Base viewport/container estimate
+    const targetWidth = `${Math.floor(totalAvailable / (numColumns - 1))}px`;
+
+    console.log(`Applying equal width (${targetWidth}) to ${numColumns - 1} columns (excluding first)`);
+
+    // Loop through ALL headers EXCEPT the first one (i=1 skips model_id)
+    for (let i = 1; i < numColumns; i++) {
+      const th = thElements[i];
+      if (th) {
+        th.style.minWidth = targetWidth;
+        th.style.width = targetWidth;
+        th.style.maxWidth = targetWidth;
+        th.style.boxSizing = 'border-box';
+        th.style.overflow = 'hidden';
+        th.style.textOverflow = 'ellipsis';
+        th.style.whiteSpace = 'nowrap';
+      }
+    }
+
+    // First column remains flexible/minimal width
+    if (thElements[0]) {
+      thElements[0].style.minWidth = 'auto';
+      thElements[0].style.maxWidth = 'none';
+    }
+  });
+});
+
+return tableDiv;
+}
+```
+
+
+### Leaderboards på Navs ulike virkeområder
+```{ojs}
+{
+function sparkbar(max) {
+  return x => htl.html`<div style="
+    background: #E6BBAD;
+    width: ${100 * x / 1}%;
+    float: right;
+    padding-right: 3px;
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    justify-content: end;">${x.toLocaleString("en")}`
+}
+
+// --- Fetch Aksel icons from CDN ---
+const iconCache = {};
+
+async function loadAkselIcon(iconName) {
+  if (iconCache[iconName]) return iconCache[iconName];
+  const url = `https://cdn.jsdelivr.net/npm/@navikt/aksel-icons@8.13.0/dist/svg/${iconName}.svg`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const svgText = await res.text();
+    const parser = new DOMParser();
+    const svgEl = parser.parseFromString(svgText, "image/svg+xml").documentElement;
+    svgEl.removeAttribute('width');
+    svgEl.removeAttribute('height');
+    svgEl.setAttribute('viewBox', '0 0 24 24');
+    svgEl.classList.add('callout-icon');
+    iconCache[iconName] = svgEl;
+    return svgEl;
+  } catch (e) {
+    const fallback = html`<span class="callout-icon-fallback">${iconName[0]}</span>`;
+    iconCache[iconName] = fallback;
+    return fallback;
+  }
+}
+
+function cloneIcon(iconName) {
+  const cached = iconCache[iconName] || iconCache["Briefcase"];
+  return cached.cloneNode(true);
+}
+
+const categoryIcons = {
+  "arbeid": "Briefcase",
+  "pensjon": "Piggybank",
+  "helse_og_sykdom": "Stethoscope",
+  "familie_og_barn": "Stroller",
+  "andre": "HandHeart",
+};
+
+function getCategoryName(filename) {
+  return filename.replace(/^leaderboard_/, '').replace(/_geometric_mean\.csv$/, '');
+}
+
+await Promise.all(Object.values(categoryIcons).map(loadAkselIcon));
+
+// Store references to apply styling after rendering
+const stylingQueue = [];
+
+function decorateTable(data, borderColor, bgColor, wrapperId) {
+  const columns = ["model_id", "status", "composite_score", "factual_corr", "answer_quality", "rouge_l", "semantic_sim", "jsd_divergence"];
+
+  const header = {
+    model_id: "Model", status: "Status", composite_score: "Composite ⚡",
+    rouge_l: "ROUGE_L", semantic_sim: "Semantic similarity",
+    jsd_divergence: "JSD divergence", factual_corr: "Factual Correctness",
+    answer_quality: "Answer Quality",
+  };
+
+  const format = {
+    rouge_l: sparkbar(d3.max(data, (d) => d.rouge_l)),
+    semantic_sim: sparkbar(d3.max(data, (d) => d.semantic_sim)),
+    jsd_divergence: sparkbar(d3.max(data, (d) => d.jsd_divergence)),
+    factual_corr: sparkbar(d3.max(data, (d) => d.factual_corr)),
+    answer_quality: sparkbar(d3.max(data, (d) => d.answer_quality)),
+  };
+
+  const table = Inputs.table(data, { columns, header, format, maxWidth: 6040, multiple: false });
+
+  // Queue for post-rendering styling
+  stylingQueue.push({ table, borderColor, bgColor, wrapperId });
+
+  return table;
+}
+
+const files = [
+  { name: "leaderboard_arbeid_geometric_mean.csv", attachment: FileAttachment("./data/leaderboards/leaderboard_arbeid_geometric_mean.csv") },
+  { name: "leaderboard_familie_og_barn_geometric_mean.csv", attachment: FileAttachment("./data/leaderboards/leaderboard_familie_og_barn_geometric_mean.csv") },
+  { name: "leaderboard_helse_og_sykdom_geometric_mean.csv", attachment: FileAttachment("./data/leaderboards/leaderboard_helse_og_sykdom_geometric_mean.csv") },
+  { name: "leaderboard_pensjon_geometric_mean.csv", attachment: FileAttachment("./data/leaderboards/leaderboard_pensjon_geometric_mean.csv") },
+  { name: "leaderboard_andre_geometric_mean.csv", attachment: FileAttachment("./data/leaderboards/leaderboard_andre_geometric_mean.csv") },
+];
+
+const datasets = await Promise.all(
+  files.map(async (file) => ({ file: file.name, data: await file.attachment.csv({ typed: true }) }))
+);
+
+const calloutColors = {
+  arbeid: { border: '#5B9BD5', bg: 'rgba(91, 155, 213, 0.1)' },
+  familie_og_barn: { border: '#70AD47', bg: 'rgba(112, 173, 71, 0.1)' },
+  helse_og_sykdom: { border: '#DC143C', bg: 'rgba(220, 20, 60, 0.1)' },
+  pensjon: { border: '#ED7D31', bg: 'rgba(237, 125, 49, 0.1)' },
+  andre: { border: '#7030A0', bg: 'rgba(112, 48, 160, 0.1)' },
+};
+
+const styles = html`<style>
+  .table-container-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-rendered table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  /* Header row sticks vertically */
+  .table-rendered table > thead tr th {
+    position: sticky !important;
+    top: 0;
+    z-index: 30;
+  }
+
+  /* Borders */
+  .table-rendered table > thead tr th,
+  .table-rendered table > tbody tr td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /* --- Callout styles --- */
+  .benk-callout {
+    border-left: 4px solid var(--callout-border-color);
+    background: var(--callout-bg-color);
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .benk-callout summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  .benk-callout summary:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .benk-callout summary::-webkit-details-marker {
+    display: none;
+  }
+  .benk-callout[open] summary {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .benk-fold-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.7em;
+    color: var(--callout-text-color);
+    margin-left: auto;
+  }
+  .benk-callout[open] .benk-fold-arrow {
+    transform: rotate(90deg);
+  }
+  .callout-icon {
+    width: 1.3em;
+    height: 1.3em;
+    flex-shrink: 0;
+    fill: var(--callout-border-color);
+  }
+  .callout-icon-fallback {
+    width: 1.3em;
+    height: 1.3em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--callout-border-color);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .benk-callout-body {
+    padding: 1rem;
+  }
+</style>`;
+
+// Generate tables first
+const tableElements = datasets.map((d, index) => {
+  const categoryName = getCategoryName(d.file);
+  const iconName = categoryIcons[categoryName] || "Briefcase";
+  const iconEl = cloneIcon(iconName);
+  const borderColor = calloutColors[categoryName]?.border || '#5B9BD5';
+  const bgColor = calloutColors[categoryName]?.bg || 'rgba(91, 155, 213, 0.1)';
+  const displayName = categoryName
+    .split('_')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+  const wrapperId = `table-wrap-${index}-${Math.random().toString(36).substr(2, 9)}`;
+
+  const table = decorateTable(d.data, borderColor, bgColor, wrapperId);
+
+  return {
+    element: html`
+      <details class="benk-callout"
+               style="--callout-border-color: ${borderColor}; --callout-bg-color: ${bgColor}; --callout-text-color: ${borderColor};">
+        <summary>
+          ${iconEl}
+          <span>${displayName}</span>
+          <span class="benk-fold-arrow">▶</span>
+        </summary>
+        <div class="benk-callout-body">
+          <div class="table-container-wrapper">
+            <div class="table-rendered" id="${wrapperId}">
+              ${table}
+            </div>
+          </div>
+        </div>
+      </details>
+    `,
+    wrapperId,
+    bgColor,
+    borderColor
+  };
+});
+
+// Apply sticky styling after all elements render
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    stylingQueue.forEach(({ table: _, borderColor, bgColor, wrapperId }) => {
+      const wrapper = document.getElementById(wrapperId);
+      if (!wrapper) return;
+
+      const table = wrapper.querySelector('table');
+      if (!table) return;
+
+      const rows = [...table.querySelectorAll(':scope > thead tr, :scope > tbody tr')];
+      const sampleRow = rows.find(r => r.cells && r.cells.length > 0);
+
+      if (!sampleRow) return;
+
+      // Find column indices by header text
+      const headers = sampleRow.parentElement?.querySelectorAll('th') || [];
+      let statusIdx = -1, compositeIdx = -1;
+
+      headers.forEach((th, idx) => {
+        const text = th.textContent.toLowerCase();
+        if (text.includes('status')) statusIdx = idx;
+        if (text.includes('composite')) compositeIdx = idx;
+      });
+
+      // Apply Status styling
+      if (statusIdx >= 0) {
+        const cells = table.querySelectorAll(`tr td:nth-child(${statusIdx + 1}), tr th:nth-child(${statusIdx + 1})`);
+        cells.forEach(cell => {
+          cell.style.position = 'sticky';
+          cell.style.right = '120px';
+          cell.style.backgroundColor = bgColor;
+          cell.style.zIndex = '15';
+          cell.style.minWidth = '90px';
+          cell.style.fontWeight = '700';
+          cell.style.whiteSpace = 'nowrap';
+          cell.style.boxShadow = '-2px 0 4px rgba(0, 0, 0, 0.08)';
+        });
+      }
+
+      // Apply Composite styling
+      if (compositeIdx >= 0) {
+        const cells = table.querySelectorAll(`tr td:nth-child(${compositeIdx + 1}), tr th:nth-child(${compositeIdx + 1})`);
+        cells.forEach(cell => {
+          cell.style.position = 'sticky';
+          cell.style.right = '0';
+          cell.style.backgroundColor = bgColor;
+          cell.style.zIndex = '20';
+          cell.style.minWidth = '120px';
+          cell.style.fontWeight = '700';
+          cell.style.whiteSpace = 'nowrap';
+          cell.style.boxShadow = '-2px 0 4px rgba(0, 0, 0, 0.1)';
+        });
+      }
+    });
+  });
+});
+
+return html`
+  ${styles}
+  <div id="benchmark-root">
+    ${tableElements.map(t => t.element)}
+  </div>
+`;
+}
+```

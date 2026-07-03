@@ -1,3 +1,4 @@
+
 # Ansvarlig KI: hvordan bruke benchmarker når dere velger modell
 
 Veiledning til team som skal velge, sammenligne eller dokumentere bruk av språkmodeller.  Fremfor å peke ut én «trygg» modell, er hensikten med teksten å hjelpe dere å bruke benchmarkresultater til det de duger til: screening og beslutningsstøtte.
@@ -67,7 +68,7 @@ Grunnen til at utløsere er bedre enn interesse: team tester gjerne hallusinasjo
 
 ### 3. Finn eksterne signaler og vurder om de gjelder dere.
 
-Relevante benchmarker og kilder per område står i [kilderegisteret](./kilderegister-benchmarker.md). Kort om kildetypene:
+Relevante benchmarker og kilder per område står i [kilderegisteret](./kilderegister-benchmarker.qmd). Kort om kildetypene:
 
 - **Uavhengige rammeverk** som HELM gir sammenlignbare resultater, men bare for modellene og versjonene som faktisk er testet.
 - **Innsendingsbaserte suiter** som AILuminate er nyttige når riktig system er testet; dekningen avhenger av hva som er sendt inn.
@@ -177,4 +178,4 @@ Usikre på om dere er der? Ta kontakt for veiledning. Det er billigere å spørr
 
 ## Kilderegister
 
-Benchmarker, lenker og status per kilde vedlikeholdes separat i [kilderegisteret](./kilderegister-benchmarker.md), med dato og revisjonsansvar. Denne veiledningen skal kunne stå seg selv om enkeltkilder kommer og går.
+Benchmarker, lenker og status per kilde vedlikeholdes separat i [kilderegisteret](./kilderegister-benchmarker.qmd), med dato og revisjonsansvar. Denne veiledningen skal kunne stå seg selv om enkeltkilder kommer og går.

@@ -1,0 +1,7 @@
+{
+    "index": 57.0,
+    "resp_claims_count": 5.156521739130435,
+    "ref_claims_count": 5.869565217391305,
+    "has_missing_facts": 0.9478260869565217,
+    "has_hallucinations": 0.9391304347826087
+}

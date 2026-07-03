@@ -1,0 +1,2640 @@
+{
+    "timestamp": "2026-06-25T22:42:16.839791",
+    "dataset": "norallm__normistral-7b-warm-instruct",
+    "total_rows": 74,
+    "results": [
+        {
+            "index": 0,
+            "metrics": {
+                "precision": 0.75,
+                "recall": 1.0,
+                "f1_score": 0.8571,
+                "true_positives": 3,
+                "false_positives": 1,
+                "false_negatives": 0,
+                "total_response_claims": 4,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Engangsstønad er en stønad som gis til foreldre som ikke har rett til foreldrepenger.",
+                "Engangsstønaden er på 63 140 kroner.",
+                "Engangsstønaden er skattefri.",
+                "Mer informasjon om engangsstønad finnes på Navs nettsider."
+            ],
+            "ref_claims_list": [
+                "Beløpet for engangsstønad er 92,648 kroner per barn.",
+                "Satsen på 92,648 kroner gjelder for fødsler som skjer 1. januar 2023 eller senere.",
+                "Satsen på 92,648 kroner gjelder for adopsjoner som skjer 1. januar 2023 eller senere."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 1,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 0.4444,
+                "f1_score": 0.5333,
+                "true_positives": 4,
+                "false_positives": 2,
+                "false_negatives": 5,
+                "total_response_claims": 6,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Å være arbeidsledig etter en oppsigelse kan ha flere konsekvenser.",
+                "I løpet av en sanksjonsperiode kan man bli nektet fordeler som arbeidsledighetstrygd, matkuponger og jobbsøkingsassistanse.",
+                "Nektelse av fordeler kan føre til en reduksjon i inntekten.",
+                "Å være arbeidsledig etter en oppsigelse kan påvirke kredittscoren, noe som kan gjøre det vanskeligere å få godkjent lån eller kredittkort.",
+                "Å være arbeidsledig etter en oppsigelse kan ha en negativ innvirkning på mental helse.",
+                "Følelsen av å ikke kunne forsørge seg selv og familien kan føre til følelser av stress, angst og depresjon."
+            ],
+            "ref_claims_list": [
+                "Hvis du sier opp jobben din uten rimelig grunn, kan du risikere en sanksjonsperiode på 18 uker uten dagpenger.",
+                "Nav vurderer om du hadde rimelig grunn til å si opp jobben.",
+                "Rimelig grunn til å si opp kan være helseutfordringer eller mobbing/trakassering på arbeidsplassen.",
+                "En rimelig grunn til å si opp må dokumenteres.",
+                "Hvis du hadde rimelig grunn til å si opp jobben, kan du få dagpenger fra første dag du har krav på dem.",
+                "Det er viktig å søke om dagpenger så snart som mulig for å unngå å tape dagpenger.",
+                "Det anbefales å søke om dagpenger to uker før siste dag du har krav på lønn.",
+                "Nav vil vurdere din situasjon etter at du har søkt om dagpenger.",
+                "Nav avgjør om sanksjonsperioden gjelder for deg."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 2,
+            "metrics": {
+                "precision": 0.5714,
+                "recall": 0.6667,
+                "f1_score": 0.6154,
+                "true_positives": 4,
+                "false_positives": 3,
+                "false_negatives": 2,
+                "total_response_claims": 7,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "For at et barn over 18 år skal motta bidrag fra en forelder eller verge, må flere vilkår oppfylles.",
+                "Et vilkår for bidrag er at barnet må være økonomisk avhengig av forelderen eller vergen.",
+                "Økonomisk avhengighet innebærer at barnet ikke kan forsørge seg selv på grunn av funksjonshemming, sykdom eller andre omstendigheter.",
+                "Et vilkår er at forelderen eller vergen må ha midler til å betale for barnets levekostnader.",
+                "Forelderen eller vergen må ha nok inntekt til å forsørge både seg selv og barnet.",
+                "Forelderen eller vergen må kunne betale bidraget uten å sette seg selv i økonomisk fare.",
+                "Retten til å motta bidrag kan begrenses eller nektes hvis vilkårene ikke oppfylles."
+            ],
+            "ref_claims_list": [
+                "For at barnebidrag skal kunne fastsettes for barn over 18 år, må barnet følge ordinær skolegang.",
+                "Ordinær skolegang inkluderer videregående opplæring eller å være lærling.",
+                "Dokumentasjon på skolegang må legges ved søknaden.",
+                "Bidraget opphører automatisk når tidsperioden i vedtaket utløper.",
+                "Et barn har ikke rett på bidrag hvis det blir selvforsørget med en inntekt over 201 000 kroner.",
+                "Foreldre kan pålegges å forsørge barn over 18 år som følger ordinær skolegang, dersom de har økonomi til det."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 3,
+            "metrics": {
+                "precision": 0.4615,
+                "recall": 0.75,
+                "f1_score": 0.5714,
+                "true_positives": 6,
+                "false_positives": 7,
+                "false_negatives": 2,
+                "total_response_claims": 13,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 13,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "For å søke om dagpenger (DP) må man henvende seg til Nav.",
+                "Nav stiller krav til søkere om dagpenger.",
+                "Et av kravene er å ha tjent et visst beløp i løpet av de siste 12 til 18 månedene.",
+                "Kvalifikasjonskriteriene kan sjekkes på Navs nettsted.",
+                "Man må fylle ut et søknadsskjema for å søke om dagpenger.",
+                "Søknadsskjemaet finnes på Navs nettsted.",
+                "Søknaden krever innsamling av nødvendige dokumenter.",
+                "Nødvendige dokumenter kan inkludere bevis på inntekt, identitet og arbeid.",
+                "Søknaden kan sendes til et lokalt Nav-kontor.",
+                "Søknaden kan sendes inn online.",
+                "Nav gjennomgår innsendte søknader.",
+                "Nav kan be om ytterligere informasjon etter at søknaden er sendt inn.",
+                "Etter at søknaden er behandlet, mottar man et brev med avgjørelsen."
+            ],
+            "ref_claims_list": [
+                "For å søke om dagpenger må man registrere seg som arbeidssøker på nav.no.",
+                "Søknad om dagpenger må sendes digitalt.",
+                "Man kan tidligst få dagpenger fra den dagen man har registrert seg som arbeidssøker og sendt inn søknaden.",
+                "Nødvendig dokumentasjon må lastes opp i søknaden.",
+                "Søkere får beskjed om hvilke dokumenter som trengs.",
+                "Dokumentasjon kan ettersendes innen 14 dager.",
+                "Man må sende meldekort hver 14. dag mens man venter på svar og mottar dagpenger.",
+                "Meldekort bekrefter at man fortsatt er arbeidssøker og oppfyller vilkårene for dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 4,
+            "metrics": {
+                "precision": 0.4444,
+                "recall": 0.5714,
+                "f1_score": 0.5,
+                "true_positives": 4,
+                "false_positives": 5,
+                "false_negatives": 3,
+                "total_response_claims": 9,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "For å søke om dagpenger etter å ha sagt opp jobben selv, må man registrere seg som arbeidssøker.",
+                "Registrering som arbeidssøker kan gjøres på nettsidene til NAV (nav.no).",
+                "Etter å ha registrert seg som arbeidssøker, kan man søke om dagpenger.",
+                "Søknad om dagpenger sendes inn via skjema NAV 04-01.03.",
+                "Nødvendige dokumenter, som oppsagt arbeidskontrakt, må sendes inn med søknaden.",
+                "Bekreftelse på at man er registrert som arbeidssøker er et av dokumentene som må sendes inn.",
+                "Etter at søknad og dokumenter er sendt inn, må man vente på svar fra NAV.",
+                "Status på søknaden kan sjekkes på NAVs nettsider.",
+                "NAV kan be om ytterligere informasjon eller dokumentasjon hvis det er nødvendig."
+            ],
+            "ref_claims_list": [
+                "En bruker som har sagt opp jobben selv og skal søke om dagpenger, må gi beskjed til Nav om oppsigelsen.",
+                "Brukeren må sende inn oppsigelsen sin til Nav.",
+                "For å unngå å miste dagpenger, bør man søke om dagpenger to uker før siste dag man har krav på lønn.",
+                "Hvis en bruker hadde rimelig grunn til å si opp jobben, som helseutfordringer eller mobbing, må dette dokumenteres.",
+                "Hvis Nav vurderer at det ikke var rimelig grunn til oppsigelsen, vil det medføre en sanksjonsperiode på 18 uker uten dagpenger.",
+                "Oppsigelsen må inneholde datoen den ble gitt og grunnen til oppsigelsen.",
+                "Hvis det ikke er gitt en skriftlig begrunnelse for oppsigelsen til arbeidsgiver, kan brukeren opplyse om årsaken i søknaden til Nav."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 5,
+            "metrics": {
+                "precision": 0.75,
+                "recall": 0.75,
+                "f1_score": 0.75,
+                "true_positives": 3,
+                "false_positives": 1,
+                "false_negatives": 1,
+                "total_response_claims": 4,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Bidrag (BA) justeres når et barn fyller 11 år.",
+                "Ifølge informasjonen på nav.no, er justeringen basert på barnets inntekt.",
+                "Når barnet fyller 11 år, justeres BA ved å bruke en faktor på 1,1.",
+                "Justeringen gjøres for å sikre at BA forblir på riktig nivå i forhold til barnets inntekt."
+            ],
+            "ref_claims_list": [
+                "Når barnet fyller 11 år, blir bidraget automatisk justert av Nav.",
+                "Justeringen tar utgangspunkt i inntektene og samværet fra siste gjeldende vedtak.",
+                "Satsene for underholdskostnad og samværsfradrag endres etter den nye aldersklassen.",
+                "Det spesifikke beløpet for justeringen kan variere."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 6,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 1.5,
+                "f1_score": 0.9231,
+                "true_positives": 6,
+                "false_positives": 3,
+                "false_negatives": 0,
+                "total_response_claims": 9,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Når en forelder bor i utlandet med et barn, kan barnebidrag påvirkes av flere faktorer.",
+                "Bidragsmottakerens bostedsland er avgjørende for beregningen av barnebidrag.",
+                "I henhold til Haag-konvensjonene kan barnebidrag betales til forelderen som bor i utlandet, selv om forelderen ikke har foreldrerett.",
+                "Lover og forskrifter i bostedslandet kan påvirke beregningen av barnebidrag.",
+                "I noen land kan barnebidrag betales basert på forelderens inntekt, mens det i andre land kan være basert på foreldrenes ressurser.",
+                "Foreldre kan bli enige om en avtale om barnebidrag.",
+                "Hvis foreldre ikke blir enige om barnebidrag, kan de søke hjelp fra en domstol eller et myndighetsorgan.",
+                "Hvis et barn har blitt bortført fra sitt bostedsland, kan internasjonal barnebortføringslov gjelde.",
+                "Ved barnebortføring kan retten i bostedslandet bestemme at barnebidrag skal betales til forelderen som bor i utlandet."
+            ],
+            "ref_claims_list": [
+                "Når en far har barn med en ny kone i utlandet, vil forsørgelsesplikten for dette barnet normalt bli tatt med i beregningen av barnebidraget til barnet i Norge.",
+                "En far får et fradrag for forsørgelse av egne barn, uavhengig av hvor barna bor.",
+                "Det tas hensyn til at en far skal forsørge alle sine barn.",
+                "Forsørgelse av flere barn kan redusere en fars bidragsevne i forhold til barnebidraget til barnet i Norge."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 7,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.5,
+                "f1_score": 0.2857,
+                "true_positives": 1,
+                "false_positives": 4,
+                "false_negatives": 1,
+                "total_response_claims": 5,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Beregningen av dagpenger er vanligvis 1,5 % av din årlige inntekt.",
+                "Prosentandelen for dagpenger brukes til å beregne det ukentlige beløpet man mottar.",
+                "Prosentandelen for dagpenger kan variere avhengig av den enkeltes situasjon.",
+                "Situasjonen kan for eksempel være om man er en ny eller tidligere ansatt.",
+                "For å få en nøyaktig prosentandel, bør man konsultere de nyeste retningslinjene fra NAV eller andre relevante myndigheter."
+            ],
+            "ref_claims_list": [
+                "Dagpenger beregnes til 62,4 prosent av tidligere inntekt.",
+                "Beregningen av dagpenger har en øvre inntektsgrense på 780 960 kroner."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 8,
+            "metrics": {
+                "precision": 0.4286,
+                "recall": 0.6,
+                "f1_score": 0.5,
+                "true_positives": 3,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 7,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "En mottaker av dagpenger som selv sier opp jobben sin, kan bli ilagt en forlenget ventetid på åtte uker.",
+                "Forlenget ventetid innebærer at dagpengeutbetalingen stanses midlertidig i et tidsrom på åtte uker.",
+                "Dagpengemottakere som uten rimelig grunn nekter å ta imot tilbud om passende arbeid, kan ilegges en sanksjonsperiode på åtte uker.",
+                "Dagpengemottakere som nekter å delta på arbeidsmarkedstiltak, kan ilegges en sanksjonsperiode på åtte uker.",
+                "Sanksjonene er ment å motvirke passivitet og fremme aktiv jobbsøking.",
+                "Sanksjoner kan ilegges i tillegg til sanksjoner for å unnlate å overholde meldeplikten.",
+                "Regelverket er basert på Folketrygdloven (LOV-1997-02-28-19) og forskriften Dagpenger under arbeidsløshet (FOR-2016-05-27-543)."
+            ],
+            "ref_claims_list": [
+                "Hvis en person selv sier opp jobben uten rimelig grunn, får vedkommende en sanksjonsperiode på 18 uker uten utbetaling av dagpenger.",
+                "Sanksjonsperioden starter tidligst fra den dagen personen har registrert seg som arbeidssøker og søkt om dagpenger.",
+                "Dersom en person får ny jobb før sanksjonsperioden er over, vil det ikke bli utbetalt dagpenger.",
+                "Man er ikke lenger reell arbeidssøker når man er i jobb.",
+                "Man oppfyller ikke vilkårene for dagpenger når man er i jobb."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 9,
+            "metrics": {
+                "precision": 0.4286,
+                "recall": 0.5,
+                "f1_score": 0.4615,
+                "true_positives": 3,
+                "false_positives": 4,
+                "false_negatives": 3,
+                "total_response_claims": 7,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "For å kunne søke om dagpenger, må man oppfylle visse krav til inntekt og arbeidsforhold.",
+                "Inntekten i løpet av de siste 12 eller 36 månedene før man ble arbeidsledig, vil bli vurdert.",
+                "Tilstrekkelig inntekt fra korte stillinger og tilkallingsjobber kan gi rett til dagpenger.",
+                "Det er et krav å være registrert som arbeidssøker hos Nav for å søke om dagpenger.",
+                "Nav kan gi veiledning tilpasset en spesifikk situasjon.",
+                "Nav kan hjelpe med å forstå kravene for å søke om dagpenger.",
+                "Nav kan gi veiledning om hvordan man søker om dagpenger."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til dagpenger må du ha mistet minst 50 prosent av din totale arbeidstid.",
+                "Du må ha hatt en inntekt på minst 186 042 kroner (1,5 G) de siste 12 månedene for å ha rett til dagpenger.",
+                "Alternativt må du ha hatt en inntekt på minst 372 084 kroner (3 G) de siste 36 månedene for å ha rett til dagpenger.",
+                "Du må være registrert som arbeidssøker hos Nav for å motta dagpenger.",
+                "Nav vurderer din totale arbeidstid og inntekt for å avgjøre om du oppfyller kravene, selv om du har flere tilkallingsvikarjobber.",
+                "Det er viktig å dokumentere alle arbeidsforhold når du søker om dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 10,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.5,
+                "f1_score": 0.4,
+                "true_positives": 3,
+                "false_positives": 6,
+                "false_negatives": 3,
+                "total_response_claims": 9,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Nav kan beregne barnebidrag for private avtaler.",
+                "Foreldre som inngår en privat avtale om barnebidrag, kan be Nav om hjelp til å beregne bidraget.",
+                "Ved beregning av barnebidrag bruker Nav informasjon som foreldrenes inntekt, antall barn og barnets alder.",
+                "Nav bruker den samme informasjonen for å beregne private og offentlige barnebidrag.",
+                "Nav håndhever ikke private avtaler om barnebidrag.",
+                "Foreldrene må selv bli enige om vilkårene for avtalen.",
+                "Foreldrene må sørge for at avtalen er gyldig og gjennomførbar.",
+                "Nav kan ikke gripe inn i en avtale som foreldrene har inngått.",
+                "Nav kan gi veiledning og råd om hvordan man kan lage en rettferdig og gjennomførbar avtale."
+            ],
+            "ref_claims_list": [
+                "Nav kan ikke beregne bidrag for en privat avtale direkte for brukeren.",
+                "Foreldrene må selv bruke bidragskalkulatoren på nav.no for å finne et veiledende beløp som grunnlag for en privat avtale.",
+                "Nav gjør kun en formell beregning og fastsettelse hvis det sendes inn en søknad om dette.",
+                "En privat avtale kan baseres på bidragskalkulatoren.",
+                "Nav går ikke gjennom kalkulatoren sammen med brukeren.",
+                "Nav gjør ikke beregningen for brukere uten en søknad om fastsettelse."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 11,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 0.6667,
+                "f1_score": 0.6667,
+                "true_positives": 4,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 6,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Lærlinger er vanligvis ansett som ansatte.",
+                "Lærlinger kan være kvalifisert for dagpenger hvis de oppfyller visse kriterier.",
+                "Kriterier for dagpenger kan inkludere å ha jobbet i minst ett år.",
+                "Kriterier for dagpenger kan inkludere å ha tjent minst 125 kroner i løpet av de siste 12 månedene.",
+                "Situasjonen rundt dagpenger kan endre seg raskt.",
+                "Dagpenger er en form for inntektserstatning."
+            ],
+            "ref_claims_list": [
+                "En lærling over 18 år kan ha rett til å motta barnebidrag.",
+                "Retten til barnebidrag kan gjelde selv om lærlingen blir permittert.",
+                "Barnebidrag kan fortsette så lenge lærlingen følger ordinær skolegang.",
+                "Barnebidrag kan fortsette så lenge lærlingen har en lærlingekontrakt som dokumenterer læretid og lønn.",
+                "Hvis en lærling har en inntekt over 201 000 kroner, regnes han som selvforsørget.",
+                "En lærling som regnes som selvforsørget har ikke rett på barnebidrag."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 12,
+            "metrics": {
+                "precision": 0.6154,
+                "recall": 1.0,
+                "f1_score": 0.7619,
+                "true_positives": 8,
+                "false_positives": 5,
+                "false_negatives": 0,
+                "total_response_claims": 13,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 13,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Dagpenger er en økonomisk ytelse som tilbys av den norske folketrygden.",
+                "Dagpenger er ment for personer som har mistet jobben eller inntekten sin på grunn av arbeidsledighet.",
+                "Hovedmålet med dagpenger er å sikre inntekt for personer som aktivt søker arbeid eller deltar på arbeidsmarkedstiltak.",
+                "For å kvalifisere for dagpenger, må man ha hatt en viss inntekt i løpet av de siste 12 til 18 månedene.",
+                "Størrelsen på dagpenger er basert på inntekten man hadde i de siste 12 månedene før man mistet jobben.",
+                "Maksimumsbeløpet for dagpenger er 62,4 % av den gjennomsnittlige inntekten man hadde i de siste 12 månedene.",
+                "Dagpenger er en tidsbegrenset ytelse.",
+                "Varigheten på dagpengeperioden avhenger av hvor mye man har tjent i løpet av de siste 12 månedene.",
+                "Personer som har tjent mindre enn 1,5 G de siste 12 månedene, kan få dagpenger i maksimalt 52 uker.",
+                "Personer som har tjent mer enn 1,5 G de siste 12 månedene, kan få dagpenger i opptil 104 uker.",
+                "Man må aktivt søke arbeid eller delta på arbeidsmarkedstiltak for å fortsette å motta dagpenger.",
+                "Man kan miste retten til dagpenger hvis man ikke aktivt søker arbeid eller deltar på arbeidsmarkedstiltak.",
+                "NAV (Arbeids- og velferdsetaten) er en offentlig etat som administrerer dagpenger."
+            ],
+            "ref_claims_list": [
+                "Dagpenger er en økonomisk støtte for arbeidsledige eller permitterte.",
+                "Formålet med dagpenger er å sikre inntekt mens man søker etter ny jobb.",
+                "Formålet med dagpenger er å sikre inntekt under deltakelse i arbeidsmarkedstiltak.",
+                "For å ha rett til dagpenger må man ha hatt en arbeidsinntekt over en viss grense.",
+                "For å ha rett til dagpenger må man være registrert som reell arbeidssøker.",
+                "Å være reell arbeidssøker innebærer å aktivt søke jobber.",
+                "Å være reell arbeidssøker innebærer å delta på intervju.",
+                "Å være reell arbeidssøker innebærer å være tilgjengelig for arbeid på kort varsel."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 13,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.1667,
+                "f1_score": 0.2222,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 5,
+                "total_response_claims": 3,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Du kan søke om barnebidrag hos Nav opptil 6 måneder etter at barnet er født.",
+                "Tidsfristen for å søke om barnebidrag kan variere avhengig av den spesifikke situasjonen og omstendighetene.",
+                "Informasjonen er basert på generelle retningslinjer fra Navs offisielle nettsted og Barnebidragsloven."
+            ],
+            "ref_claims_list": [
+                "Som hovedregel kan barnebidrag fastsettes fra og med måneden søknaden sendes inn.",
+                "Det er mulig å få fastsatt barnebidrag inntil ett år tilbake i tid fra søknadstidspunktet.",
+                "I særlige tilfeller kan barnebidrag fastsettes inntil tre år tilbake i tid.",
+                "Særlige tilfeller kan for eksempel være alvorlig sykdom, trusler eller en langvarig farskapssak.",
+                "For å få bidrag fastsatt mer enn ett år tilbake i tid, må det oppgis og dokumenteres særskilte grunner for hvorfor det ikke ble søkt tidligere.",
+                "Saker om barnebidrag mer enn ett år tilbake i tid vurderes unntaksvis av Nav."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 14,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 0.9091,
+                "f1_score": 0.7692,
+                "true_positives": 10,
+                "false_positives": 5,
+                "false_negatives": 1,
+                "total_response_claims": 15,
+                "total_reference_claims": 11
+            },
+            "resp_claims_count": 15,
+            "ref_claims_count": 11,
+            "resp_claims_list": [
+                "Dagpenger er en form for inntektserstatning som tilbys av den amerikanske regjeringen til kvalifiserte arbeidsledige arbeidere.",
+                "For å være kvalifisert for dagpenger, må man ha vært ansatt i løpet av de siste 40 ukene før man mistet jobben.",
+                "Kravet om arbeidshistorie kan fravikes for nylig uteksaminerte, nykommere i arbeidslivet, eller de som var selvstendig næringsdrivende i minst ett år.",
+                "For å motta dagpenger, må man ha mistet jobben uten egen skyld.",
+                "Man kan ikke motta dagpenger hvis man ble sagt opp for å ha begått en kriminell handling.",
+                "Man kan ikke motta dagpenger hvis man forlot jobben uten rimelig grunn.",
+                "Man kan ikke motta dagpenger hvis man ble sagt opp for å ha deltatt i ulovlige aktiviteter.",
+                "For å være kvalifisert for dagpenger, må man ha tjent en viss mengde penger i løpet av de siste 52 ukene før man mistet jobben.",
+                "Inntektskravet er basert på en prosentandel av justert bruttoinntekt (AGI).",
+                "Prosentandelen for inntektskravet varierer basert på ukentlig arbeidstid i de siste 8 ukene før jobbtap.",
+                "For å motta dagpenger, må man være en aktiv jobbsøker.",
+                "En aktiv jobbsøker må være tilgjengelig for arbeid, søke på passende jobber og delta på jobbintervjuer.",
+                "For å motta dagpenger, må man være en amerikansk statsborger eller bosatt.",
+                "For å kvalifisere som bosatt, må man ha bodd i USA i en viss periode før søknad.",
+                "De spesifikke kravene for dagpenger kan variere avhengig av beliggenhet og andre faktorer."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til dagpenger må man ha mistet minst 50 prosent av den totale arbeidstiden sin.",
+                "For å ha rett til dagpenger må man ha fått inntekten sin helt eller delvis redusert.",
+                "For å ha rett til dagpenger må man ha hatt en inntekt på minst 186042 kroner (1,5 G) de siste 12 månedene, eller minst 372084 kroner (3 G) de siste 36 månedene.",
+                "For å ha rett til dagpenger må man være under 67 år.",
+                "For å motta dagpenger må man søke om dagpenger.",
+                "For å motta dagpenger må man registrere seg som arbeidssøker.",
+                "For å motta dagpenger må man oppholde seg i Norge.",
+                "For å motta dagpenger må man være medlem av folketrygden.",
+                "For å motta dagpenger må man sende meldekort hver 14. dag.",
+                "For å motta dagpenger må man være en reell arbeidssøker.",
+                "Hvis man er permittert, må permitteringsårsaken være mangel på arbeid i bedriften eller andre forhold arbeidsgiver ikke kan påvirke for at man skal ha rett til dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 15,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.2727,
+                "f1_score": 0.3529,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 8,
+                "total_response_claims": 6,
+                "total_reference_claims": 11
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 11,
+            "resp_claims_list": [
+                "En kopi av sykmeldingen kan brukes for å bevise at man er sykmeldt og ikke i stand til å jobbe.",
+                "For å søke om dagpenger må man sende inn nødvendig informasjon og dokumentasjon til NAV.",
+                "Relevant dokumentasjon til NAV kan være utskrift av lønn eller bevis på bosted.",
+                "Status på en dagpengesøknad kan sjekkes ved å logge inn på NAVs nettsted.",
+                "Status på en dagpengesøknad kan sjekkes ved å kontakte sitt lokale NAV-kontor.",
+                "Retningslinjer for sykmeldte arbeidssøkere kan variere avhengig av spesifikke omstendigheter."
+            ],
+            "ref_claims_list": [
+                "Når man er sykmeldt som både arbeidstaker og arbeidssøker med dagpenger, trengs to separate sykemeldinger.",
+                "Én sykemelding er for rollen som arbeidstaker og én for rollen som arbeidsledig/permittert.",
+                "Sykemeldingene må godkjennes på 'Ditt Sykefravær'.",
+                "Ved godkjenning velges 'ansatt' for den ene sykemeldingen og 'arbeidsledig' for den andre.",
+                "Hvis man er sykmeldt 50 % eller mindre, skal man svare 'nei' på spørsmål om sykdom på meldekortet.",
+                "Ved sykmelding på 50 % eller mindre kan man ha rett på en kombinasjon av dagpenger og sykepenger.",
+                "Hvis man er sykmeldt mer enn 50 %, skal man svare 'ja' på spørsmål om sykdom på meldekortet.",
+                "Hvis man er sykmeldt mer enn 50 %, har man ikke rett på dagpenger, men kan ha rett på sykepenger.",
+                "For den delen man er ansatt, kan man bruke egenmelding.",
+                "Legen bør informeres om at man har flere roller for at sykemeldingene skal bli korrekt utstedt.",
+                "Hvis man er sykmeldt mer enn 50 % totalt, oppfyller man ikke lenger vilkåret om å være arbeidsfør, som er et krav for dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 16,
+            "metrics": {
+                "precision": 0.4286,
+                "recall": 0.6,
+                "f1_score": 0.5,
+                "true_positives": 3,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 7,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Engangsstønad ved fødsel er en stønad som kan gis til kvinner som ikke har rett til foreldrepenger.",
+                "Stønaden er skattefri.",
+                "Stønaden er ment å dekke utgifter i forbindelse med fødselen.",
+                "Stønaden er behovsprøvd.",
+                "Stønaden kan bli avkortet hvis mottakeren har inntekt eller trygd.",
+                "Stønaden må søkes om innen seks måneder etter fødselen.",
+                "Informasjon om engangsstønad ved fødsel finnes på nettsidene til NAV."
+            ],
+            "ref_claims_list": [
+                "Man kan tidligst søke om engangsstønad i 22. svangerskapsuke.",
+                "Søknaden må inneholde en terminbekreftelse eller et helsekort for gravide som er datert og signert i 22. uke eller senere.",
+                "Søknaden kan behandles tidligst når all nødvendig dokumentasjon er levert.",
+                "Vedtak om engangsstønad kan fattes før fødsel hvis all dokumentasjon er i orden.",
+                "Utbetaling av engangsstønad skjer vanligvis etter fødsel eller adopsjon."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 17,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 4,
+                "false_negatives": 4,
+                "total_response_claims": 4,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "For informasjon om endringsgebyret for barnebidrag, anbefales det å sjekke Nav sine nettsider eller kontakte dem direkte.",
+                "Gebyret for endring av barnebidrag kan variere.",
+                "Lenken til Nav sine nettsider er oppgitt som https://www.nav.no/.",
+                "Assistenten kan ikke surfe på nettet eller få tilgang til eksterne ressurser."
+            ],
+            "ref_claims_list": [
+                "Gebyret for å få Nav til å fastsette eller endre barnebidrag er 1 314 kroner.",
+                "Gebyret kreves fra både bidragsmottaker og bidragspliktig.",
+                "Gebyret tilsvarer satsen for et rettsgebyr.",
+                "Personer med en bruttoinntekt lavere enn 348 400 kroner slipper å betale gebyret."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 18,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.375,
+                "f1_score": 0.3529,
+                "true_positives": 3,
+                "false_positives": 6,
+                "false_negatives": 5,
+                "total_response_claims": 9,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Man kan be om en revurdering av barnebidrag på grunn av økte utgifter til bolig, lån og andre faste kostnader.",
+                "En revurdering av barnebidrag er ikke en garantert prosess.",
+                "Avgjørelsen om revurdering av barnebidrag tas av den aktuelle myndighetsorganisasjonen.",
+                "For å be om en revurdering, må man fremlegge bevis på økte utgifter og den nåværende økonomiske situasjonen.",
+                "Bevis kan omfatte kontoutskrifter, låneavdrag, og husleie- eller boliglånsbetalinger.",
+                "Det er tilrådelig å gi en detaljert forklaring av situasjonen når man ber om en revurdering.",
+                "Det kan være en ventetid før en revurdering er fullført.",
+                "Myndighetsorganisasjonen må samle inn nødvendig informasjon og gjennomgå saken under en revurdering.",
+                "Etter at gjennomgangen er fullført, blir man varslet om avgjørelsen og eventuelle endringer i barnebidragsbetalingene."
+            ],
+            "ref_claims_list": [
+                "For å få en revurdering av barnebidraget, må man sende en søknad om endring til Nav.",
+                "Nav endrer kun barnebidraget dersom en ny beregning gir en endring på mer enn 12 prosent.",
+                "Ved søknad om endring av barnebidrag må begge parter betale et fastsettelsesgebyr.",
+                "Nav tar utgangspunkt i faste tall basert på en snittberegning for levekostnader på landsbasis.",
+                "Nav gjør ikke individuelle vurderinger av kostnader som boliglån eller andre personlige utgifter.",
+                "Endringer i bosituasjon, som å dele bolig med en annen voksen, kan påvirke bidragsevnen.",
+                "Det finnes en bidragskalkulator på nav.no for å beregne hvordan endringer kan påvirke bidraget.",
+                "Søknadsskjema for endring av barnebidrag finnes på nav.no."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 19,
+            "metrics": {
+                "precision": 0.4,
+                "recall": 0.6667,
+                "f1_score": 0.5,
+                "true_positives": 2,
+                "false_positives": 3,
+                "false_negatives": 1,
+                "total_response_claims": 5,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "For å motta engangsstønad må man sende inn en terminbekreftelse.",
+                "Terminbekreftelsen er nødvendig for å sikre at man er kvalifisert for stønaden.",
+                "Terminbekreftelsen brukes for å bekrefte at man ikke allerede mottar svangerskapsstønad.",
+                "Mer informasjon om engangsstønad er tilgjengelig på Navs nettside.",
+                "Navs nettside er en offisiell kilde til informasjon om trygdeytelser i Norge."
+            ],
+            "ref_claims_list": [
+                "Du må sende terminbekreftelse når du søker om engangsstønad ved fødsel, så lenge barnet ikke er født.",
+                "Terminbekreftelsen må være datert i 22. svangerskapsuke eller senere.",
+                "Hvis barnet er født, trenger du ikke å legge ved terminbekreftelse."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 20,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 0.25,
+                "f1_score": 0.3529,
+                "true_positives": 3,
+                "false_positives": 2,
+                "false_negatives": 9,
+                "total_response_claims": 5,
+                "total_reference_claims": 12
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 12,
+            "resp_claims_list": [
+                "Hvis du blir sagt opp, har du rett til dagpenger dersom du oppfyller visse krav.",
+                "Et krav for dagpenger er å ha tjent et visst beløp i løpet av de siste 12 til 18 månedene.",
+                "Hvis du sier opp jobben din, er du i utgangspunktet ikke kvalifisert for dagpenger.",
+                "Det finnes unntak fra regelen om at man ikke får dagpenger ved egen oppsigelse, for eksempel ved uredelig oppførsel fra arbeidsgiver.",
+                "Hvis du blir sagt opp, kan du være kvalifisert for tilleggsfordeler som yrkesopplæring eller jobbplasseringstjenester."
+            ],
+            "ref_claims_list": [
+                "Ved oppsigelse fra arbeidsgiver har man krav på lønn fra arbeidsgiver gjennom hele oppsigelsestiden.",
+                "Hvis man ikke er ansvarlig for oppsigelsen, vil dagpengene løpe som normalt etter oppsigelsestiden.",
+                "Ved oppsigelse fra arbeidsgiver må man laste opp oppsigelsen på Nav sine nettsider.",
+                "Hvis man sier opp selv, må man gi beskjed til Nav om oppsigelsen.",
+                "Hvis man sier opp selv, må man sende inn oppsigelsen til Nav.",
+                "Nav vurderer om en person hadde rimelig grunn til å si opp selv.",
+                "Hvis man sier opp selv uten rimelig grunn, får man ikke utbetalt dagpenger de første 18 ukene etter oppsigelsestiden.",
+                "Helseutfordringer kan være en rimelig grunn til å si opp.",
+                "Mobbing på arbeidsplassen kan være en rimelig grunn til å si opp.",
+                "En rimelig grunn til å si opp må dokumenteres.",
+                "Man må søke om dagpenger for å motta det.",
+                "Nav vurderer en persons situasjon basert på oppsigelsesgrunnen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 21,
+            "metrics": {
+                "precision": 0.4,
+                "recall": 0.2857,
+                "f1_score": 0.3333,
+                "true_positives": 2,
+                "false_positives": 3,
+                "false_negatives": 5,
+                "total_response_claims": 5,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "En mor kan søke om full barnetrygd hvis hun kan dokumentere at hun er aleneforsørger og har den daglige omsorgen for barnet.",
+                "Dokumentasjon for aleneforsørgerstatus kan fremlegges fra NAV eller andre relevante myndigheter.",
+                "Delt bosted gir ikke automatisk rett til delt barnetrygd.",
+                "Ved delt bosted er det opp til foreldrene å bli enige om hvordan barnetrygden skal deles.",
+                "Mer informasjon om barnetrygd finnes på NAVs nettsider."
+            ],
+            "ref_claims_list": [
+                "En mor kan søke om full barnetrygd ved å sende en ny søknad til Nav.",
+                "Søknaden må inkludere dokumentasjon som viser at delt bosted ikke fungerer i praksis.",
+                "En kopi av avtalen om delt fast bosted må legges ved søknaden.",
+                "En eventuell meklingsattest skal legges ved hvis det er relevant.",
+                "Hvis den andre forelderen allerede mottar barnetrygd, vil Nav varsle denne personen.",
+                "Nav vil gi den andre forelderen en frist til å uttale seg om søknaden.",
+                "Hvis den andre forelderen ikke reagerer, kan søknaden innvilges i sin helhet til mor."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 22,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.2857,
+                "f1_score": 0.3636,
+                "true_positives": 2,
+                "false_positives": 2,
+                "false_negatives": 5,
+                "total_response_claims": 4,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Barn over 18 år som går på videregående skole eller er lærling, kan være berettiget til barnebidrag.",
+                "For å motta barnebidrag etter fylte 18 år, må barnet ikke kunne forsørge seg selv på grunn av funksjonshemming, sykdom eller andre spesifikke omstendigheter.",
+                "Et krav for barnebidrag etter 18 år er at barnet er fysisk eller psykisk funksjonshemmet i en grad som hindrer dem i å jobbe.",
+                "Barnets inntekt og eiendeler må være under visse grenser for å være berettiget til barnebidrag etter fylte 18 år."
+            ],
+            "ref_claims_list": [
+                "For at barnebidrag skal fortsette etter at barnet har fylt 18 år, må skolegang eller lærlingplass dokumenteres.",
+                "Ved søknad om bidrag etter fylte 18 år, må barnet sende inn dokumentasjon som en bekreftelse fra skolen eller en kopi av lærlingekontrakten.",
+                "En bekreftelse fra skolen kan inneholde opplysninger som navn, fødselsdato, type og varighet på skolegangen, samt signatur og stempel.",
+                "Hvis det er tvil om dokumentasjonen, kan Nav innhente opplysninger direkte fra utdanningsinstitusjonen.",
+                "Dersom barnet slutter på skolen eller lærlingplassen, må partene melde fra til Nav.",
+                "Nav har hjemmel til å kontrollere om vilkårene for bidrag fortsatt er oppfylt, inkludert oppmøte og aktivitet.",
+                "Hvis skolegangen varer lenger enn perioden det er gitt bidrag for, må det søkes på nytt med oppdatert dokumentasjon."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 23,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 3,
+                "false_negatives": 3,
+                "total_response_claims": 3,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Hvis du mottar dagpenger, må du sende inn en CV til arbeidsformidlingen.",
+                "Å sende inn en CV til arbeidsformidlingen er et krav for å kunne motta dagpenger.",
+                "Mer informasjon om kravet om å sende inn CV for dagpengemottakere finnes på nettsidene til NAV."
+            ],
+            "ref_claims_list": [
+                "Når du mottar dagpenger, må du holde CV-en din oppdatert som en del av kravene for å være en reell arbeidssøker.",
+                "Når du mottar dagpenger, må du søke på jobber.",
+                "Når du mottar dagpenger, må du stille til intervju."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 24,
+            "metrics": {
+                "precision": 0.2667,
+                "recall": 0.5,
+                "f1_score": 0.3478,
+                "true_positives": 4,
+                "false_positives": 11,
+                "false_negatives": 4,
+                "total_response_claims": 15,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 15,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Barn i fosterhjem uten personnummer eller d-nummer kan være berettiget til barnetrygd.",
+                "Søknadsprosessen for barnetrygd kan være mer komplisert for barn uten personnummer eller d-nummer.",
+                "Barnetrygden er en månedlig utbetaling ment for å dekke kostnadene ved å oppdra et barn.",
+                "For å være kvalifisert for barnetrygd, må barnet være bosatt i Norge.",
+                "Barnet må være registrert i folkeregisteret og ha et norsk personnummer eller d-nummer for å få barnetrygd.",
+                "Fosterforeldre er juridisk ansvarlige for barnet i fosterhjem.",
+                "Fosterforeldre må søke om barnetrygd på vegne av barnet.",
+                "Fosterforeldre må dokumentere at de er fosterforeldre og at de bor på samme adresse som barnet.",
+                "Barnetrygden blir utbetalt til fosterforeldrene.",
+                "Fosterforeldrene er ansvarlige for å bruke barnetrygden til å dekke barnets levekostnader.",
+                "Barnetrygden blir vanligvis utbetalt den 25. hver måned.",
+                "Barnetrygden utbetales til barnet fyller 18 år.",
+                "Barn som er 16 år eller eldre kan søke om barnetrygd på egenhånd.",
+                "Man kan kontakte sitt lokale NAV-kontor for spørsmål om barnetrygd.",
+                "Informasjon om barnetrygd er tilgjengelig på NAVs nettside."
+            ],
+            "ref_claims_list": [
+                "Fosterforeldre kan få barnetrygd hvis barnet bor fast hos dem i mer enn tre måneder.",
+                "For å søke om barnetrygd må barnet ha et personnummer eller d-nummer.",
+                "Hvis et barn ikke har personnummer eller d-nummer, må det først registreres i Folkeregisteret for å få det tildelt.",
+                "Søknad om barnetrygd kan ikke behandles før barnet har fått tildelt personnummer eller d-nummer.",
+                "Kravet om personnummer eller d-nummer gjelder også for barn som har kommet fra utlandet eller som ikke er folkeregistrert i Norge.",
+                "Barnevernet kan bistå med nødvendig dokumentasjon.",
+                "Det anbefales å legge ved et skriv fra barnevernet som bekrefter omsorgsovertakelsen og varigheten.",
+                "Fosterforeldre kan ikke få utbetalt barnetrygd før barnet har fått personnummer eller d-nummer."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 25,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.8,
+                "f1_score": 0.6154,
+                "true_positives": 4,
+                "false_positives": 4,
+                "false_negatives": 1,
+                "total_response_claims": 8,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "For å motta barnetrygd fra Nav må man være registrert som bosatt i Norge.",
+                "For å motta barnetrygd fra Nav må man ha et norsk personnummer.",
+                "Hvis man ikke har et personnummer, kan man søke om et ved å følge instruksjonene på Navs nettsted.",
+                "Retten til å motta barnetrygd er underlagt visse betingelser.",
+                "For å motta barnetrygd må barnet være bosatt i Norge.",
+                "For å motta barnetrygd må barnet være under 18 år.",
+                "For å motta barnetrygd må man være bosatt i Norge og være medlem av folketrygden.",
+                "Hvis man ikke er medlem av folketrygden, kan man være kvalifisert for et frivillig medlemskap."
+            ],
+            "ref_claims_list": [
+                "En mor kan ikke motta barnetrygd hvis hun ikke har omsorgsansvar og ikke er registrert i Folkeregisteret.",
+                "Skatteetaten/Folkeregisteret har ansvar for registrering av foreldreansvar og bosted.",
+                "Nav kan ikke endre registreringer av foreldreansvar og bosted i Folkeregisteret.",
+                "For å kunne søke om barnetrygd for et barn, må omsorgspersonen være registrert med foreldreansvar og bosted for barnet i Folkeregisteret.",
+                "Fosterforeldre eller andre omsorgspersoner kan søke om barnetrygd dersom de har omsorgen for barnet og er registrert med det."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 26,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.5,
+                "f1_score": 0.4,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 6,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Dagpenger er en økonomisk ytelse som tilbys av den norske folketrygden.",
+                "Ytelsen er for arbeidsledige personer som har mistet jobben.",
+                "Dagpenger er ment å hjelpe mottakere med å opprettholde inntekten mens de leter etter nytt arbeid.",
+                "Dagpenger utbetales til personer som har tjent nok inntekt i løpet av de siste 12 til 18 månedene.",
+                "Inntektskravet for dagpenger er avhengig av alder.",
+                "Det er en ventetid før dagpenger kan utbetales."
+            ],
+            "ref_claims_list": [
+                "Dagpenger er en pengestøtte for arbeidsledige eller permitterte.",
+                "Dagpenger er ment å sikre inntekt i perioder uten arbeid.",
+                "Retten til dagpenger kan være basert på tidligere arbeidsinntekt.",
+                "For å få dagpenger må man være registrert som arbeidssøker hos Nav."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 27,
+            "metrics": {
+                "precision": 0.4545,
+                "recall": 0.25,
+                "f1_score": 0.3226,
+                "true_positives": 5,
+                "false_positives": 6,
+                "false_negatives": 15,
+                "total_response_claims": 11,
+                "total_reference_claims": 20
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 20,
+            "resp_claims_list": [
+                "Barnebidrag er et økonomisk bidrag ment å dekke kostnadene ved å oppdra et barn.",
+                "Barnebidrag dekker utgifter som mat, klær, husly, medisinsk behandling, utdanning og fritidsaktiviteter.",
+                "Barnebidrag er ikke ment å dekke alle kostnadene ved å oppdra et barn.",
+                "Barnebidrag er et juridisk begrep.",
+                "Barnebidrag er regulert av lover og forskrifter som varierer avhengig av jurisdiksjon.",
+                "I USA er barnebidrag regulert av Family Law Act.",
+                "I Canada er barnebidrag regulert av Children's Services Act.",
+                "Størrelsen på barnebidraget kan avhenge av foreldrenes inntekt.",
+                "Størrelsen på barnebidraget kan avhenge av antall barn som blir støttet.",
+                "Størrelsen på barnebidraget kan avhenge av om foreldrene har felles omsorg.",
+                "Barnebidrag er et verktøy for å sikre barns tilgang til utdanning og helsetjenester."
+            ],
+            "ref_claims_list": [
+                "Barnebidrag skal dekke underholdskostnaden for barnet.",
+                "Underholdskostnaden omfatter utgifter til daglig forsørgelse som mat, drikke, klær, sko, bo- og tilsynsutgifter, samt lek og fritid.",
+                "Kostnadene for barnebidrag er basert på sjablongbeløp fra SIFO.",
+                "Barnebidrag dekker ikke ekstrautgifter som feriereiser, dyre fritidsaktiviteter, konfirmasjon eller briller.",
+                "Ekstrautgifter kan dekkes gjennom særbidrag eller egne avtaler mellom foreldrene.",
+                "Barnebidraget dekker utgifter til mat og drikke.",
+                "Barnebidraget dekker utgifter til klær og sko.",
+                "Barnebidraget dekker utgifter til helse og hygiene.",
+                "Barnebidraget dekker utgifter til lek og fritid.",
+                "Barnebidraget dekker utgifter til husleie, strøm og vedlikehold.",
+                "Barnebidraget dekker utgifter til barnetilsyn.",
+                "Barnebidraget dekker utgifter til telefon, mediebruk og PC ved vanlig bruk.",
+                "Dyre fritidsaktiviteter dekkes ikke av barnebidraget.",
+                "Feriereiser dekkes ikke av barnebidraget.",
+                "Gaver, lommepenger og bursdagsfeiring dekkes ikke av barnebidraget.",
+                "Utgifter til privatskole dekkes ikke av barnebidraget.",
+                "Barne- eller personforsikring dekkes ikke av barnebidraget.",
+                "Avdrag på boliglån dekkes ikke av barnebidraget.",
+                "Ved delt bosted fordeles kostnadene mellom foreldrene og det fastsettes et nettobidrag.",
+                "Man kan søke om særbidrag ved særskilte utgifter."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 28,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 1.0,
+                "f1_score": 0.6667,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 0,
+                "total_response_claims": 6,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Det er ikke mulig å informere brukeren om hans gjeld til bidragsmottaker (BM) basert på den oppgitte informasjonen.",
+                "Det finnes ingen offisielle kilder som gir denne informasjonen.",
+                "Assistenten følger alltid de gitte retningslinjene.",
+                "Assistenten gir kun informasjon som er tilgjengelig i sine kilder.",
+                "Assistenten har ingen personlige erfaringer.",
+                "Assistenten har ingen følelser."
+            ],
+            "ref_claims_list": [
+                "En bidragspliktig kan bli informert om sin bidragsgjeld.",
+                "Det er mulig for en bidragspliktig å avtale en betalingsordning med Skatteetaten.",
+                "En bidragspliktig kan søke om sletting av bidragsgjeld under visse betingelser."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 29,
+            "metrics": {
+                "precision": 0.2857,
+                "recall": 0.3333,
+                "f1_score": 0.3077,
+                "true_positives": 2,
+                "false_positives": 5,
+                "false_negatives": 4,
+                "total_response_claims": 7,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "For å motta dagpenger må man oppfylle visse kriterier.",
+                "Et krav for å motta dagpenger er å aktivt søke arbeid.",
+                "Et krav for å motta dagpenger er å være en reell arbeidssøker.",
+                "Et krav for å motta dagpenger er å være villig til å ta alle typer arbeid.",
+                "Kravene for dagpenger kan variere avhengig av den enkeltes situasjon.",
+                "Dagpenger er en form for inntektserstatning.",
+                "Informasjon om dagpenger finnes på Arbeidsdepartementets offisielle nettsted."
+            ],
+            "ref_claims_list": [
+                "En person med en 50% stilling kan ha rett til reduserte dagpenger.",
+                "Man må sende meldekort hver 14. dag for å motta dagpenger.",
+                "Alle timer man jobber må føres opp på meldekortet.",
+                "Utbetalingen av dagpenger reduseres i forhold til antall timer man har jobbet i meldekortperioden.",
+                "Dagpenger stanses automatisk hvis man jobber mer enn 50% av vanlig arbeidstid i tre påfølgende meldekortperioder.",
+                "Hvis dagpengene har blitt stanset, må man søke på nytt for å motta dem igjen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 30,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.3333,
+                "f1_score": 0.3333,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "En bruker kan søke om bidragsbarn (BA) uten at far får vite om det.",
+                "Hvis en far har foreldrerett, kan han ha rett til å bli informert om søknaden.",
+                "Å gi falsk informasjon til myndighetene kan være ulovlig og kan føre til juridiske konsekvenser."
+            ],
+            "ref_claims_list": [
+                "Ved søknad om barnebidrag har begge parter rett til innsyn i den felles saken.",
+                "Opplysninger som sendes inn i en barnebidragssak, blir videresendt til den andre parten.",
+                "Begge parter i en barnebidragssak har taushetsplikt om opplysningene de får innsyn i."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 31,
+            "metrics": {
+                "precision": 0.4545,
+                "recall": 0.5556,
+                "f1_score": 0.5,
+                "true_positives": 5,
+                "false_positives": 6,
+                "false_negatives": 4,
+                "total_response_claims": 11,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "I en sak om barnebidrag kan man ettersende dokumentasjon for å støtte kravet.",
+                "Inntektsdokumentasjon kan inkludere lønnsslipper, W-2-er og skattemeldinger.",
+                "Inntektsdokumentasjon kan brukes for å bevise evnen til å støtte et barn økonomisk.",
+                "Utgiftsdokumentasjon kan omfatte regninger for verktøy, bilbetalinger og medisinske regninger.",
+                "Utgiftsdokumentasjon kan brukes for å bevise at man har økonomiske forpliktelser.",
+                "Dokumentasjon på andre inntekter kan omfatte investeringsinntekter eller underholdsbidrag.",
+                "Dokumentasjon på andre inntekter kan bevise at man har en jevn inntekt som kan brukes til å støtte et barn.",
+                "Skatterapporter kan omfatte skattemeldinger, skattekreditter eller skattefradrag.",
+                "Skatterapporter kan bevise at man har betalt skatt på inntekten sin.",
+                "Dokumentasjon på andre utgifter kan omfatte studielån eller boliglån.",
+                "Spesifikke typer dokumentasjon som kreves i en barnebidragssak kan variere avhengig av jurisdiksjon og saksdetaljer."
+            ],
+            "ref_claims_list": [
+                "I en barnebidragssak kan man ettersende kopi av en samværsavtale.",
+                "Hvis en samværsavtale er basert på en domsavgjørelse, kan man ettersende en kopi av dommen.",
+                "Man kan ettersende kopi av avtaler om delt fast bosted.",
+                "Hvis en avtale om delt fast bosted er basert på en domsavgjørelse, kan man ettersende en kopi av dommen.",
+                "Man kan ettersende kopi av en privat avtale om barnebidrag.",
+                "Man kan ettersende kopi av en barnebidragsavtale som er fastsatt av andre enn Nav.",
+                "Dokumentasjon for barnebidrag til egne barn som ikke er en del av saken, kan ettersendes.",
+                "Ved lav inntekt på grunn av helseutfordringer, kan man ettersende dokumentasjon fra lege.",
+                "Legeerklæring kan leveres på et spesifikt skjema eller som et eget dokument skrevet av legen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 32,
+            "metrics": {
+                "precision": 0.5556,
+                "recall": 1.25,
+                "f1_score": 0.7692,
+                "true_positives": 5,
+                "false_positives": 4,
+                "false_negatives": 0,
+                "total_response_claims": 9,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "For å søke om barnetrygd for barn født i utlandet, må man fremlegge dokumenter.",
+                "En original eller sertifisert kopi av barnets fødselsattest må fremlegges.",
+                "Barnets fødselsattest må vise navn, fødselsdato og fødselssted.",
+                "En original eller sertifisert kopi av passet til forelderen(e) må fremlegges.",
+                "Passet til forelderen(e) må vise navn, fødselsdato og fødselssted.",
+                "En original eller sertifisert kopi av ekteskapsattesten til forelderen(e) må fremlegges.",
+                "Ekteskapsattesten til forelderen(e) må vise navn, fødselsdato og fødselssted.",
+                "En original eller sertifisert kopi av fødselsattesten til forelderen(e) må fremlegges.",
+                "Fødselsattesten til forelderen(e) må vise navn, fødselsdato og fødselssted."
+            ],
+            "ref_claims_list": [
+                "Når du søker om barnetrygd for et barn født i utlandet, må du legge ved fødselsattest for barnet.",
+                "Hvis barnet ikke er folkeregistrert i Norge, må du legge ved en attest fra hjemlandet som bekrefter at du er forelder til barnet.",
+                "Du må inkludere ID-nummer og adresse fra hjemlandet for deg, barnet og den andre forelderen.",
+                "Du må inkludere dokumentasjon på arbeidsforholdet ditt, som en kopi av arbeidsavtalen."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 33,
+            "metrics": {
+                "precision": 0.5455,
+                "recall": 0.8571,
+                "f1_score": 0.6667,
+                "true_positives": 6,
+                "false_positives": 5,
+                "false_negatives": 1,
+                "total_response_claims": 11,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Dagpenger (DP) er en form for inntektserstatning som tilbys av den norske folketrygden (NAV).",
+                "Ytelsen er for de som har mistet jobben på grunn av forhold utenfor deres kontroll, som oppsigelse, nedbemanning eller konkurs.",
+                "For å søke om dagpenger må man ha tjent minst 1,5 G (grunnbeløp) de siste tre avsluttede kalenderårene.",
+                "Alternativt må man ha tjent minst 4 G (grunnbeløp) i løpet av de siste 12 månedene for å kvalifisere for dagpenger.",
+                "Det er mulig å søke om dagpenger elektronisk gjennom NAVs nettsider.",
+                "For å motta dagpenger må man være villig til å ta alle typer arbeid som tilbys, hvor som helst i Norge.",
+                "Man må være villig til å jobbe minst 50% av sin tidligere vanlige arbeidstid.",
+                "Mottakere av dagpenger må sende inn en arbeidsplan hver 14. dag.",
+                "Hvis man ikke sender inn en arbeidsplan, kan man miste retten til dagpenger.",
+                "Dagpenger er en tidsbegrenset ytelse.",
+                "Etter dagpengeperioden må man enten gå tilbake til jobb eller søke om andre ytelser fra NAV."
+            ],
+            "ref_claims_list": [
+                "Dagpenger er en pengestøtte for arbeidsledige eller permitterte.",
+                "For å ha rett til dagpenger må man være registrert som arbeidssøker hos Nav.",
+                "Man kan tidligst få dagpenger fra den dagen man har registrert seg som arbeidssøker og sendt søknad.",
+                "Man må sende meldekort hver 14. dag.",
+                "Meldekort må sendes selv om man ikke har fått svar på søknaden.",
+                "Dagpenger kan bli stanset hvis man ikke følger opp avtalen med Nav om å søke jobb.",
+                "Informasjon om hvordan man søker dagpenger finnes på Nav sine nettsider."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 34,
+            "metrics": {
+                "precision": 0.1667,
+                "recall": 0.25,
+                "f1_score": 0.2,
+                "true_positives": 1,
+                "false_positives": 5,
+                "false_negatives": 3,
+                "total_response_claims": 6,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Det er mulig å motta dagpenger selv om det er et kort opphold mellom en gammel og en ny jobb.",
+                "For å kvalifisere for dagpenger, må man ha mistet jobben på grunn av forhold utenfor egen kontroll, som for eksempel nedbemanning eller konkurs.",
+                "For å kvalifisere for dagpenger, må man ha hatt en viss inntekt i løpet av en viss periode.",
+                "Kravet til inntekt for å motta dagpenger kan variere avhengig av hvor man bor.",
+                "Dagpenger er ment å gi midlertidig støtte til kvalifiserte arbeidere som er arbeidsledige.",
+                "Mer informasjon om dagpenger finnes på det offisielle Nav-nettstedet."
+            ],
+            "ref_claims_list": [
+                "Man kan risikere å få en sanksjonsperiode på dagpenger dersom man sier opp en jobb uten rimelig grunn og blir arbeidsledig.",
+                "En sanksjonsperiode innebærer at man ikke har rett til dagpenger i en viss periode.",
+                "Hvorvidt man har en rimelig grunn til å si opp en jobb, kan påvirke retten til dagpenger.",
+                "Det anbefales å kontakte Nav for veiledning ved spesifikke spørsmål om ens situasjon."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 35,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 3.0,
+                "f1_score": 0.8571,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 0,
+                "total_response_claims": 6,
+                "total_reference_claims": 1
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 1,
+            "resp_claims_list": [
+                "Ferietillegget fra dagpenger er skattepliktig.",
+                "Ferietillegget fra dagpenger regnes som skattbar inntekt.",
+                "Skatt på ferietillegget trekkes fra dagpengene før utbetaling.",
+                "Ferietillegget fra dagpenger er inkludert i skattemeldingen.",
+                "Mer informasjon om temaet finnes på nettsidene til NAV.",
+                "Mer informasjon om temaet finnes på nettsidene til Skatteetaten."
+            ],
+            "ref_claims_list": [
+                "Det trekkes ikke skatt av ferietillegget fra dagpenger."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 36,
+            "metrics": {
+                "precision": 0.5556,
+                "recall": 0.5556,
+                "f1_score": 0.5556,
+                "true_positives": 5,
+                "false_positives": 4,
+                "false_negatives": 4,
+                "total_response_claims": 9,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "For å søke om dagpenger i Norge må man registrere seg som arbeidssøker hos det lokale arbeidskontoret.",
+                "Registrering som arbeidssøker kan gjøres online eller ved å besøke et lokalt kontor.",
+                "Etter å ha registrert seg som arbeidssøker, kan man søke om dagpenger.",
+                "For å søke om dagpenger må man fylle ut et søknadsskjema.",
+                "Søknadsskjemaet for dagpenger krever informasjon om ansettelseshistorikk, lønn og andre inntekter.",
+                "Man må sende inn dokumentasjon for å støtte en søknad om dagpenger.",
+                "Nødvendig dokumentasjon inkluderer bevis på identitet, bevis på ansettelse og lønnsslipper.",
+                "Som en betingelse for å motta dagpenger, må man delta på jobbsøkingsaktiviteter organisert av det lokale arbeidskontoret.",
+                "Prosessen for å søke dagpenger kan variere avhengig av søkerens situasjon og bosted i Norge."
+            ],
+            "ref_claims_list": [
+                "For å søke om dagpenger i Norge etter å ha jobbet i Storbritannia, må man først registrere seg som arbeidssøker på nav.no.",
+                "Man må sende inn en søknad om dagpenger og opplyse om arbeidsforhold i Storbritannia.",
+                "Det kreves dokumentasjon på jobber man har hatt i Storbritannia de siste 36 månedene.",
+                "Arbeidsforhold i Storbritannia dokumenteres med en PD U1-attest.",
+                "PD U1-attesten utstedes av arbeidsledighetsmyndighetene i Storbritannia.",
+                "Hvis man ikke har en PD U1-attest, vil Nav be om denne fra arbeidsledighetsmyndighetene i Storbritannia.",
+                "Hvis Nav må be om PD U1-attesten, må søkeren dokumentere start- og sluttdato, sluttårsak, inntekt og arbeidstid for de siste 36 månedene.",
+                "Saksbehandlingstiden kan bli forlenget hvis Nav må etterspørre mer dokumentasjon.",
+                "Saksbehandlingstiden kan bli forlenget hvis Nav må vente på svar fra utenlandske myndigheter."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 37,
+            "metrics": {
+                "precision": 0.25,
+                "recall": 0.3333,
+                "f1_score": 0.2857,
+                "true_positives": 2,
+                "false_positives": 6,
+                "false_negatives": 4,
+                "total_response_claims": 8,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "For å søke om dagpenger etter å ha sagt opp jobben på grunn av sykdom, må man sende inn et kravskjema.",
+                "Kravskjemaet er tilgjengelig på det offisielle U.S. Department of Labor-nettstedet (dl.gov).",
+                "Nødvendig støttedokumentasjon inkluderer arbeidshistorikk, inntektsuttalelser, bevis på tidligere lønn og medisinske journaler.",
+                "Kravet skal sendes inn via et lokalt dagpengekontor.",
+                "Kontaktinformasjonen til lokale dagpengekontorer finnes på det offisielle U.S. Department of Labor-nettstedet.",
+                "Etter innsending av kravet, må man vente på en avgjørelse.",
+                "Avgjørelsesprosessen kan ta fra flere uker til noen måneder.",
+                "Informasjonen i kildeteksten er oppgitt å være nøyaktig per 2021."
+            ],
+            "ref_claims_list": [
+                "Hvis du har sagt opp jobben din på grunn av sykdom, kan du ha rett til dagpenger.",
+                "Du må dokumentere årsaken til oppsigelsen når du søker om dagpenger.",
+                "Du bør søke om dagpenger senest den dagen du ikke lenger har krav på lønn for å unngå å tape dagpenger.",
+                "Hvis du hadde rimelig grunn til å si opp jobben, som for eksempel helseutfordringer, kan du få dagpenger fra første dag du har krav på dagpenger.",
+                "Du må legge ved oppsigelsen som inneholder datoen du ga oppsigelsen og grunnen til at du sa opp jobben.",
+                "Etter at du har søkt, vil Nav vurdere om du hadde rimelig grunn til å si opp jobben."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 38,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.5,
+                "f1_score": 0.4,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 6,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Engangsinntekt fra enkeltpersonforetak (ENK) påvirker ikke om du er kvalifisert for dagpenger.",
+                "Engangsinntekt fra ENK kan påvirke beregningen av dagpenger.",
+                "Dagpengegrunnlaget er vanligvis basert på inntekten din i løpet av de siste 12 månedene før du søker om dagpenger.",
+                "Inntekt fra ENK kan tas med i beregningen av dagpengegrunnlaget hvis den er dokumentert og kan bevises.",
+                "Enkeltpersonforetak er ikke alltid registrert hos skattemyndighetene.",
+                "Inntekt fra ENK er ikke alltid tilgjengelig i offentlige registre."
+            ],
+            "ref_claims_list": [
+                "Engangsinntekt fra et enkeltpersonforetak påvirker ikke søknaden om dagpenger.",
+                "Inntekten fra et enkeltpersonforetak kan ikke inngå i opptjeningsgrunnlaget for dagpenger.",
+                "Næringsinntekt fra et enkeltpersonforetak regnes ikke som inntekt når Nav vurderer rett til dagpenger.",
+                "Arbeidsinntekt fra en annen arbeidsgiver kan inngå i opptjeningsgrunnlaget for dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 39,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.4444,
+                "f1_score": 0.381,
+                "true_positives": 4,
+                "false_positives": 8,
+                "false_negatives": 5,
+                "total_response_claims": 12,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 12,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Man kan få dagpenger (DP) mens man etablerer egen bedrift.",
+                "For å kvalifisere for dagpenger må man ha tjent minst 1,5 G (kr 149 782) i løpet av de siste tre avsluttede kalenderårene.",
+                "Et alternativt inntektskrav for dagpenger er å ha tjent minst 3 G (kr 299 570) i løpet av de siste tre avsluttede kalenderårene.",
+                "For å få dagpenger må man være reell arbeidstaker og tilgjengelig for å jobbe.",
+                "Man må være registrert hos arbeidsformidlingen og aktivt søke arbeid.",
+                "Man må være i stand til å jobbe og ta imot ethvert arbeid som tilbys.",
+                "Hvis man starter egen bedrift med dagpenger, må man være forberedt på å legge ned eller selge virksomheten hvis man blir tilbudt arbeid.",
+                "For å få dagpenger må man være i stand til å jobbe i minst 50% av sin tidligere inntekt.",
+                "Hvis man er i stand til å jobbe mindre enn 50%, kan man være kvalifisert for en redusert fordel.",
+                "Man må søke om dagpenger før man starter egen bedrift.",
+                "Man kan søke om dagpenger ved å bruke det elektroniske skjemaet på NAVs nettsted.",
+                "Mer informasjon om emnet finnes på NAVs nettsted."
+            ],
+            "ref_claims_list": [
+                "Du kan søke om å beholde dagpengene mens du etablerer egen bedrift.",
+                "For å få dagpenger under etablering av egen bedrift, må bedriften være ny.",
+                "Etableringen må kunne føre til at du kan leve av inntektene fra bedriften.",
+                "Du må eie mer enn 50 prosent av virksomheten, alene eller sammen med andre som også får dagpenger.",
+                "Du kan ikke selv være ansvarlig for at du har mistet jobben de siste 6 månedene.",
+                "Du kan beholde dagpengene i inntil 12 måneder mens du jobber med etableringen av bedriften.",
+                "Du må sende inn en næringsfaglig vurdering.",
+                "Du må gi beskjed til Nav om at du ønsker å etablere egen bedrift samtidig som du mottar dagpenger.",
+                "Etableringen godkjennes tidligst fra den dagen søknaden er ferdig behandlet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 40,
+            "metrics": {
+                "precision": 0.4545,
+                "recall": 0.5,
+                "f1_score": 0.4762,
+                "true_positives": 5,
+                "false_positives": 6,
+                "false_negatives": 5,
+                "total_response_claims": 11,
+                "total_reference_claims": 10
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 10,
+            "resp_claims_list": [
+                "Vilkårene for rett til dagpenger er fastsatt i folketrygdloven § 4-4.",
+                "For å ha rett til dagpenger må man være en reell arbeidssøker.",
+                "En reell arbeidssøker må være villig og i stand til å ta ethvert passende arbeid som er lønnet etter tariff eller sedvane.",
+                "For å ha rett til dagpenger må man være i stand til å jobbe.",
+                "For å ha rett til dagpenger må man kunne jobbe minst 50 % av den vanlige arbeidstiden for jobben.",
+                "For å ha rett til dagpenger må man være registrert som arbeidssøker hos Nav og aktivt søke arbeid.",
+                "Et inntektskrav for dagpenger er å ha tjent minst 1,5 ganger folketrygdens grunnbeløp (1,5 G) i det siste kalenderåret.",
+                "Et alternativt inntektskrav for dagpenger er å ha tjent minst 3 G i løpet av de siste tre kalenderårene.",
+                "Man har som hovedregel ikke rett til dagpenger hvis man er under utdanning eller opplæring.",
+                "Man har ikke rett til dagpenger hvis man er selvforskyldt arbeidsledig.",
+                "Å si opp jobben uten rimelig grunn eller å nekte å motta tilbud om arbeid er eksempler på selvforskyldt arbeidsledighet."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til dagpenger må du ha blitt arbeidsledig eller permittert.",
+                "For å ha rett til dagpenger må du ha mistet minst 50 % av den totale arbeidstiden din.",
+                "For å ha rett til dagpenger må du ha fått inntekten din helt eller delvis redusert.",
+                "For å ha rett til dagpenger må du ha hatt en inntekt på minst 195 240 kroner (1,5 G) de siste 12 månedene, eller minst 390 480 kroner (3 G) de siste 36 månedene.",
+                "For å ha rett til dagpenger må du være under 67 år.",
+                "For å ha rett til dagpenger må du være reell arbeidssøker, registrere deg som arbeidssøker og sende meldekort hver 14. dag.",
+                "For å ha rett til dagpenger må du oppholde deg i Norge og være medlem av folketrygden.",
+                "Det gjelder spesielle regler for permitterte for å ha rett til dagpenger.",
+                "Det gjelder spesielle regler for enkelte yrkesgrupper som fiskere.",
+                "For å ha rett til dagpenger ved gradert uføretrygd må du kunne jobbe minst 30 %."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 41,
+            "metrics": {
+                "precision": 0.4286,
+                "recall": 1.0,
+                "f1_score": 0.6,
+                "true_positives": 3,
+                "false_positives": 4,
+                "false_negatives": 0,
+                "total_response_claims": 7,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Urettferdig behandling, som diskriminering eller trakassering, kan være en gyldig grunn til å si opp jobben.",
+                "Uakseptable arbeidsforhold, som utrygge eller uhygieniske forhold, kan være en gyldig grunn til å si opp.",
+                "Økonomiske problemer, som at lønnen ikke er tilstrekkelig til å betale regninger, kan være en gyldig grunn til å si opp.",
+                "Uoppnåelige eller urimelige mål satt av arbeidsgiver kan være en gyldig grunn til å si opp.",
+                "Utilstrekkelig opplæring eller støtte for å utføre jobben kan være en gyldig grunn til å si opp.",
+                "Listen over gyldige grunner til å si opp er ikke uttømmende.",
+                "Det anbefales å konsultere en juridisk fagperson før man tar en avgjørelse om å si opp."
+            ],
+            "ref_claims_list": [
+                "Helseutfordringer som hindrer en person i å fortsette i arbeidet kan være en rimelig grunn til å si opp jobben.",
+                "Å ha vært utsatt for mobbing eller trakassering på arbeidsplassen kan være en rimelig grunn til å si opp jobben.",
+                "Helseutfordringer, mobbing eller trakassering som grunn til oppsigelse må kunne dokumenteres."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 42,
+            "metrics": {
+                "precision": 0.7143,
+                "recall": 0.8333,
+                "f1_score": 0.7692,
+                "true_positives": 5,
+                "false_positives": 2,
+                "false_negatives": 1,
+                "total_response_claims": 7,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Du kan jobbe mens du mottar dagpenger.",
+                "Ifølge dagpengeforskriften kan du jobbe opp til 50 % av full stilling og fortsatt motta dagpenger.",
+                "Hvis du jobber mer enn 50 % av full stilling, vil du miste retten til dagpenger for den aktuelle perioden.",
+                "Hvis du tjener mer enn 50 % av din tidligere inntekt fra samme arbeidsgiver, vil du ikke lenger ha rett til dagpenger.",
+                "Selv om du jobber mens du mottar dagpenger, må du fortsatt sende regelmessige jobbsøknader til NAV.",
+                "Selv om du jobber mens du mottar dagpenger, må du delta på eventuelle jobbrelaterte aktiviteter NAV krever.",
+                "Du kan være kvalifisert for dagpenger hvis du ikke er i stand til å jobbe på grunn av en sykdom eller skade."
+            ],
+            "ref_claims_list": [
+                "Man kan jobbe samtidig som man mottar dagpenger.",
+                "Mengden arbeid påvirker utbetalingen av dagpenger.",
+                "Hvis man jobber inntil 50 prosent av vanlig arbeidstid, blir dagpengene redusert for hver time som føres på meldekortet.",
+                "Man får ikke utbetalt dagpenger hvis man jobber mer enn 50 prosent av vanlig arbeidstid.",
+                "Man må gi beskjed til Nav hvis man får seg jobb.",
+                "Timene man jobber må fylles inn på meldekortet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 43,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.375,
+                "f1_score": 0.3529,
+                "true_positives": 3,
+                "false_positives": 6,
+                "false_negatives": 5,
+                "total_response_claims": 9,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "For å søke om dagpenger fra Nav, må man registrere seg som arbeidssøker på Navs nettsider.",
+                "Registrering som arbeidssøker kan gjøres ved å fylle ut et søknadsskjema på nett.",
+                "Etter innsending av søknaden, må man vente på at Nav behandler den.",
+                "Nav krever dokumenter som kopi av arbeidskontrakt, lønnsslipper og skattemeldinger.",
+                "Dokumenter kan vanligvis lastes opp direkte på Navs nettsider.",
+                "Nav gjennomgår søknaden og avgjør kvalifisering etter å ha mottatt alle nødvendige dokumenter.",
+                "Hvis man er kvalifisert, vil Nav beregne beløpet og utbetale dagpengene til søkerens konto.",
+                "Navs nettsider gir en detaljert guide til søknadsprosessen.",
+                "Informasjonen i kildeteksten er oppgitt som korrekt per 2022."
+            ],
+            "ref_claims_list": [
+                "For å søke dagpenger må man registrere seg som arbeidssøker på nav.no.",
+                "Søknad om dagpenger må sendes digitalt.",
+                "Nødvendig dokumentasjon må lastes opp i søknaden.",
+                "Søknaden gir beskjed om hvilke dokumenter som trengs.",
+                "Dokumentasjon kan ettersendes innen 14 dager hvis noe mangler.",
+                "Man må sende meldekort hver 14. dag mens man venter på svar på søknaden.",
+                "Man må sende meldekort hver 14. dag så lenge man mottar dagpenger.",
+                "Man kan tidligst få dagpenger fra den dagen Nav har mottatt både søknad og registrering som arbeidssøker."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 44,
+            "metrics": {
+                "precision": 0.3,
+                "recall": 0.25,
+                "f1_score": 0.2727,
+                "true_positives": 3,
+                "false_positives": 7,
+                "false_negatives": 9,
+                "total_response_claims": 10,
+                "total_reference_claims": 12
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 12,
+            "resp_claims_list": [
+                "Det er mulig å ta med dagpenger til Frankrike under visse vilkår og begrensninger.",
+                "Dagpenger er en stønad som gis til personer som har mistet jobben sin.",
+                "Mottakere av dagpenger forventes vanligvis å aktivt søke arbeid og delta på jobbintervjuer.",
+                "Frankrike er et medlem av Den europeiske union (EU).",
+                "En avtale tillater at dagpenger mottas i opptil tre måneder mens man søker arbeid i et annet EU-land.",
+                "Man kan ta med dagpenger fra Norge til Frankrike for å søke arbeid uten å måtte søke på nytt.",
+                "Selv om man tar med dagpenger til Frankrike, forventes man fortsatt å aktivt søke arbeid.",
+                "Man kan bli bedt om å registrere seg hos det lokale arbeidskontoret i Frankrike.",
+                "Man kan bli bedt om å delta i arbeidsrelaterte aktiviteter som tilbys av det lokale arbeidskontoret i Frankrike.",
+                "Kravene og begrensningene som gjelder for dagpenger i Norge, gjelder også når man tar dem med til Frankrike."
+            ],
+            "ref_claims_list": [
+                "Du kan ta med deg dagpenger til Frankrike i inntil 3 måneder for å søke jobb der.",
+                "Frankrike er et EØS-land.",
+                "For å ta med dagpenger til et EØS-land, må du ha vært helt arbeidsledig og registrert som arbeidssøker i minst 4 uker før avreise.",
+                "Du må søke om attest PD U2 fra Nav før du reiser for å ta med dagpenger til et EØS-land.",
+                "Du må registrere deg som arbeidssøker hos arbeidsmyndighetene i Frankrike innen 7 dager etter ankomst.",
+                "Det gjelder egne regler hvis du reiser sammen med ektefelle eller samboer som har fått jobb i Frankrike.",
+                "Det gjelder egne regler hvis du skal på jobbintervju i Frankrike.",
+                "Kravet om å ha vært registrert som arbeidssøker i 4 uker før avreise gjelder ikke hvis du reiser med ektefelle/samboer som har fått jobb, eller skal på jobbintervju.",
+                "Dagpengene stanses fra avreisedatoen.",
+                "Dagpenger utbetales igjen når Nav har fått bekreftelse på at du har registrert deg som arbeidssøker i Frankrike.",
+                "Du må fylle ut meldekort som vanlig mens du er i utlandet.",
+                "Du kan søke om attest PD U2 på nav.no."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 45,
+            "metrics": {
+                "precision": 0.25,
+                "recall": 0.5,
+                "f1_score": 0.3333,
+                "true_positives": 1,
+                "false_positives": 3,
+                "false_negatives": 1,
+                "total_response_claims": 4,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Hvis en søknad om dagpenger blir godkjent, har søkeren rett til å motta etterbetaling for perioden vedkommende har rett til dagpenger.",
+                "Nav er det norske arbeids- og velferdsetaten.",
+                "Informasjon om etterbetaling av dagpenger finnes på det offisielle nettstedet til Nav.",
+                "Man kan finne relevant informasjon ved å søke etter «etterbetaling av dagpenger» på Navs nettsted."
+            ],
+            "ref_claims_list": [
+                "Du får etterbetalt dagpenger fra dagen du har rett til dagpenger.",
+                "Du har rett til dagpenger fra dagen du sender inn søknaden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 46,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 2,
+                "false_negatives": 5,
+                "total_response_claims": 2,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 2,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Som uavhengig næringsdrivende er du ikke kvalifisert for dagpenger.",
+                "Betaling av trygdeavgift er nødvendig for å samle inn dagpenger."
+            ],
+            "ref_claims_list": [
+                "En selvstendig næringsdrivende har i utgangspunktet ikke rett til dagpenger.",
+                "Næringsinntekt fra enkeltpersonforetak regnes ikke med når Nav vurderer om en person har rett til dagpenger.",
+                "En person kan ha rett til dagpenger hvis vedkommende i tillegg til næringsinntekt har hatt arbeidsinntekt som arbeidstaker.",
+                "For å ha rett til dagpenger basert på arbeidsinntekt, må denne inntekten oppfylle inntektskravet for dagpenger.",
+                "Eventuelle dagpenger vil være basert på arbeidsinntekten, ikke næringsinntekten."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 47,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 1.0,
+                "f1_score": 0.6667,
+                "true_positives": 5,
+                "false_positives": 5,
+                "false_negatives": 0,
+                "total_response_claims": 10,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "En bruker som sier opp jobben sin kan være kvalifisert for dagpenger.",
+                "En bruker som sier opp jobben sin kan risikere en 18-ukers utestengelse fra dagpenger.",
+                "En 18-ukers utestengelse betyr at man ikke er kvalifisert for dagpenger i den perioden.",
+                "Det finnes måter å unngå utestengelse fra dagpenger på.",
+                "Deltakelse på jobbsøkerkurs er en måte å unngå utestengelse på.",
+                "Jobbsøkerkurs kan hjelpe brukere med å forbedre sine jobbsøkingsferdigheter.",
+                "Å flytte til et annet sted for å ta en jobb er en måte å unngå utestengelse på.",
+                "Å flytte for å ta en jobb kan sees på som en rimelig grunn til å si opp sin forrige jobb.",
+                "Hver sak om dagpenger vurderes individuelt.",
+                "Andre faktorer kan påvirke en brukers kvalifisering for dagpenger."
+            ],
+            "ref_claims_list": [
+                "Man kan unngå 18 ukers utestengelse av dagpenger ved å ha en rimelig grunn til å si opp jobben.",
+                "Helseutfordringer som gjør det umulig å fortsette i arbeidet kan være en rimelig grunn til oppsigelse.",
+                "Mobbing eller trakassering på arbeidsplassen kan være en rimelig grunn til oppsigelse.",
+                "En rimelig grunn til oppsigelse må kunne dokumenteres.",
+                "Nav vurderer om det var en rimelig grunn til oppsigelsen når man søker om dagpenger."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 48,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.6667,
+                "f1_score": 0.4444,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 1,
+                "total_response_claims": 6,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Når et barn fyller 18 år, vil hjelpestønaden automatisk opphøre.",
+                "Hjelpestønad er ment å dekke ekstrautgifter som følge av et barns funksjonshemming.",
+                "Når et barn blir 18 år, anses de ikke lenger som et barn i sammenheng med hjelpestønad.",
+                "Det finnes unntak fra regelen om at hjelpestønad opphører ved 18 år.",
+                "Hjelpestønaden kan forlenges hvis barnet fortsetter å bo hos foreldrene etter fylte 18 år og har betydelige omsorgsbehov.",
+                "I tilfeller der hjelpestønaden kan forlenges, vil det bli gjort en ny vurdering av barnets omsorgsbehov."
+            ],
+            "ref_claims_list": [
+                "Brukere mottar en skriftlig bekreftelse/vedtak fra Nav når en søknad om opphør av statlige ytelser er behandlet.",
+                "Regelen om skriftlig bekreftelse ved opphør av ytelser gjelder for familieytelser som barnetrygd og overgangsstønad.",
+                "En mor vil normalt motta en bekreftelse når hjelpestønad for barnet er sagt opp."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 49,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 0.5,
+                "f1_score": 0.5714,
+                "true_positives": 2,
+                "false_positives": 1,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Barnetrygden for 2023 var på 1355 kroner i måneden per barn.",
+                "Informasjonen om barnetrygden er hentet fra de offisielle nettsidene til Nav.",
+                "Navs nettside om barnetrygd har lenken https://www.nav.no/no/person/familie/barnetrygd."
+            ],
+            "ref_claims_list": [
+                "Fra 1. juli 2023 til og med 31. desember 2023 var barnetrygden for barn under 6 år 1766 kroner per måned.",
+                "Fra 1. juli 2023 til og med 31. desember 2023 var barnetrygden for barn over 6 år 1310 kroner per måned.",
+                "Fra 1. mars 2023 til og med 30. juni 2023 var barnetrygden for barn under 6 år 1723 kroner per måned.",
+                "Fra 1. mars 2023 til og med 30. juni 2023 var barnetrygden for barn over 6 år 1083 kroner per måned."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 50,
+            "metrics": {
+                "precision": 0.5385,
+                "recall": 1.0,
+                "f1_score": 0.7,
+                "true_positives": 7,
+                "false_positives": 6,
+                "false_negatives": 0,
+                "total_response_claims": 13,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 13,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Dagpenger er en delvis erstatning for tapt inntekt som følge av arbeidsløshet.",
+                "For å ha rett til dagpenger, må du ha tjent minst 1,5 G (grunnbeløp i folketrygden) i løpet av de siste 12 månedene, eller 3 G i løpet av de siste 36 månedene.",
+                "Du kan søke om dagpenger på nett eller på ditt lokale NAV-kontor.",
+                "Når du har søkt, må du være tilgjengelig for arbeidsmarkedet og klar til å begynne i jobb.",
+                "Du kan ha rett til dagpenger hvis du er en nykommer på arbeidsmarkedet.",
+                "Du kan ha rett til dagpenger hvis du har vært selvstendig næringsdrivende.",
+                "Du kan ha rett til dagpenger hvis du har vært lærling.",
+                "Du kan ha rett til dagpenger hvis du har vært i militæret.",
+                "Du kan få dagpenger i maksimalt 26 uker i løpet av en periode på 18 måneder.",
+                "Hvis du har tjent mindre enn 1,5 G i løpet av de siste 12 månedene, kan du få dagpenger i maksimalt 18 uker.",
+                "Du kan ha rett til dagpenger hvis du har blitt sagt opp på grunn av omstendigheter som arbeidsgiveren din har kontroll over, som konkurs eller nedbemanning.",
+                "Du kan finne mer informasjon om dagpenger på NAVs nettsider.",
+                "Du kan kontakte NAVs kontaktsenter på telefon 55 55 33 33."
+            ],
+            "ref_claims_list": [
+                "Saken om dagpenger kan avsluttes ettersom du har flyttet fra Norge og betalt gjelden din.",
+                "Du vil ikke lenger være registrert som arbeidssøker i Norge.",
+                "Du kan trenge et PD U1-sertifikat for å søke om dagpenger i hjemlandet ditt.",
+                "Et PD U1-sertifikat bekrefter perioder med arbeid og forsikring i Norge.",
+                "Myndighetene i hjemlandet ditt vil vanligvis be om PD U1-informasjon direkte fra Nav.",
+                "Du kan søke om PD U1-sertifikatet selv hvis myndighetene i hjemlandet ditt ikke gjør det.",
+                "Mer informasjon om prosessen finnes på nav.no."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 51,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 1.5,
+                "f1_score": 0.75,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 0,
+                "total_response_claims": 6,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Livsoppholdssatser for gjeldsordning er veiledende satser som namsmannen bruker for å beregne en persons behov til livsopphold.",
+                "Den veiledende livsoppholdssatsen for et barn på 12 år er 2 160 kroner per måned.",
+                "Satsen for barn skal dekke utgifter til mat, klær, transport og legebesøk.",
+                "Livsoppholdssatsene kan variere basert på faktorer som inntekt og utgifter.",
+                "Barne- og familiedepartementets rundskriv Q8/2022 er en offisiell kilde for informasjonen.",
+                "Navs nettsider om livsoppholdssatser er en offisiell kilde for informasjonen."
+            ],
+            "ref_claims_list": [
+                "Tillegget for barn i husstanden ved gjeldsordning og utleggstrekk følger forskrift om livsoppholdssatser.",
+                "For et barn på 12 år skal en person med gjeldsordning eller utleggstrekk beholde 5 919 kroner per måned for barnet."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 52,
+            "metrics": {
+                "precision": 0.5455,
+                "recall": 0.6667,
+                "f1_score": 0.6,
+                "true_positives": 6,
+                "false_positives": 5,
+                "false_negatives": 3,
+                "total_response_claims": 11,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Bidragsnivåer (BA) er en metode som brukes av offentlige etater for å bestemme hvor mye penger som skal betales for ulike typer eiendom.",
+                "BA1 er det laveste nivået av bidrag.",
+                "BA1 brukes vanligvis på små tomter eller bygninger.",
+                "På BA1-nivået er bidragsbeløpet vanligvis en liten prosentandel av den vurderte verdien av eiendommen.",
+                "BA2-nivået brukes på større tomter eller bygninger.",
+                "Bidragsbeløpet på BA2-nivået er vanligvis høyere enn på BA1-nivået.",
+                "BA3 er det høyeste nivået av bidrag.",
+                "BA3 brukes på svært store tomter eller bygninger.",
+                "Bidragsbeløpet på BA3-nivået er vanligvis det høyeste av alle nivåene.",
+                "De nøyaktige bidragsnivåene kan variere avhengig av den spesifikke lokale myndigheten som er involvert.",
+                "De nøyaktige bidragsnivåene kan variere avhengig av typen eiendom som blir vurdert."
+            ],
+            "ref_claims_list": [
+                "Barnebidraget fastsettes ut fra den bidragspliktiges bidragsevne og foreldrenes inntekt.",
+                "Nav vurderer hvor mye den bidragspliktige kan betale, samtidig som vedkommende skal ha nok midler til å forsørge seg selv og egne barn i husstanden.",
+                "Hvis en bidragspliktig har lav inntekt, kan bidraget bli redusert eller satt til 0 kroner.",
+                "Barnebidraget skal aldri være høyere enn bidragsevnen.",
+                "Det er mulig å få samværsfradrag hvis den bidragspliktige har samvær med barnet.",
+                "Samværsfradraget tar hensyn til utgifter som mat, drikke, helse, hygiene, lek, fritid, transport og boutgifter ved samvær.",
+                "Bidragsforskudd har tre ulike satser: forhøyet, ordinært og redusert forskudd.",
+                "Satsene for bidragsforskudd er behovsprøvde.",
+                "Satsene for bidragsforskudd bestemmes ut fra inntekt, antall egne barn man bor sammen med, og om man bor alene eller er samboer."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 53,
+            "metrics": {
+                "precision": 0.375,
+                "recall": 0.5,
+                "f1_score": 0.4286,
+                "true_positives": 3,
+                "false_positives": 5,
+                "false_negatives": 3,
+                "total_response_claims": 8,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Man kan søke om barnetrygd for opptil tre måneder tilbake i tid etter at et barn er født.",
+                "Tidsperioden for å søke barnetrygd tilbake i tid er fastsatt av folketrygdloven.",
+                "Søknader om barnetrygd som sendes inn etter tremånedersperioden, vil ikke bli vurdert.",
+                "For å søke om barnetrygd tilbake i tid, må man fylle ut et søknadsskjema og sende det til det lokale trygdekontoret.",
+                "Søknadsskjemaet kan finnes på trygdekontorets nettsted eller ved å kontakte det lokale trygdekontoret.",
+                "Innsendte søknader blir gjennomgått og behandlet av trygdeadministrasjonen.",
+                "Hvis søknaden godkjennes, vil barnetrygden bli utbetalt.",
+                "Hvis søknaden avslås, kan man anke avgjørelsen."
+            ],
+            "ref_claims_list": [
+                "Hovedregelen er at barnetrygd kan etterbetales for opptil 3 måneder fra søknadsdato.",
+                "Regelen om 3 måneders etterbetaling gjelder for både ordinær og utvidet barnetrygd.",
+                "Unntaksvis kan barnetrygd etterbetales for inntil 3 år tilbake i tid.",
+                "Etterbetaling utover 3 måneder krever særskilt begrunnelse og dokumentasjon.",
+                "Å ha vært forhindret fra å søke er et eksempel på en grunn som kan gi rett til etterbetaling utover 3 måneder.",
+                "Å ha fått misvisende informasjon fra Nav er et eksempel på en grunn som kan gi rett til etterbetaling utover 3 måneder."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 54,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.375,
+                "f1_score": 0.4286,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 5,
+                "total_response_claims": 6,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "For å kvalifisere for foreldrepenger i Norge, må man ha vært medlem av folketrygden i minst tre år, eller i minst ett år og seks måneder før fødsel.",
+                "Kravet om medlemskap i folketrygden for å få foreldrepenger er kjent som «foreldrepengerettigheter».",
+                "For å kvalifisere for foreldrepenger, må man ha vært i arbeid i minst seks av de siste ti månedene før fødsel.",
+                "Kravet om arbeid for å få foreldrepenger er kjent som «arbeidsrettighet».",
+                "For å kvalifisere for foreldrepenger, må man ha en inntekt på minst halvparten av grunnbeløpet i folketrygden (0,5 G).",
+                "Kravet om inntekt for å få foreldrepenger er kjent som «inntektskrav»."
+            ],
+            "ref_claims_list": [
+                "For å få engangsstønad fra Norge må man være medlem av folketrygden på tidspunktet for fødsel eller adopsjon.",
+                "Fra 1. oktober 2024 blir det et krav om å ha vært sammenhengende medlem i norsk folketrygd i minst 12 måneder før termindato eller adopsjonsdato.",
+                "Man kan få engangsstønad hvis man ikke har hatt inntekt som gir rett til foreldrepenger.",
+                "Det er mulig å velge å søke om engangsstønad selv om man har rett til foreldrepenger.",
+                "Engangsstønad kan gis ved fødsel eller adopsjon av et barn.",
+                "Det er primært mødre som har rett til engangsstønad.",
+                "Far eller medmor kan få engangsstønad i noen tilfeller, som når de adopterer alene eller overtar foreldreansvaret.",
+                "Ved adopsjon må barnet være under 15 år for å kvalifisere for engangsstønad."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 55,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 1.0,
+                "f1_score": 0.75,
+                "true_positives": 3,
+                "false_positives": 2,
+                "false_negatives": 0,
+                "total_response_claims": 5,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "En person over 18 år kan motta barnebidrag mens de er i militæret, forutsatt at de oppfyller de vanlige kravene til bidrag.",
+                "Militærtjeneste anses som en «rimelig grunn» for fravær fra hjemmet.",
+                "Fravær fra hjemmet på grunn av militærtjeneste kan påvirke en persons evne til å betale underholdsbidrag.",
+                "Hver sak om barnebidrag vurderes individuelt.",
+                "Spesifikke omstendigheter i en situasjon kan påvirke avgjørelsen om barnebidrag."
+            ],
+            "ref_claims_list": [
+                "Plikten til å betale barnebidrag varer normalt til og med den måneden barnet fyller 18 år.",
+                "Etter fylte 18 år kan barnet ha rett til å bli forsørget gjennom videregående opplæring.",
+                "Retten til forsørgelse etter fylte 18 år under videregående opplæring gjelder ikke for personer som er i militæret."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 56,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 5,
+                "false_negatives": 6,
+                "total_response_claims": 5,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Når to personer som tidligere var gift, flytter sammen igjen, er de ikke lenger pålagt å betale barnebidrag til hverandre.",
+                "I henhold til amerikansk lov regnes tidligere gifte foreldre som flytter sammen igjen ikke lenger som 'separerte' eller 'ikke-bosatte'.",
+                "Regelen om opphør av barnebidrag gjelder ikke når en forelder flytter sammen med den andre forelderen og deres barn mens de fortsatt er gift.",
+                "Foreldre som aldri har vært gift med hverandre, er ikke pålagt å betale barnebidrag, uavhengig av om de bor sammen eller ikke.",
+                "Informasjonen i teksten er basert på gjeldende amerikansk lov og kan endres."
+            ],
+            "ref_claims_list": [
+                "Den bidragspliktige må søke om opphør av bidrag når foreldrene har flyttet sammen igjen.",
+                "Barnebidrag skal kun betales når foreldrene ikke bor sammen.",
+                "Det må meldes fra skriftlig til Nav for å få stanset barnebidraget.",
+                "Søknad om opphør av barnebidrag kan sendes via skjemaet 'Uttalelse i barnebidragssaken din' på nav.no.",
+                "Det kan unntaksvis kreves bidrag når foreldrene bor sammen.",
+                "For at bidrag skal kunne kreves når foreldre bor sammen, må det sannsynliggjøres at en av foreldrene ikke forsørger barnet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 57,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 0.75,
+                "f1_score": 0.6667,
+                "true_positives": 6,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 10,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Reglene for bidrag i en privat avtale kan variere avhengig av de spesifikke omstendighetene i saken.",
+                "Bidrag i en privat avtale er ikke en juridisk forpliktelse.",
+                "Hver part har rett til å beholde alle eiendeler og inntekter som de bringer inn i forholdet.",
+                "I noen tilfeller kan en part være forpliktet til å bidra til den andre partens levekostnader, noe som kalles underholdsbidrag.",
+                "Underholdsbidrag er vanligvis begrenset til nødsituasjoner og midlertidige situasjoner.",
+                "Underholdsbidrag er vanligvis bare nødvendig i tilfeller av vold i hjemmet, misbruk eller andre alvorlige problemer.",
+                "En privat avtale kan inneholde en klausul om «bidragsplikt», hvor en part må bidra med en viss sum penger til den andres levekostnader.",
+                "En bidragsplikt kan håndheves av retten hvis en av partene bryter avtalen.",
+                "En bidragsplikt kan bare håndheves hvis den er rettferdig og rimelig.",
+                "En bidragsplikt kan ikke håndheves hvis den er en urimelig byrde for parten som blir bedt om å bidra."
+            ],
+            "ref_claims_list": [
+                "Barnebidrag er i utgangspunktet en privat sak.",
+                "Foreldre kan avtale beløp og innhold i en privat avtale som begge parter signerer.",
+                "Nav blir som hovedregel ikke involvert ved inngåelse av en privat avtale.",
+                "Foreldre kan bruke et skjema utarbeidet av Nav for å lage en privat avtale.",
+                "En privat avtale om barnebidrag kan skrives på et vanlig ark.",
+                "Hvis Skatteetaten skal kreve inn barnebidraget, må en kopi av avtalen sendes til Nav.",
+                "Det er ingen kostnader ved å inngå en privat avtale om barnebidrag.",
+                "Skatteetaten tar ikke gebyr for innkreving av barnebidrag ved privat avtale."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 58,
+            "metrics": {
+                "precision": 0.375,
+                "recall": 0.375,
+                "f1_score": 0.375,
+                "true_positives": 3,
+                "false_positives": 5,
+                "false_negatives": 5,
+                "total_response_claims": 8,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "For å få omregnet bidrag til en tidligere ektefelle, må man sende en ny søknad til NAV.",
+                "Samværsordningen endres fra 01.06.2025.",
+                "Den nye samværsordningen innebærer samvær 5 av 14 dager.",
+                "Søknadsskjema er tilgjengelig på NAVs nettside.",
+                "Søknadsskjemaet finnes på adressen https://www.nav.no/sosiale-tjenester/bidrag/bidragsforskudd.",
+                "Dokumentasjon som viser den nye samværsordningen må legges ved søknaden.",
+                "Dokumentasjonen må inkludere rettsdokumentet som viser den nye samværsordningen.",
+                "Hvis søknaden ikke sendes inn innen fristen, vil bidraget bli beregnet ut fra den gamle samværsordningen."
+            ],
+            "ref_claims_list": [
+                "For å få omregnet barnebidraget må man søke om endring hos Nav.",
+                "Søknad om endring av barnebidrag kan gjøres via Nav sine nettsider.",
+                "Rettsdokumentet som viser den nye samværsordningen må legges ved søknaden.",
+                "Endringer i inntektsgrunnlaget kan påvirke beregningen av bidraget.",
+                "Det påløper et fastsettelsesgebyr for begge parter ved søknad om endring av barnebidrag.",
+                "Nav vurderer om endringen i samvær og inntektsgrunnlag gir en endring på mer enn 12 prosent.",
+                "Kravet for at bidraget skal kunne omregnes er en endring på mer enn 12 prosent.",
+                "Man kan kontakte Nav for veiledning med søknaden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 59,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.3333,
+                "f1_score": 0.3333,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Gebyret i en bidragssak betales vanligvis bare én gang.",
+                "En endringssøknad i en bidragssak medfører ikke et nytt gebyr.",
+                "Faren sendte inn en endringssøknad etter at brukeren mottok et vedtak."
+            ],
+            "ref_claims_list": [
+                "Begge parter må betale gebyr hver gang det søkes om endring av bidraget.",
+                "Gebyret må betales selv om en av partene allerede har betalt gebyr for en tidligere søknad.",
+                "Gebyret vil bli krevd inn selv om søknaden om endring ikke fører til en endring av bidraget."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 60,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 0.8,
+                "f1_score": 0.7273,
+                "true_positives": 4,
+                "false_positives": 2,
+                "false_negatives": 1,
+                "total_response_claims": 6,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Statusen på en søknad om ekstra omsorgspenger kan sjekkes på Navs nettsider.",
+                "Nav er en offentlig etat i Norge.",
+                "Nav er ansvarlig for å administrere ulike trygde- og velferdsprogrammer.",
+                "Programmet for omsorgspenger er blant programmene Nav administrerer.",
+                "På Navs nettsider kan man søke etter 'ekstra omsorgspenger' eller 'omsorgspenger' for å finne informasjon.",
+                "Nav tilbyr ressurser og verktøy for å hjelpe med administrasjon av søknader."
+            ],
+            "ref_claims_list": [
+                "Brukere kan følge med på status for søknad om ekstra omsorgspenger ved å logge inn på nav.no.",
+                "På innloggede sider på nav.no finnes en oversikt over brukerens pågående saker.",
+                "Oversikten over pågående saker inkluderer søknader om ekstra omsorgsdager.",
+                "Brukere kan se om det er behov for å ettersende dokumentasjon på nav.no.",
+                "Vedtaket blir tilgjengelig på nav.no når det er klart."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 61,
+            "metrics": {
+                "precision": 0.3636,
+                "recall": 0.5,
+                "f1_score": 0.4211,
+                "true_positives": 4,
+                "false_positives": 7,
+                "false_negatives": 4,
+                "total_response_claims": 11,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Uføretrygd og barnetillegg er to separate stønader.",
+                "Barnetillegget er ment å bidra til å dekke ekstrakostnadene ved å ha barn.",
+                "Barnetillegget er ikke behovsprøvd.",
+                "Barnetillegget er ikke avhengig av inntekten til mottakeren eller ektefellen/samboeren.",
+                "Reglene for barnetillegg ble endret fra 1. januar 2020.",
+                "Tidligere ble barnetillegget redusert med 50 % av inntekten til mottakeren som var over friinntektsgrensen.",
+                "Fra 1. januar 2020 er friinntektsgrensen for barnetillegg fjernet.",
+                "Fra 1. januar 2020 blir barnetillegget ikke lenger redusert på grunn av inntekt.",
+                "Alle som mottar barnetillegg til uføretrygd, vil motta full utbetaling, uavhengig av inntekten.",
+                "Uføretrygd og barnetillegg er ment å være en midlertidig ytelse.",
+                "Mottakere kan være kvalifisert for andre ytelser, som økonomisk støtte eller tilleggsinntekt."
+            ],
+            "ref_claims_list": [
+                "Å bli samboer med en annen enn barnefar kan føre til endring i barnetillegget til uføretrygden.",
+                "Barnetillegget er behovsprøvd og beregnes ut fra familiesituasjon og inntekt.",
+                "En ny samboers inntekt skal ikke regnes med i vurderingen av barnetillegget.",
+                "Kun foreldrenes inntekt teller ved behovsprøvingen av barnetillegget.",
+                "En endring i sivilstand kan påvirke hvilken sats eller hvilket fribeløp som gjelder for barnetillegget.",
+                "Man må melde fra til Nav om endringer i sivilstand.",
+                "Nav vurderer saken på nytt ved melding om endringer i sivilstand.",
+                "Man får et nytt vedtak dersom barnetillegget endres som følge av at man blir samboer."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 62,
+            "metrics": {
+                "precision": 0.5556,
+                "recall": 0.8333,
+                "f1_score": 0.6667,
+                "true_positives": 5,
+                "false_positives": 4,
+                "false_negatives": 1,
+                "total_response_claims": 9,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Man har rett til feriepenger av sykepenger.",
+                "Feriepenger av sykepenger beregnes av arbeidsgiver med 10,2 % av sykepenger utbetalt i arbeidsgiverperioden.",
+                "Ordningen med feriepenger av sykepenger er regulert i folketrygdloven.",
+                "Arbeidsgiver skal betale feriepenger av sykepenger de selv utbetaler til arbeidstaker.",
+                "Arbeidsgiver skal betale feriepenger av sykepenger som arbeidstaker får direkte fra Nav for inntil 48 dager hvert år.",
+                "Arbeidsgiver skal ikke betale arbeidsgiveravgift av feriepenger av sykepenger.",
+                "Feriepenger av sykepenger kommer i tillegg til feriepenger av annen lønn.",
+                "Det er forskjell på feriepenger av sykepenger og feriepenger av foreldrepenger.",
+                "Feriepenger av foreldrepenger gjelder for de 12 første ukene av foreldrepermisjonen."
+            ],
+            "ref_claims_list": [
+                "Arbeidstakere som mottar sykepenger fra Nav har rett til feriepenger for de første 48 sykepengedagene i opptjeningsåret.",
+                "Feriepengene utgjør 10,2 % av sykepengene som gir rett til feriepenger.",
+                "For arbeidstakere som har fylt 59 år i opptjeningsåret, er prosentsatsen for feriepenger 12,5 %.",
+                "Hvis en arbeidsgiver har forskuttert sykepengene, vil Nav utbetale feriepengene til arbeidsgiveren.",
+                "Feriepenger utbetales i mai året etter at de er opptjent.",
+                "Man kan maksimalt få utbetalt feriepenger for 48 sykepengedager for hvert opptjeningsår."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 63,
+            "metrics": {
+                "precision": 0.1667,
+                "recall": 0.1667,
+                "f1_score": 0.1667,
+                "true_positives": 1,
+                "false_positives": 5,
+                "false_negatives": 5,
+                "total_response_claims": 6,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Det er mulig å miste retten til sykepenger hvis man jobber for mye i sykmeldingsperioden.",
+                "Det er mulig å miste retten til sykepenger hvis man har flere arbeidsgivere, men er sykmeldt fra én av dem.",
+                "Sykepenger er ment å erstatte inntekten man mister på grunn av sykdom eller skade.",
+                "Hvis man er sykmeldt på grunn av en yrkesskade eller yrkessykdom, kan man ha rett til full utbetaling selv om man jobber.",
+                "Det er den sykmeldtes ansvar å informere arbeidsgiveren om sykemeldingen og hvor mye man kan jobbe.",
+                "Hvis man jobber mer enn man er sykmeldt fra, kan man bli holdt ansvarlig for eventuelle tap arbeidsgiveren lider."
+            ],
+            "ref_claims_list": [
+                "Det er mulig å miste retten til sykepenger hvis man jobber for mye i sykmeldingsperioden.",
+                "Man må gi beskjed til Nav hvis man øker arbeidsmengden hos én arbeidsgiver mens man er sykmeldt fra en annen.",
+                "Arbeidsuførheten må vurderes på nytt dersom man trapper opp i en annen stilling eller tar et annet arbeid i sykmeldingsperioden.",
+                "Når man er sykmeldt fra én av flere deltidsstillinger, har man rett til sykepenger for den delen av arbeidet man er sykmeldt fra.",
+                "Sykepenger ved sykmelding fra én av flere stillinger baseres på hvor mye arbeidet utgjør i forhold til samlet arbeidstid og inntekt.",
+                "Man må informere Nav om endringer i arbeidsmengden for å sikre korrekt utbetaling av sykepenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 64,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.6667,
+                "f1_score": 0.5714,
+                "true_positives": 2,
+                "false_positives": 2,
+                "false_negatives": 1,
+                "total_response_claims": 4,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "En bruker kan beholde sykepenger (SP) under etablering av enkeltmannsforetak.",
+                "Sykepenger (SP) kan beholdes i opptil 52 uker i løpet av en periode på tre år.",
+                "Perioden for sykepenger inkluderer perioder med delvis sykefravær.",
+                "Sykepengeytelsen blir redusert til 65 % av full lønn hvis brukeren starter egen virksomhet i løpet av sykepengeperioden."
+            ],
+            "ref_claims_list": [
+                "En bruker kan beholde sykepenger under etablering av enkeltmannsforetak.",
+                "Sykepengegrunnlaget for selvstendig næringsdrivende beregnes ut fra dokumentert næringsinntekt.",
+                "Nylig oppstartede selvstendig næringsdrivende bør legge ved dokumentasjon på forventet inntekt med søknaden om sykepenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 65,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 3,
+                "false_negatives": 4,
+                "total_response_claims": 3,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Man får ikke sykepenger på røde dager.",
+                "Røde dager er fridager.",
+                "Man får ikke lønn for røde dager."
+            ],
+            "ref_claims_list": [
+                "Man får sykepenger på offentlige helligdager.",
+                "Offentlige helligdager regnes ikke som ferie eller permisjon i sammenheng med sykepenger.",
+                "Offentlige helligdager skal ikke føres opp som ferie i søknaden om sykepenger.",
+                "Hvis man har avtalt ferie med arbeidsgiver på en offentlig helligdag, skal man krysse av for ferie i søknaden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 66,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 1.0,
+                "f1_score": 0.6667,
+                "true_positives": 2,
+                "false_positives": 2,
+                "false_negatives": 0,
+                "total_response_claims": 4,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Man kan søke om bostøtte selv om man mottar uføretrygd.",
+                "Informasjon om bostøtte finnes på nettsidene til Husbanken.",
+                "Husbanken har en egen side om bostøtte for personer med nedsatt funksjonsevne og/eller langvarig sykdom.",
+                "Man kan kontakte sin lokale kommune for mer informasjon om deres bostøtteordninger."
+            ],
+            "ref_claims_list": [
+                "Mottakere av uføretrygd med lav inntekt og høye boutgifter kan ha rett til bostøtte fra Husbanken.",
+                "For å få vurdert om man kvalifiserer for bostøtte, må man sende inn en søknad."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 67,
+            "metrics": {
+                "precision": 0.4444,
+                "recall": 0.4444,
+                "f1_score": 0.4444,
+                "true_positives": 4,
+                "false_positives": 5,
+                "false_negatives": 5,
+                "total_response_claims": 9,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 9,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Sykepengegrunnlaget er den gjennomsnittlige inntekten arbeidstakeren har hatt i løpet av de siste tre årene.",
+                "Hvis en arbeidstakers inntekt har vært uregelmessig, kan en kortere periode brukes for å beregne sykepengegrunnlaget.",
+                "Arbeidstakeren er berettiget til 100 % av inntektsgrunnlaget de første 16 dagene av sykefraværet.",
+                "De første 16 dagene av sykefraværet kalles arbeidsgiverperioden.",
+                "Etter arbeidsgiverperioden mottar arbeidstakeren 65 % av inntektsgrunnlaget.",
+                "Sykepenger etter arbeidsgiverperioden har et tak på 6 G (folketrygdens grunnbeløp).",
+                "Folketrygdens grunnbeløp (G) justeres årlig.",
+                "Folketrygdens grunnbeløp er for tiden 106 399 kroner.",
+                "Ved yrkesskade kan en arbeidstaker være berettiget til 100 % av inntektsgrunnlaget, selv om de ikke har vært ansatt i 4 uker."
+            ],
+            "ref_claims_list": [
+                "Sykepenger for arbeidstakere beregnes ut fra inntekten før de ble syke.",
+                "Sykepengegrunnlaget fastsettes som et gjennomsnitt av inntekten rapportert de tre siste kalendermånedene før første fraværsdag.",
+                "Hvis det har vært en varig lønnsendring før sykefraværet startet, skal den nye lønnen legges til grunn.",
+                "Sykepengegrunnlaget kan ikke overstige 6 ganger folketrygdens grunnbeløp (6G).",
+                "Sykepengegrunnlaget må utgjøre minst et halvt G (1/2 G).",
+                "Dagsatsen for sykepenger finnes ved å dele årsinntekten på 260.",
+                "Ved gradert sykmelding reduseres dagsatsen tilsvarende graden av sykmelding.",
+                "Arbeidsgiver utbetaler sykepenger for de første 16 dagene, kjent som arbeidsgiverperioden.",
+                "Etter arbeidsgiverperioden utbetaler Nav sykepenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 68,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 1.0,
+                "f1_score": 0.75,
+                "true_positives": 6,
+                "false_positives": 4,
+                "false_negatives": 0,
+                "total_response_claims": 10,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "For å søke om sykepenger som selvstendig næringsdrivende, må man fremlegge bevis på inntekt.",
+                "Bevis på inntekt kan være en kopi av selvangivelsen eller W-2-skjemaer.",
+                "Hvis man har hatt ansatte, må man fremlegge bevis på ansettelsesforholdene.",
+                "Bevis på ansettelsesforhold kan inkludere lønnsslipper og W-2-skjemaer.",
+                "Selvstendig næringsdrivende er pålagt å kjøpe helseforsikring for å motta sykepenger.",
+                "Man må fremlegge bevis på kjøpt helseforsikring, for eksempel en kopi av forsikringspolisen.",
+                "Man må fremlegge bevis på at man er selvstendig næringsdrivende.",
+                "Bevis på at man er selvstendig næringsdrivende kan være en kopi av skattemeldingen eller en kopi av den siste lønnsslippen.",
+                "Listen over dokumenter er ikke uttømmende.",
+                "Kravene for å søke om sykepenger kan variere avhengig av den spesifikke situasjonen."
+            ],
+            "ref_claims_list": [
+                "For å søke om sykepenger som selvstendig næringsdrivende, trenger du en sykmelding fra lege.",
+                "For å søke om sykepenger som selvstendig næringsdrivende, trenger du en søknad om sykepenger.",
+                "For å søke om sykepenger som selvstendig næringsdrivende, trenger du inntektsopplysninger.",
+                "Inntektsopplysninger kan inkludere resultatregnskap for inneværende år, næringsspesifikasjon, budsjett for inneværende år/neste år, og oppdragsavtaler og inngåtte kontrakter.",
+                "Den første søknaden om sykepenger inneholder ekstra spørsmål for å avgjøre om du må sende inn dokumentasjon på inntekten din.",
+                "Hvis du sender inn søknad på papir, må du også fylle ut og sende inn skjemaet for inntektsopplysninger."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 69,
+            "metrics": {
+                "precision": 0.25,
+                "recall": 0.6667,
+                "f1_score": 0.3636,
+                "true_positives": 2,
+                "false_positives": 6,
+                "false_negatives": 1,
+                "total_response_claims": 8,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "En bruker kan være kvalifisert for 100 % sykepenger etter endt utdanningspermisjon.",
+                "Retten til sykepenger avhenger av brukerens helsetilstand.",
+                "Retten til sykepenger avhenger av arbeidsgiverens evne til å tilby alternative arbeidsoppgaver.",
+                "Retten til sykepenger avhenger av brukerens evne til å utføre sine vanlige arbeidsoppgaver.",
+                "Retten til sykepenger kan påvirkes av brukerens alder, bosted og ansettelseshistorikk.",
+                "En bruker over en viss alder eller med en bestemt sykdom er ikke nødvendigvis kvalifisert for full lønn under sykdom.",
+                "For nøyaktig informasjon om rettigheter til sykepenger, kan brukeren kontakte sitt lokale NAV-kontor eller arbeidsgivers personalavdeling.",
+                "Rettigheter til sykepenger kan påvirkes av endringer i regelverket."
+            ],
+            "ref_claims_list": [
+                "Når en 20 % utdanningspermisjon er over og man formelt er tilbake i 100 % stilling, kan man få sykepenger for hele stillingen dersom man fortsatt er syk.",
+                "For å få sykepenger for hele stillingen, må man oppfylle vilkårene for sykepenger.",
+                "En forutsetning for å få sykepenger for hele stillingen er at man har et reelt inntektstap fra hele stillingen fra det tidspunktet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 70,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 0.8,
+                "f1_score": 0.8889,
+                "true_positives": 4,
+                "false_positives": 0,
+                "false_negatives": 1,
+                "total_response_claims": 4,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Feriepenger er en form for kompensasjon for ferietid som ansatte ikke har tatt ut.",
+                "Feriepenger blir vanligvis utbetalt året etter at de er opptjent.",
+                "Feriepenger som er opptjent i løpet av tiden du mottok uføretrygd, er ikke skattepliktig.",
+                "Hvis du mottok uføretrygd og feriepenger i løpet av samme år, trenger du ikke å betale skatt på feriepengene."
+            ],
+            "ref_claims_list": [
+                "Feriepenger opptjent før innvilget uføretrygd, som utbetales etter avsluttet arbeidsforhold, skal normalt holdes utenfor etteroppgjøret for uføretrygd.",
+                "At feriepenger holdes utenfor etteroppgjøret gjelder uavhengig av om de utbetales samme år som arbeidsforholdet avsluttes eller året etter.",
+                "Feriepenger som er opptjent etter innvilget uføretrygd, skal regnes som inntekt og inngå i etteroppgjøret.",
+                "Det avgjørende er når feriepengene er opptjent i forhold til tidspunktet for innvilgelse av uføretrygd.",
+                "Dokumentasjon på når arbeidsforholdet ble avsluttet og at utbetalingen gjelder feriepenger kan være nødvendig."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": false
+        },
+        {
+            "index": 71,
+            "metrics": {
+                "precision": 0.1429,
+                "recall": 0.2,
+                "f1_score": 0.1667,
+                "true_positives": 1,
+                "false_positives": 6,
+                "false_negatives": 4,
+                "total_response_claims": 7,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Ved søknad om uføretrygd må man legge ved inntektsopplysninger fra arbeidsgiver hvis man har hatt en inntekt på minst 0,75 G (grunnbeløp) de siste 12 månedene før man ble syk.",
+                "Inntektsopplysninger fra arbeidsgiver er en del av dokumentasjonen NAV trenger for å behandle søknaden.",
+                "Formålet med inntektsopplysningene er å sikre korrekt behandling av søknaden og riktig ytelse.",
+                "Kravet om inntektsopplysninger gjelder uavhengig av om man søker om full eller delvis uføretrygd.",
+                "Inntektsopplysninger kan hentes fra lønnsslipper eller andre dokumenter som viser inntekten.",
+                "Inntektsopplysningene må legges ved søknaden sammen med annen dokumentasjon, som legeerklæringer.",
+                "Man kan kontakte NAV for veiledning om innlevering av inntektsopplysninger."
+            ],
+            "ref_claims_list": [
+                "Inntektsopplysninger fra arbeidsgiver må legges ved søknad om gradert uføretrygd dersom man forventer å ha inntekt fremover.",
+                "Arbeidsgiveren fyller ut skjemaet NAV 12-06.06.",
+                "Arbeidsgiveren sender det utfylte skjemaet til den ansatte.",
+                "Den ansatte sender skjemaet til Nav sammen med en kopi av siste lønnsslipp.",
+                "Hvis en person ikke skal jobbe mer fremover, er det ikke nødvendig å bruke skjemaet NAV 12-06.06."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 72,
+            "metrics": {
+                "precision": 0.7143,
+                "recall": 0.625,
+                "f1_score": 0.6667,
+                "true_positives": 5,
+                "false_positives": 2,
+                "false_negatives": 3,
+                "total_response_claims": 7,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Man har rett til å ta ut feriedager eller ulønnet permisjon for å delta på medisinske avtaler.",
+                "En arbeidsgiver kan kreve dokumentasjon for å godkjenne fravær.",
+                "For å dokumentere at fravær er medisinsk nødvendig, kan man be om en uttalelse om helsetilstanden fra en lege.",
+                "En legeuttalelse kan presenteres for arbeidsgiveren for å lette godkjenningen av fravær.",
+                "En legeuttalelse bør inneholde en beskrivelse av helsetilstand, behandlingsplan og hvorfor reise er nødvendig for behandling.",
+                "Uttalelsen bør være spesifikk om fraværets art og varighet, samt hvordan det påvirker evnen til å utføre arbeidsoppgaver.",
+                "Feriedager til gode kan brukes til å dekke fravær."
+            ],
+            "ref_claims_list": [
+                "Du kan ha rett til sykepenger dersom du er arbeidsufør på grunn av sykdom.",
+                "For å få sykepenger må nødvendig dokumentasjon sendes til NAV.",
+                "Arbeidsgiver forskutterer sykepenger i arbeidsgiverperioden.",
+                "Ved hyppig sykefravær på grunn av kronisk sykdom, kan man søke om unntak fra arbeidsgiveransvaret for sykepenger.",
+                "Både arbeidstaker og arbeidsgiver kan søke om unntak fra arbeidsgiveransvaret for sykepenger.",
+                "Søknad om unntak fra arbeidsgiveransvaret for sykepenger bør skje i samråd med arbeidstakeren.",
+                "Det er vanligvis legen som gir en legeerklæring som dokumenterer behovet for fravær.",
+                "NAV kan be legen om å utstede en legeerklæring ved arbeidsuførhet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 73,
+            "metrics": {
+                "precision": 0.2857,
+                "recall": 0.25,
+                "f1_score": 0.2667,
+                "true_positives": 2,
+                "false_positives": 5,
+                "false_negatives": 6,
+                "total_response_claims": 7,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "For å være kvalifisert for uføretrygd, må man generelt ha vært ansatt i minst 10 år i løpet av de siste 30 årene.",
+                "For å være kvalifisert for uføretrygd, må man generelt ha tjent minst 40 studiepoeng i løpet av de siste 26 ukene før man søker.",
+                "Man kan være kvalifisert for uføretrygd hvis man har hatt en funksjonshemming i minst 12 måneder og har mottatt ytelser fra Social Security Administration (SSA) i den perioden.",
+                "Social Security Administration (SSA) vurderer ikke en bijobb når de bestemmer kvalifisering for uføretrygd.",
+                "For å være kvalifisert for uføretrygd, må man ha en medisinsk tilstand som forhindrer en i å jobbe mer enn 50 % av tiden.",
+                "Man kan nå en SSA-rådgiver ved å ringe 1-800-772-1213.",
+                "TTY-nummeret for å nå en SSA-rådgiver er 1-800-325-0793."
+            ],
+            "ref_claims_list": [
+                "For å få innvilget uføretrygd må inntektsevnen være varig redusert med minst 50 prosent.",
+                "Reduksjonen i inntektsevne må skyldes sykdom eller skade.",
+                "Å fortsatt kunne jobbe 10 prosent påvirker ikke nødvendigvis muligheten til å få innvilget uføretrygd.",
+                "Restarbeidsevne kan påvirke graden av uføretrygd man får.",
+                "Uføretrygden beregnes ut fra hvor mye inntektsevnen er redusert.",
+                "Hvis man kan jobbe 10 prosent, kan man få en gradert uføretrygd.",
+                "Gradert uføretrygd tar hensyn til inntekten man fortsatt har fra arbeid.",
+                "Alle relevante opplysninger må oppgis i søknaden for at Nav skal kunne gjøre en korrekt vurdering."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        }
+    ],
+    "df_stats": {
+        "row_index": {
+            "count": 74.0,
+            "mean": 36.5,
+            "std": 21.50581316760657,
+            "min": 0.0,
+            "25%": 18.25,
+            "50%": 36.5,
+            "75%": 54.75,
+            "max": 73.0
+        },
+        "f1_score": {
+            "count": 74.0,
+            "mean": 0.47929459459459456,
+            "std": 0.22567832416468045,
+            "min": 0.0,
+            "25%": 0.336925,
+            "50%": 0.46885,
+            "75%": 0.6667,
+            "max": 0.9231
+        },
+        "precision": {
+            "count": 74.0,
+            "mean": 0.433122972972973,
+            "std": 0.196594779364133,
+            "min": 0.0,
+            "25%": 0.3333,
+            "50%": 0.44945,
+            "75%": 0.5556,
+            "max": 1.0
+        },
+        "recall": {
+            "count": 74.0,
+            "mean": 0.6054216216216215,
+            "std": 0.4325330844168369,
+            "min": 0.0,
+            "25%": 0.3333,
+            "50%": 0.5,
+            "75%": 0.8,
+            "max": 3.0
+        },
+        "true_positives": {
+            "count": 74.0,
+            "mean": 3.2567567567567566,
+            "std": 1.944861940452194,
+            "min": 0.0,
+            "25%": 2.0,
+            "50%": 3.0,
+            "75%": 4.0,
+            "max": 10.0
+        },
+        "false_positives": {
+            "count": 74.0,
+            "mean": 4.013513513513513,
+            "std": 1.8762629955797794,
+            "min": 0.0,
+            "25%": 3.0,
+            "50%": 4.0,
+            "75%": 5.0,
+            "max": 11.0
+        },
+        "false_negatives": {
+            "count": 74.0,
+            "mean": 2.891891891891892,
+            "std": 2.625311814840065,
+            "min": 0.0,
+            "25%": 1.0,
+            "50%": 2.0,
+            "75%": 4.75,
+            "max": 15.0
+        },
+        "resp_claims_count": {
+            "count": 74.0,
+            "mean": 7.27027027027027,
+            "std": 3.0036384205775817,
+            "min": 2.0,
+            "25%": 5.0,
+            "50%": 7.0,
+            "75%": 9.0,
+            "max": 15.0
+        },
+        "ref_claims_count": {
+            "count": 74.0,
+            "mean": 6.0675675675675675,
+            "std": 3.0265088214074343,
+            "min": 1.0,
+            "25%": 4.0,
+            "50%": 6.0,
+            "75%": 8.0,
+            "max": 20.0
+        }
+    }
+}

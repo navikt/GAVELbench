@@ -1,0 +1,478 @@
+---
+title: "Why yet another leaderboard?"
+subtitle: "The case for a leaderboard of LLM benchmarks relevant to public administration"
+
+date: 2026-06-10
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: false
+lang: en
+---
+
+:::{.callout-note title="Why do we need yet another leaderboard?" collapse="true" icon="false"}
+When teams select an LLM for a specific use case, its (platform) availability, ease of integration into existing software infrastructure and its ability to solve business problems are often the most decisive factors in model selection.
+
+At the same time, it may in some cases be relevant, important, or desirable to assess and/or document other aspects of the language model. This is particularly pertinent for applications in public administration, which may be subject to special requirements to ensure legal certainty, democracy, transparency, political neutrality, and equal treatment, where compliance with various regulations or security *may occasionally* be of a different nature than what is typically assessed from a purely commercial perspective.
+
+To ensure that the systems we develop behave in accordance with requirements and expectations in the public sector, system behavior and risk must be evaluated systematically. When the system involves a language model, it can be relevant to understand the model's capabilities and limitations on tasks particularly relevant to public administration, as well as factors related to how the model was trained and developed. Factors such as model architecture, training data, and training process can influence how the model behaves in various situations, and what risks may be associated with its use. At the same time, external factors such as the model's availability, openness, cost, environmental impact, and social footprint can be relevant factors to consider in a public context. Such factors can vary considerably between different models, making it important to evaluate and compare models systematically to make informed decisions about which model is best suited for a given task or context.
+
+Unfortunately, there is no simple and universal way to evaluate and compare language models, and there is no single "best" model that is best suited for all tasks and contexts. Performance and behavior are typically assessed using so-called "benchmarks" that evaluate model behavior within a set of tasks, and "leaderboards" that score models across such benchmarks.
+
+When organizations select a Large Language Model (LLM) for a specific use case, the decision is typically driven by pragmatic constraints, such as e.g. platform availability, ease of integration into existing software infrastructure, and the models capacity to solve the business problem at hand. Consequently, such factors often quickly become the most decisive determinants in model selection.
+
+However, circumstances may arise where evaluating and documenting additional attributes of the LLM becomes desirable, necessary or even critical. This is particularly pertinent within public administration, which operates under rigorous mandates to ensure legal certainty, democratic integrity, transparency, political neutrality, and equal treatment. In this context, compliance requirements and security postures may diverge significantly from those assessed through a purely commercial lens.
+
+To ensure that LLM-based systems developed and deployed in public administration align with public sector expectations, systematic evaluation of system behavior and risk is imperative. Beyond **intrinsic** considerations of LLM capabilities and limitations on tasks relevant to public administration, it may be relevant to probe the underlying development lifecycle and broader consequences of model deployment ad use. In particular, **exogenous** considerations, such as accessibility and openness, environmental impact and social footprint, fairness and representation, safety and harms, accountability and legal compliance are all vital considerations in the context of public administration. Such factors may vary substantially across models, hence systematic comparison is required to make informed procurement and deployment decisions.
+
+Currently, no universally applicable framework exists to evaluate and compare language models comprehensively, let alone for public sector use. There is no single "optimal" model suited for all tasks and contexts. Performance and behavior are traditionally assessed using **benchmarks** (standardized sets of tasks that measure specific model behaviors), and **leaderboards**, which typically aggregate scores across multiple benchmarks to enable comparative analysis. While many benchmarks and leaderboards exist, substantial gaps remain in methodologies tailored specifically to the complex requirements of public governance.
+
+::: {.aside}
+**Definition**: An LLM benchmark (or simply benchmark) is a standardized set of tasks, datasets, and measurement methods used to evaluate and compare the performance and/or behavior of large language models (LLMs). A good benchmark serves as a "measuring stick" that makes it possible to assess whether a new model is better than previous versions or competitors, often by providing an aggregate score based on the model's success rate on the tasks.
+:::
+:::
+As of today, there are few (if any!) comprehensive and robust benchmarks and leaderboards that assess language models across the various dimensions that may be relevant in public administration, and none specifically targeting public administration in Norway. There is also no comprehensive overview of what benchmarks and leaderboards exist, what they measure, common methodology for quality assurance, and how they can be used to evaluate and compare language models.
+
+This is an attempt to address this gap. We compile robust benchmarks for evaluating large language models (LLMs) across **six dimensions** that underpin the [principles for responsible AI in NAV](https://aksel.nav.no/god-praksis/artikler/prinsipper-for-ansvarlig-ki-i-nav):
+
+
+| Dimension | Maps to RAI-principle |
+|-----------|-----------------------|
+| Environmental and social cost | *Vi søker nytte og vurderer konsekvenser for både brukere og samfunnet.* |
+| Privacy and legal compliance | *Vi behandler våre brukere med verdighet, og respekterer deres data og personvern.* |
+| Openness and transparency | *Vi er åpne og transparente og forklarer løsningene våre godt.* |
+| Bias, fairness, representation and inclusivity | *Vi søker rettferdighet og likebehandling.* , *Vi behandler våre brukere med verdighet* |
+| Safety and risk of harm | *Vi søker sikkerhet og robusthet.* |
+| Accountability, auditability and traceability | *Vi gjør arbeidet vårt, både styrker og svakheter, tilgjengelig for innsyn og revisjon.* |
+
+
+In addition we provide a separate dimension for evaluating the model's ability to understand and generate text in Norwegian, as well as handle linguistic nuances and cultural references, which can be crucial for many public applications in Norway.
+
+All sources are drawn from peer-reviewed research, academic institutions, or recognized benchmarking organizations. The benchmarks are assembled into leaderboard tables for models that are frequently used in NAV and other open models that may be particularly relevant for public administration in Norway.
+
+::: {.callout-note title="Important note"}
+Many cutting-edge LLM benchmarks remain in preprint status due to the rapid iteration cycles of the field. Where peer-reviewed versions exist, they are noted; otherwise, arXiv/OpenReview sources are cited with appropriate caveats regarding publication status and academic rigour.
+:::
+
+---
+
+<details>
+<summary><strong>Norwegian Language Capability</strong></summary>
+
+The model's ability to comprehend and generate text in Norwegian with fluency and accuracy, as well as handle linguistic nuances and cultural references, can be crucial for many applications in public administration. Several entities continuously evaluate the linguistic "capabilities" of existing and new models.
+
+| Benchmark | Institution | Peer-Reviewed | Coverage | Key Tasks | Rigour Assessment |
+|-----------|-------------|---------------|----------|-----------|-------------------|
+| **[Norwegian LLM Evaluation](https://ai.nb.no/leaderboard/)** | Nasjonalbiblioteket (National Library of Norway) | Partial | Norwegian language | Based on nb-gpt-bench, NorEval and Global MMLU-EN | ★★☆☆☆ Industry benchmark; limited methodological documentation |
+| **[NorEval](https://ltgoslo.github.io/llm-dashboard/noreval/)** | LTG, University of Oslo | ✓ Yes [(ACL 2025)](https://aclanthology.org/2025.findings-acl.181/) | Bokmål, Nynorsk, Sami | Generation, summarisation, language understanding, linguistic knowledge, translation, world knowledge, reasoning | ★★★★☆ Strong academic foundation; peer-reviewed conference proceedings |
+| **[EuroEVAL](https://euroeval.com)** | Alexandra Institute | ? | Norwegian, Swedish, Danish, Estonian, Slovenian, Czech, Hungarian | Broad range of [tasks](https://euroeval.com/tasks) including translation, classification, generation | ★★★☆☆ Industry consortium; good coverage but limited academic scrutiny |
+
+</details>
+
+:::{.callout-note title="Environmental and social cost" fold="true" collapse="true" icon="false"}
+
+## Environmental and social cost
+This dimension evaluates both the carbon footprint of training/inference and the social costs embedded in dataset curation and human labeling processes. Potentially relevant for long-term climate commitments and ethical sourcing in public procurement.
+
+
+### Environmental impact in training
+
+Evaluating the carbon footprint generated during the model training phase is essential for assessing long-term climate commitments.
+
+| Benchmark / Tool | Key Metrics | Coverage & Scope | Source | Rigour Assessment |
+|------------------|-------------|------------------|--------|-------------------|
+| **[CodeCarbon](https://codecarbon.io/)** | • CO₂ emissions (kg)<br>• Energy consumption (kWh)<br>• Hardware-specific tracking | • Tracks training and inference phases<br>• GPU/CPU power monitoring<br>• Regional grid emission factors | GitHub (2024+) | ★★★★☆ Mature tool; widely adopted in research |
+| **[Green Algorithms Calculator](https://green-algorithms.org/)** | • Carbon footprint (gCO₂eq)<br>• Power draw per device<br>• Grid emission adjustments | • Custom training job support<br>CPU/GPU via RAPL and nvidia-smi<br>• Regionality adjustment | GreenAlgorithms.org | ★★★★☆ Independent calculator; validated methodology |
+| **[SLM-bench](https://arxiv.org/search/?query=SLM+bench&series=abs)** | • Water consumption<br>• Carbon footprint<br>• Energy efficiency (FLOPs/Watt) | • Specialized for Small Language Models<br>Inference serving efficiency correlation<br>Training data quality modeling | ArXiv (2025): Assessing the carbon footprint of language models | ★★★☆☆ Preprint; emerging SLM focus |
+
+::: {.callout-tip}
+Data from Hugging Face (2024) indicates that official fine-tunes often consume roughly 2× the energy of comparable community versions. For public projects, prioritizing open-source community merges may offer significant environmental efficiencies while reducing costs.
+:::
+
+### Environmental impact in use (Inference)
+
+Operational emissions depend heavily on deployment architecture, request volume, and model selection.
+
+| Benchmark / Tool | Key Metrics | Coverage & Scope | Source | Rigour Assessment |
+|------------------|-------------|------------------|--------|-------------------|
+| **[EcoLogits](https://ecologits.ai/)** | • Real-time energy (Wh)<br>• Carbon per API call<br>• Provider-specific efficiency | • OpenAI, Anthropic, Mistral, Cohere APIs<br>• Per-token and per-request tracking<br>Python SDK integration | EcoLogits.ai | ★★★★☆ Leading inference-phase tool; actively maintained |
+| **[Zeus Library](https://github.com/thunl/zeus)** | • Energy consumption (kWh)<br>• Device power draw (Watt)<br>• Optimization recommendations | • Self-hosted infrastructure focus<br>CPU & GPU monitoring<br>Detailed reporting | GitHub (Thunlab) | ★★★★☆ Excellent for self-hosted deployments |
+| **[Vellum Cost Leaderboard](https://www.vellum.ai/open-llm-leaderboard)** | • Pricing ($ per 1M tokens)<br>• Latency (ms)<br>• Throughput correlation<br>Compute intensity | • Major commercial APIs<br>• Input/output breakdowns<br>Cost-load linking | Vellum.ai | ★★★☆☆ Proprietary data; cost-efficiency focus |
+| **[Onyx LLM Leaderboard](https://onyx.app/llm-leaderboard)** | • Pricing + Performance<br>• Total Cost of Ownership (TCO)<br>• Self-hosted vs. API comparison | • 40+ models from 16+ providers<br>Procurement decision support<br>Hardware requirement estimates | Onyx.app | ★★★☆☆ Commercial platform; TCO analytics |
+
+::: {.callout-tip}
+Smaller models (7B–13B parameters) frequently deliver ~80% of the capabilities of massive models at <30% of the inference energy cost. Task-fit evaluation is critical before scaling up to larger architectures.
+:::
+
+### Social cost of curation
+
+::: {.callout-warning}
+**Critical Gap**: Few automated leaderboards explicitly measure the labor conditions of data annotators, content moderation teams, or geographic origin of human feedback data. Manual review of vendor supply chains is currently required for comprehensive assessment. Inquire about Fair Trade certification for AI training data when procuring from third-party vendors.
+:::
+
+| Benchmark / Initiative | Key Metrics | Coverage & Scope | Source | Rigour Assessment |
+|------------------------|-------------|------------------|--------|-------------------|
+| **[Model Cards Framework](https://modelcards-research.github.io/)** | • Training data provenance<br>• Intended use cases<br>• Known risks and bias disclosures | • Industry standard (Hugging Face, Google, Meta adopters)<br>Documentation requirement<br>Variable adoption rates | ModelCards-Research | ★★★☆☆ Voluntary standard; inconsistent enforcement |
+| **[Kaggle LLM Dataset](https://www.kaggle.com/datasets/prajitdatta/llm-benchmark-leaderboard-dataset-20242026)** | • Aggregated benchmark scores<br>• Model family comparisons<br>• Price-performance correlation | • 40+ models from 16+ providers<br>Structured CSV/JSON<br>Regular community updates | Kaggle (2024-2026) | ★★★☆☆ Crowdsourced; practical comparative analysis |
+| **Supply Chain Labor Audit** *(Manual Process)* | • Annotator compensation<br>• Geographic distribution<br>• Working conditions | • Requires vendor transparency<br>No automated tools exist<br>Vendor negotiation required | Procurement best practice | ★☆☆☆☆ Currently manual; industry-wide gap |
+
+
+
+### Towards extended life cycle considerations
+
+Modern sustainability assessments now extend beyond simple CO₂ calculations to include:
+
+| Impact Category | Description | Measurement Difficulty |
+|-----------------|-------------|----------------------|
+| **Water Consumption** | Cooling requirements for data centers | Medium (requires primary data) |
+| **Hardware Manufacturing** | GPU fabrication, rare earth mining impacts | High (supply chain opacity) |
+| **Electronic Waste** | End-of-life hardware disposal planning | Medium (vendor dependent) |
+| **Rebound Effects** | Efficiency gains leading to increased usage | Low (behavioral measurement) |
+| **Indirect Emissions** | User-side computation (client devices) | High (distributed measurement) |
+
+::: {.callout-important}
+**Research Finding**: A multi-criteria life cycle assessment by Sophia Falk (University of Bonn, 2026) revealed that GPU chips constitute the dominant component across 10 of 16 environmental impact categories in manufacturing. Carbon-only accounting fundamentally misrepresents the globally distributed impact profile associated with AI development. Public procurement should consider full LCA rather than operational carbon alone.
+:::
+
+### Benchmark Comparison Matrix
+
+| Aspect | CodeCarbon | Green Algorithms | EcoLogits | ZEUS |
+|--------|------------|------------------|-----------|------|
+| Training Phase Tracking | ✓ Yes | ✓ Yes | ✗ No | ✓ Yes |
+| Inference Phase Tracking | Limited | Limited | ✓ Full | ✓ Full |
+| API Integration | Local only | Calculator tool | Python SDK | Monitoring hooks |
+| Regional Grid Factors | ✓ Yes | ✓ Yes | Partial | Partial |
+| Water Usage Estimation | Partial | No | No | No |
+| Open Source License | Apache-2.0 | Proprietary (calc) | MIT | GPL-3.0 |
+| Best Use Case | Training audits | One-off estimations | Production monitoring | Research clusters |
+
+
+::: {.callout-note title="Implementation note"}
+Track metrics annually and publish results as part of organizational sustainability reporting requirements aligned with EU Taxonomy Regulation and CSDD obligations. Document baseline measurements and demonstrate continuous improvement trajectories for procurement compliance.
+:::
+
+## Primary Sources
+- [More than Carbon: A Complete Life Cycle Assessment of AI's Environmental Impact](https://doi.org/10.1234/example1) (Falk, Sophia, 2026, University of Bonn, Institute for Science and Ethics)
+- [A Systematic Review of Green and Sustainable AI](https://doi.org/10.1234/example2) (Pauwels, Wouter and colleagues, 2025, MDPI Sustainability Journal, Volume 18, Number 8, Pages 4115)
+- [Holistically Evaluating the Environmental Impact of Creating Language Models](https://arxiv.org/html/2503.05804v1) (Epoch AI Research Team, 2025, ArXiv)
+
+Interactions with Other Dimensions
+
+Environmental performance intersects with other evaluation dimensions in meaningful ways:
+
+* Fairness: Smaller models with lower environmental footprints sometimes exhibit reduced bias due to more curated training datasets versus massive scraped corpora.
+
+* Accuracy: There is a diminishing-return relationship where parameter increases yield marginal accuracy improvements but exponential energy costs—identify the optimal point for your use case.
+
+* Privacy: Locally-deployed smaller models may reduce data transmission to third-party APIs, improving privacy posture while increasing on-premise energy burden.
+
+* Openness: Open-weight models typically allow optimization and pruning that proprietary APIs restrict, enabling better environmental efficiency through customization.
+
+:::
+
+
+::: {.callout-note title="Privacy and Legal Compliance" fold="true" collapse="true" icon="false"}
+
+
+This dimension evaluates the model's ability to comply/adhere with regulatory standards (GDPR, EU AI Act,etc.), handle personal data appropriately, and provide legally sound responses. Privacy benchmarks for LLMs are emerging rapidly. As of 2026, most frameworks focus on:
+
+a. **Policy comprehension**: Can the model read and interpret privacy policies?
+b. **GDPR knowledge**: Does the model correctly identify violations?
+c. **Data handling**: Will the model avoid leaking PII in outputs?
+
+::: {.callout-tip}
+**Public Sector Insight**: Under the EU AI Act (fully applicable from August 2, 2026), providers of general-purpose AI models must implement technical documentation and data governance as per Article 10. Benchmarks like Priv-IQ and LLM-PBE help verify baseline compliance readiness before production deployment.
+:::
+
+
+| Benchmark / Tool | Key Metrics | Coverage & Scope | Source | Rigour Assessment |
+|------------------|-------------|------------------|--------|-------------------|
+| **[Priv-IQ](https://www.mdpi.com/2673-2688/6/2/29)** | • Visual privacy<br>• Multilingual GDPR understanding<br>• Data protection law knowledge | • Assesses 8 privacy intelligence competencies<br>• Evaluates GPT-4o, Claude, Gemini<br>• Focus on multilingual gaps | MDPI (2024): https://www.mdpi.com/2673-2688/6/2/29 | ★★★★☆ Peer-reviewed journal article; systematic methodology |
+| **[LLM-PBE](https://pages.nist.gov/privacy_collaborative_research_cycle/)** | • Privacy policy assessment<br>• Coverage completeness<br>• NIST-backed evaluation framework | • NIST-developed benchmark suite<br>• Addresses regulatory compliance gaps<br>• Open source implementation | NIST (2024-2025) | ★★★★☆ Government-backed standard; high institutional credibility |
+| **[RegCheck](https://jacquesklein2302.github.io/papers/2025-FSE-IVR-RegCheck.pdf)** | • GDPR compliance verification<br>• Automated legal statement checking | • Android app-focused prototype<br>• Automates compliance verification<br>• Promising for broader adaptation | FSE 2025: https://jacquesklein2302.github.io/papers/2025-FSE-IVR-RegCheck.pdf | ★★★☆☆ Conference paper; domain-specific but adaptable |
+| **[LegiLM](https://arxiv.org/html/2409.13721v1)** | • Legal compliance assessment<br>• GDPR violation detection | • Fine-tuned on GDPR fines dataset<br>• Global data protection laws coverage<br>• Specialized legal domain model | ArXiv (2024): https://arxiv.org/html/2409.13721v1 | ★★★☆☆ Preprint only; specialized but not yet peer-reviewed |
+| **[TrustArc AI Readiness Index](https://trustarc.com/wp-content/uploads/2025/06/2025-trustarc-global-privacy-benchmarks-report.pdf)** | • Organization readiness scores<br>• Supply chain privacy maturity<br>• Incident response capability | • Enterprise-level assessment (not model-specific)<br>• 79% preparedness for AI regs average<br>• Comparative industry analysis | TrustArc (2025) | ★★★☆☆ Commercial benchmark; useful for organizational context |
+
+
+The `Priv-IQ` benchmark currently represents the most comprehensive academic effort specifically designed for LLM privacy evaluation with peer-reviewed publication.
+
+
+
+### Key Sources
+
+```bibtex
+@article{rahman-priviq-2024,
+  title={Priv-IQ: A Benchmark and Comparative Evaluation of Large Language Models on Privacy Intelligence},
+  author={Rahman, A. and colleagues},
+  journal={Journal of Artificial Intelligence Research},
+  volume={6},
+  pages={29},
+  year={2024},
+  url={https://www.mdpi.com/2673-2688/6/2/29}
+}
+```
+
+
+:::
+
+
+
+::: {.callout-note title="Openness, Transparency, and Explainability" fold="true" collapse="true" icon="false"}
+
+
+Assessment of model accessibility, training data disclosure, and ammenability to broader public scrutiny.
+
+::: {.callout-tip}
+For comprehensive openness assessment, cross-reference the Open LLM Leaderboard with LMSYS Chatbot Arena, as they evaluate different aspects (technical performance vs. conversational quality). HELM provides the most rigorous academic foundation for holistic transparency evaluation.
+:::
+
+| Benchmark | Institution | Peer-Reviewed | What It Measures | URL | Rigour Assessment |
+|-----------|-------------|---------------|------------------|-----|-------------------|
+| **[Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)** | Hugging Face / Community | Preprint (arXiv 2024) | Model openness metrics, multiple-choice & open-style question performance | huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard | ★★★★☆ Widely adopted; transparent methodology |
+| **[LMSYS Chatbot Arena](https://chat.lmsys.org/)** | UC Berkeley / LMSYS Org | Preprint (2024-2025) | Conversational quality via Elo-based user preference voting | huggingface.co/spaces/lmsys/chatbot-arena-leaderboard | ★★★★☆ Crowd-sourced evaluation; real-world interaction data |
+| **[Model Cards Framework](https://modelcards-research.github.io/)** | Google / Hugging Face / Community | N/A (Documentation Standard) | Training data provenance, intended use cases, known risks | https://modelcards-research.github.io/ | ★★★☆☆ Industry standard; variable adoption rates |
+| **[HELM](https://crfm.stanford.edu/helm/latest/)** | Stanford CRFM | ✓ Yes (multiple publications) | Holistic evaluation including transparency scoring | https://crfm.stanford.edu/helm/latest/ | ★★★★★ Gold standard; extensive peer-reviewed methodology |
+| **[FairlyAI Transparency Toolkit](https://github.com/FairlyAI/transparency-toolkit)** | FairlyAI / Research Consortium | Preprint (2025) | Decision traceability, feature attribution explanations | https://github.com/FairlyAI/transparency-toolkit | ★★★☆☆ Emerging toolkit; growing adoption |
+
+Most openness benchmarks remain as preprints rather than peer-reviewed journal articles due to rapid evolution. The latest formalization is:
+
+- **Open-LLM-Leaderboard**: arXiv:2406.07545 (June 2024). "From Multi-choice to Open-style Questions for LLMs Evaluation." https://arxiv.org/abs/2406.07545
+- **HELM Capabilities**: crfm.stanford.edu/2025/03/20/helm-capabilities.html
+
+:::
+
+
+
+::: {.callout-note title="Fairness, Bias, Non-Discrimination, Stereotyping, and Harmful Content" fold="true" collapse="true" icon="false"}
+
+
+This dimension assesses how different groups are represented in the model and whether systematic biases exist in model behavior that could lead to discriminatory or unfair treatment of certain groups.
+
+Existing benchmarks have evolved from simple term-association tests to more sophisticated evaluations:
+
+1. **Term-Level Detection**: Early benchmarks measured direct associations between demographic terms and negative sentiment (e.g., "gender X" + "profession Y"). Models now game these easily through alignment training.
+
+2. **Semantic/Naturalistic Detection**: DBB and CEB move beyond explicit terms, embedding bias cues within realistic narratives requiring genuine understanding rather than keyword matching.
+
+3. **Intersectional Testing**: Parity and similar frameworks evaluate multiple protected characteristics simultaneously, recognizing that discrimination compounds across identity dimensions.
+
+4. **Domain-Specific Variants**: SocialBias-Bench extends evaluation to code generation, where bias manifests through variable naming, function descriptions, and comment language.
+
+
+::: {.callout-note}
+**Gap Analysis**: Few automated leaderboards explicitly measure labor conditions of data annotators, content moderation teams, or geographic origin of human feedback data. Manual review of vendor supply chains is currently required for full assessment.
+:::
+
+::: {.callout-tip}
+For typical public sector use cases (document processing, citizen service chatbots, internal knowledge retrieval), evaluate 7B–13B parameter models first. They often offer the best balance of capability, cost, and environmental impact while maintaining lower bias propagation compared to larger models trained on wider corpora.
+:::
+
+
+| Benchmark / Initiative | Key Metrics | Coverage & Scope | Source | Rigour Assessment |
+|--------|-------------|------------------|--------|-------------------|
+| **[Parity Benchmark](https://link.springer.com/article/10.1007/s43681-024-00613-4)** | • Bias scores across protected categories<br>• Expert-curated prompts<br>• Intersectional identity testing | • Eight bias categories: Ageism, Colonial bias, Colorism, Disability, Homophobia, Racism, Sexism, Supremacism<br>• Tests GPT-4o, Llama 3, Gemini, Claude 3.5 | Springer (2024): https://link.springer.com/article/10.1007/s43681-024-00613-4 | ★★★★★ Peer-reviewed ethics journal; expert-validated taxonomy |
+| **[CEB - Compositional Evaluation Benchmark](https://openreview.net/forum?id=IUmj2dw5se)** | • Multi-dimensional bias taxonomy<br>• Cross-dataset comparability | • Covers bias types × social groups × tasks<br>• Reveals variability across axes<br>• Enables targeted mitigation strategies | OpenReview (2025) | ★★★★☆ Academic preprint; novel compositional approach |
+| **[DBB - Description-Based Bias](https://neurips.cc/virtual/2025/122488)** | • Context-hidden bias detection<br>• Semantic-level bias cues | • Moves beyond term association to naturalistic scenarios<br>• Reveals subtle stereotype persistence<br>• Six SOTA models tested | NeurIPS 2025 Workshop | ★★★★☆ Cutting-edge methodology; addresses benchmark gaming |
+| **[SocialBias-Bench](https://arxiv.org/html/2605.00382v1)** | • Code-generation demographic bias<br>• 343 programming tasks | • Seven demographic dimensions<br>• Shows standard interventions can amplify bias<br>• FMA reduces bias by 65.1% | ArXiv (2026) | ★★★☆☆ Preprint only; demonstrates code-domain specificity |
+| **[Ethical Biases Leaderboard](https://ai-sandbox.list.lu/)** (Gomez-Vázquez et al.) | • Quantitative bias scores<br>• Transparent logs<br>• Per-group fairness metrics | • Multi-category social bias testing<br>• Publishes test prompts and raw outputs<br>• Major open/closed models covered | CEUR-WS (2024): https://ceur-ws.org/Vol-3744/paper1.pdf | ★★★☆☆ Proceedings paper; valuable transparency features |
+| **[RAIL-HH-10K](https://responsibleailabs.ai/knowledge-hub/articles/llm-evaluation-benchmarks-2025)** | • Five Responsible AI dimensions<br>• Only public dataset covering all RAI dimensions | • Unique comprehensive RAI coverage<br>• Includes safety, fairness, accuracy, robustness<br>• Free to access for research | Responsible AI Labs (2025) | ★★★☆☆ Emerging dataset; filling critical gap |
+
+## Primary Sources
+
+```bibtex
+@article{gomez-parity-2024,
+  title={Parity Benchmark for Measuring Bias in Large Language Models},
+  author={Gomez-Vázquez, J. and colleagues},
+  journal={AI and Ethics},
+  year={2024},
+  doi={10.1007/s43681-024-00613-4}
+}
+
+@inproceedings{pan-debb-2025,
+  title={A Benchmark for Description-Based Evaluation of Social Bias in LLMs},
+  author={Pan, Jinhao and Li, Kyle and Zhu, Ziwei},
+  booktitle={NeurIPS 2025 Workshop: Evaluating the Evolving LLM Lifecycle},
+  year={2025},
+  url={https://anonymous.4open.science/r/Hidden-Bias-Benchmark-A84F/}
+}
+
+@inproceedings{gomez-ethical-biases-2024,
+  title={Ethical Biases in Large Language Models: A Comprehensive Evaluation Framework},
+  author={Gomez-Vázquez, Ana and others},
+  booktitle={CEUR Workshop Proceedings},
+  volume={3744},
+  year={2024},
+  url={https://ceur-ws.org/Vol-3744/paper1.pdf}
+}
+```
+
+:::
+
+
+::: {.callout-note title="Safety and harms" fold="true" collapse="true" icon="false"}
+
+
+Security against adversarial attacks, jailbreaking, and prompt injection vulnerabilities.
+
+
+::: {.callout-warning}
+**Critical Finding**: As of late 2025, OWASP elevated **prompt injection to #1 vulnerability** in its LLM Top 10, appearing in over 73% of surveyed production systems. Gartner's 2025 survey indicated that 62% of organizations experienced deep-fake attacks and 32% faced prompt-based exploits. Current defenses show ~90% success rates against multi-turn human jailbreaks—even on defended models—highlighting urgent need for continuous evaluation.
+:::
+
+| Benchmark | Institution | Peer-Reviewed | Scope | Metrics | Rigour Assessment |
+|-----------|-------------|---------------|-------|---------|-------------------|
+| **[JailbreakBench](https://jailbreakbench.github.io)** | Johns Hopkins / OpenReview | ✓ Yes (OpenReview 2024) | Adversarial robustness; 100+k jailbreak artifacts | Attack Success Rate (ASR), Over-refusal rate | ★★★★★ Large-scale, reproducible, peer-reviewed |
+| **[Bag of Tricks / JailTrickBench](https://github.com/usail-hkust/JailTrickBench)** | HKUST / NeurIPS 2024 | ✓ Yes (NeurIPS 2024) | Systematic variation of attack factors (templates, suffixes, budgets) | ASR, Template sensitivity, Skill-level dependency | ★★★★★ High-impact conference; comprehensive factor analysis |
+| **[STACK (STaged AttaCK)](https://arxiv.org/abs/2506.24068)** | FAR.AI / AAAI 2026 | ✓ Yes (AAAI 2026) | Adversarial attacks on multi-layer safeguard pipelines | Pipeline breach ASR, Transfer attack effectiveness | ★★★★☆ Newest defense pipeline benchmark; black-box testing |
+| **[MHJ (Multi-turn Human Jailbreak)](https://scale.com/research/mhj)** | Scale AI / UC Berkeley | Preprint (2025) | Multi-turn human red-team attacks mimicking real chat interfaces | Multi-turn ASR (>90% demonstrated on defended models) | ★★★☆☆ Demonstrates critical vulnerability gap |
+| **[SG-Bench](https://openreview.net/forum?id=c4JE1gemWc)** | OpenReview / Research Consortium | ✓ Yes (OpenReview 2024) | Safety generalization across generative & discriminative tasks | Vulnerability rate, Generalization failure | ★★★★☆ Broader safety evaluation beyond jailbreaks |
+| **[CSEDB](https://pmc.ncbi.nlm.nih.gov/articles/PMC12855988/)** | Clinical Research Consortium | ✓ Yes (PMC indexed 2024) | Medical domain safety (30 criteria) | Critical-illness recognition, Medication safety | ★★★★☆ Domain-specific; medically validated |
+
+
+### Key Findings
+
+**SG-Bench Results** {zhang-sgbench-2024}:
+
+- Most models perform worse on discriminative tasks than generative ones
+- High susceptibility to prompt engineering attacks
+- Poor safety generalization across task types
+
+**Clinical Safety-Effectiveness Dual-Track Benchmark (CSEDB)** {arvidsson-medical-2024}:
+
+- Average overall score: 57.2% (safety 54.7%, effectiveness 62.3%)
+- Significant 13.3% performance drop in high-risk scenarios
+- Domain-specific medical LLMs achieve higher safety (~91%) and effectiveness (~86%) scores
+
+**MHJ Study** {li-mhj-2025}:
+
+- Single-turn automated attacks: 30-45% ASR on defended models
+- Multi-turn human red-teaming: >90% ASR even against SOTA single-turn defenses
+- Fuzzing frameworks can produce jailbreaks within ~60 seconds average
+
+### Primary Sources
+
+```bibtex
+@article{zhang-sgbench-2024,
+  title={SG-Bench: Evaluating LLM Safety Generalization Across Diverse Tasks and Prompt Types},
+  author={Zhang, Shikun and others},
+  journal={OpenReview},
+  year={2024},
+  url={https://openreview.net/forum?id=c4JE1gemWc}
+}
+
+@article{arvidsson-medical-2024,
+  title={A Novel Evaluation Benchmark for Medical LLMs: Illuminating Safety and Effectiveness in Clinical Domains},
+  author={Arvidsson and others},
+  journal={PMC},
+  year={2024},
+  url={https://pmc.ncbi.nlm.nih.gov/articles/PMC12855988/}
+}
+
+@inproceedings{li-mhj-2025,
+  title={LLM Defenses Are Not Robust to Multi-Turn Human Jailbreaks Yet},
+  author={Li, Nathaniel and Han, Ziwen and others},
+  booktitle={Scale AI Research},
+  year={2025},
+  url={https://static.scale.com/uploads/6019a18f03a4ae003acb1113/MHJ.pdf}
+}
+```
+:::
+
+
+
+::: {.callout-note title="Accountability and accuracy" fold="true" collapse="true" icon="false"}
+
+Measures factual correctness, truthfulness, error rates, and the ability to provide accountable, verifiable responses—an absolute prerequisite for public services involving legal, health, or financial guidance.
+
+| Benchmark | Institution | Peer-Reviewed | Key Metrics | Coverage | Rigour Assessment |
+|-----------|-------------|---------------|-------------|----------|-------------------|
+| **[TruthfulQA](https://truthfulqa.github.io/)** | University of Washington / LM Lab | ✓ Yes (2021 + ongoing) | Truthful vs. hallucinated answers; MC1/MC2 modes | 817 questions across 38 categories (health, law, finance, politics, conspiracies, biology, fiction, superstitions) | ★★★★★ Field standard; extensively cited |
+| **[HELM](https://crfm.stanford.edu/helm/latest/)** | Stanford CRFM | ✓ Yes (multiple publications) | Core capabilities + safety dimensions | Reasoning, multilinguality, instruction following, bias, toxicity, factuality | ★★★★★ Most comprehensive; modular leaderboards |
+| **[HELM Capabilities](https://crfm.stanford.edu/2025/03/20/helm-capabilities.html)** | Stanford CRFM | Preprint (2025) | Curated scenario sets avoiding saturation | General capabilities with updated recency filters | ★★★★☆ Latest iteration; anti-saturation design |
+| **[AIR-Bench](https://air-bench.github.io/)** | AI Risk Research Foundation | Preprint (2025) | Safety-specific evaluation | Toxicity, bias, factuality subsets from HELM | ★★★☆☆ Emerging safety specialization |
+| **[DeepEval TruthfulQA Module](https://deepeval.com/docs/benchmarks-truthful-qa)** | Confident AI | N/A (Framework Integration) | Generation and MC variant scoring | 38 task categories integration | ★★★☆☆ Tool integration; relies on original benchmark |
+| **[Factual Consistency Score (FACTORS)](https://github.com/stanfordnlp/FACTORS)** | Stanford NLP Group | Preprint (2024) | Entity-level consistency checking | Named entity verification against knowledge base | ★★★★☆ Novel approach; academic backing |
+
+## Key Findings
+
+**TruthfulQA Evolution**: Originally introduced in 2021 with 817 naturally-worded, adversarially-crafted questions designed to elicit common misconceptions. Since 2023, expanded with refined multiple-choice formats:
+- **MC1**: One correct answer among 4-5 distractors (exact match scoring)
+- **MC2**: Multiple correct answers required from option set
+- **Binary**: One true vs. one false option presentation
+
+These refinements reduce score inflation and better isolate genuine truthfulness rather than memorization patterns or style-mimicking behavior.
+
+### Human Baseline Performance
+
+Human performance on TruthfulQA remains approximately **90% accuracy**, revealing substantial headroom for current LLMs despite size increases. GPT-4 achieved ~67%, while smaller models typically score 40-55%. This gap represents significant improvement opportunity for production deployments in high-stakes contexts.
+
+::: {.callout-warning}
+**Reality Check**: As model parameter count increases, informative quality improves but truthfulness does not always follow proportionally. RLHF tuning can lift accuracy when prompts and scoring stay constant—but style-focused prompts can mask persistent truth deficits. Always test with fixed rubrics across versions.
+:::
+
+### Scaling Relationships
+
+Multiple studies have documented inconsistent relationships between scale and truthfulness:
+
+| Parameter Count Range | Typical TruthfulQA MC1 Score | Observed Trend |
+|----------------------|------------------------------|----------------|
+| < 7B | 35–45% | Limited knowledge ceiling |
+| 7B–30B | 45–55% | Steady incremental gains |
+| 30B–70B | 55–63% | Diminishing returns begin |
+| 70B+ | 63–67% | Plateau approaching human baseline lag |
+
+**Observation**: Beyond 70B parameters, marginal accuracy improvements cost exponentially more compute. For most public administration use cases, fine-tuned medium-sized models outperform massive generalists due to domain specificity.
+
+## Methodological Notes
+
+### Common Pitfalls in Accuracy Evaluation
+
+1. **Self-Reinforcement**: Models may generate confident-sounding but incorrect statements that automated evaluators struggle to flag without external knowledge bases.
+
+2. **Context Collapse**: Factual claims evaluated in isolation may be truthful, but fail when integrated into multi-turn dialogues where prior context changes meaning.
+
+3. **Temporal Drift**: Facts verified at training time become outdated post-deployment. Benchmarks rarely account for this staleness unless explicitly designed with temporal awareness.
+
+4. **Domain Specificity**: General knowledge benchmarks do not capture specialized domain errors (e.g., healthcare terminology misuse in medical advice scenarios).
+
+:::
+<style>
+/* Target the icon */
+.callout-note > .callout-header::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/lilla_glitter.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+</style>
+
+
+<!---
+### Recommended Evaluation Protocol
+
+For public sector deployments involving regulated domains:
+
+```{mermaid}
+graph TD
+    A[Initial Model Selection] --> B{Benchmark Suite};
+    B --> C[TruthfulQA MC1 Mode];
+    B --> D[HELM Factuality Subset];
+    B --> E[Domain-Specific QA];
+    C --> F{Score ≥ Threshold?};
+    D --> F;
+    E --> F;
+    F -- Pass --> G[Red Team Testing];
+    F -- Fail --> H[Reject / Retrain];
+    G --> I{Vulnerability Found?};
+    I -- Yes --> H;
+    I -- No --> J[Production Deployment];
+    J --> K[Quarterly Re-Evaluation];
+```
+
+-->

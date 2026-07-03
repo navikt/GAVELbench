@@ -1,0 +1,5 @@
+model_id,rouge_l,semantic_sim,factual_corr,answer_quality,jsd_divergence,composite_score,status
+norallm__normistral-7b-warm-instruct,0.0,0.0,0.4646,0.0,0.0,0.04137213379974816,FAIL_QUALITY
+NBAiLab__borealis-open-4b-gguf,0.0,0.0,0.4543,0.0,0.0,0.04127948530952213,FAIL_QUALITY
+gemini-2.5-pro,0.0,0.0,0.4268,0.0,0.0,0.041022529979974055,FAIL_QUALITY
+claude-sonnet-4-6,0.0,0.0,0.3914,0.0,0.0,0.04066886780847036,FAIL_QUALITY

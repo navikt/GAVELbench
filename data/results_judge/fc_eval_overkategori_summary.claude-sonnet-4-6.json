@@ -1,0 +1,51 @@
+{
+    "timestamp": "2026-06-26T22:20:02.094732",
+    "dataset": "claude-sonnet-4-6",
+    "categories_count": 4,
+    "metrics_by_category": {
+        "Helse og sykdom": {
+            "row_index": 99.5,
+            "f1_score": 0.5099,
+            "precision": 0.5483,
+            "recall": 0.5045,
+            "true_positives": 2.6333,
+            "false_positives": 2.4667,
+            "false_negatives": 3.2667,
+            "resp_claims_count": 5.1,
+            "ref_claims_count": 5.8667
+        },
+        "Pensjon": {
+            "row_index": 105.1667,
+            "f1_score": 0.5329,
+            "precision": 0.5802,
+            "recall": 0.5565,
+            "true_positives": 2.8333,
+            "false_positives": 2.3333,
+            "false_negatives": 3.0,
+            "resp_claims_count": 5.1667,
+            "ref_claims_count": 5.8333
+        },
+        "Arbeid": {
+            "row_index": 35.2424,
+            "f1_score": 0.3603,
+            "precision": 0.3811,
+            "recall": 0.3522,
+            "true_positives": 2.3636,
+            "false_positives": 3.1515,
+            "false_negatives": 3.8485,
+            "resp_claims_count": 5.5152,
+            "ref_claims_count": 6.2121
+        },
+        "Familie og barn": {
+            "row_index": 46.2885,
+            "f1_score": 0.4034,
+            "precision": 0.4934,
+            "recall": 0.3649,
+            "true_positives": 2.1154,
+            "false_positives": 2.25,
+            "false_negatives": 3.8077,
+            "resp_claims_count": 4.3654,
+            "ref_claims_count": 5.9231
+        }
+    }
+}

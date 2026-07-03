@@ -1,0 +1,40 @@
+{
+    "timestamp": "2026-06-25T23:09:18.691599",
+    "dataset": "NBAiLab__borealis-open-4b-gguf",
+    "categories_count": 3,
+    "metrics_by_category": {
+        "Familie og barn": {
+            "row_index": 7.75,
+            "f1_score": 0.4921,
+            "precision": 0.5104,
+            "recall": 0.4762,
+            "true_positives": 3.75,
+            "false_positives": 3.75,
+            "false_negatives": 4.25,
+            "resp_claims_count": 7.5,
+            "ref_claims_count": 8.0
+        },
+        "Helse og sykdom": {
+            "row_index": 13.0,
+            "f1_score": 0.4543,
+            "precision": 0.43,
+            "recall": 0.5433,
+            "true_positives": 2.4,
+            "false_positives": 3.6,
+            "false_negatives": 2.4,
+            "resp_claims_count": 6.0,
+            "ref_claims_count": 4.8
+        },
+        "Arbeid": {
+            "row_index": 3.4286,
+            "f1_score": 0.401,
+            "precision": 0.43,
+            "recall": 0.4365,
+            "true_positives": 3.1429,
+            "false_positives": 4.0,
+            "false_negatives": 5.0,
+            "resp_claims_count": 7.1429,
+            "ref_claims_count": 8.1429
+        }
+    }
+}

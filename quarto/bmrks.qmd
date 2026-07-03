@@ -1,0 +1,152 @@
+---
+title: "Hvilken LLM skal jeg bruke?"
+subtitle: "LLM Benchmarks and Leaderboards: A Comprehensive Compilation"
+author: "Team TADA"
+date: 2026-06-10
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+lang: nb
+---
+
+Når du skal velge en LLM til et spesifikt formål, er tilgjengelighet og evne til løse et forretningsproblem ofte er avgjørende.
+
+Samtidig kan det i noen tilfeller være aktuelt, viktig eller ønskelig å kunne vurdere og/eller dokumentere andre sider av språkmodellen. Dette gjelder kanskje særlig for anvendelser i offentlig forvaltning, hvor krav til åpenhet, etterlevelse av ulike regelverk eller sikkerhet *tidvis kan* være av en annen art enn det som er vanlig å vurdere fra et rent forretningsmessig perspektiv.
+
+Det finnes mange ulike måter å evaluere og sammenligne store språkmodeller (LLMs) på. Følgelig finnes det derfor et bredt spekter av såkalte benchmarks og leaderboards som forsøker å beskriver hvor gode modellene er på å løse ulike oppgaver.
+
+Det finnes ikke...
+
+This document compiles robust benchmarks and leaderboards for evaluating Large Language Models (LLMs) across six critical dimensions. All sources are drawn from peer-reviewed research, academic institutions, or reputable benchmarking organizations.
+
+::: {.callout-note}
+**Important**: Many cutting-edge LLM benchmarks remain in preprint status due to the rapid iteration cycles of the field. Where peer-reviewed versions exist, they are noted; otherwise, arXiv/OpenReview sources are cited with appropriate caveats.
+:::
+
+## Scandinavian Language Proficiency
+
+| Benchmark | Institution | Peer-Reviewed | Coverage | Key Tasks |
+|-----------|-------------|---------------|----------|-----------|
+| **ScandEval** | Alexandra Institute / ACL Anthology | ✓ Yes (NoDaLiDa 2023) | Danish, Norwegian, Swedish, Icelandic | Linguistic acceptability, NER, sentiment analysis, QA |
+| **Swedish Medical LLM Benchmark** | PMC / Medical Research Consortium | ✓ Yes (PMC indexed) | Swedish medical domain | MedQA-SWE, SMDT, clinical knowledge assessment |
+| **Icelandic LLM Evaluation Framework** | arXiv / Icelandic Research Community | Preprint (calls for improvement) | Icelandic language | Evaluation gap identification |
+
+### Primary Sources
+
+- **ScandEval**: Nielsen, D.S. (2023). "ScandEval: A Benchmark for Scandinavian Natural Language Processing." *Proceedings of the 24th Nordic Conference on Computational Linguistics (NoDaLiDa)*. https://aclanthology.org/2023.nodalida-1.20.pdf
+- **Swedish Medical Benchmark**: Arvidsson et al. (2024). "Swedish Medical LLM Benchmark: development and evaluation of a framework for assessing large language models in the Swedish medical domain." *PMC*. https://pmc.ncbi.nlm.nih.gov/articles/PMC12290221/
+
+::: {.callout-warning}
+**Coverage Gap**: Icelandic remains significantly underserved compared to mainland Scandinavian languages. Recent research has identified shortcomings in existing Icelandic LLM evaluations.
+:::
+
+---
+
+## Openness and Transparency
+
+| Benchmark | Institution | Peer-Reviewed | What It Measures | URL |
+|-----------|-------------|---------------|------------------|-----|
+| **Open LLM Leaderboard** | Hugging Face / Community | Preprint (arXiv 2024) | Model openness, multiple-choice & open-style question performance | huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard |
+| **LMSYS Chatbot Arena** | UC Berkeley / LMSYS Org | Preprint | Conversational quality via Elo-based user preference voting | huggingface.co/spaces/lmsys/chatbot-arena-leaderboard |
+| **Opening Up ChatGPT** | OpenAI / Research Community | Research Publication | Model card transparency, training data disclosure | opening-up-chatgpt.github.io |
+
+### Methodological Notes
+
+Most openness benchmarks remain as preprints rather than peer-reviewed journal articles due to the rapid evolution of this field. The latest formalization is:
+
+- **Open-LLM-Leaderboard**: arXiv:2406.07545 (June 2024). "Open-LLM-Leaderboard: From Multi-choice to Open-style Questions for LLMs Evaluation, Benchmark, and Arena." https://arxiv.org/abs/2406.07545
+
+::: {.callout-tip}
+For comprehensive openness assessment, cross-reference the Open LLM Leaderboard with LMSYS Chatbot Arena, as they evaluate different aspects (technical performance vs. conversational quality).
+:::
+
+---
+
+## Safety Evaluation
+
+| Benchmark | Institution | Peer-Reviewed | Scope | Metrics |
+|-----------|-------------|---------------|-------|---------|
+| **SG-Bench** | OpenReview / Research Consortium | ✓ Yes (OpenReview) | Safety generalization across generative & discriminative tasks | Prompt engineering vulnerability, jailbreak resistance |
+| **CSEDB** | Clinical Research Consortium | ✓ Yes (PMC/arXiv) | Medical domain safety (30 criteria) | Critical-illness recognition, medication safety, guideline adherence |
+| **HELM** | Stanford CRFM | ✓ Yes (multiple publications) | Holistic evaluation | Accuracy, calibration, bias, toxicity |
+| **SafeRLHF** | Research Labs | Preprint | Safety alignment via RLHF | Human feedback alignment scores |
+
+## Environmental Impact in Training
+
+Evaluating the carbon footprint generated during the model training phase is essential for assessing long-term climate commitments.
+
+| Benchmark / Tool | Key Metrics | Coverage & Scope | Source |
+|------------------|-------------|------------------|--------|
+| **Open LLM Leaderboard** (Hugging Face) | • CO₂ emissions (kg)<br>• Energy consumption (kWh)<br>• Efficiency ratio (performance/energy) | • **Scale:** >3,000 models evaluated since June 2024.<br>• **Focus:** Tracks trends between community fine-tunes vs. official releases.<br>• **Methodology:** Uses spare cluster cycles but estimates full training implications via parameter scaling. | [hf.co/blog/leaderboard-emissions-analysis](https://huggingface.co/blog/leaderboard-emissions-analysis) |
+| **Green Algorithms Calculator** | • Carbon footprint (gCO₂eq)<br>• Hardware-specific power draw<br>• Grid emission factors | • **Scope:** Supports custom training jobs and research prototypes.<br>• **Hardware:** Monitors CPU/GPU via RAPL and `nvidia-smi`.<br>• **Regionality:** Adjusts calculations based on local grid carbon intensity. | [green-algorithms.org](https://www.green-algorithms.org/) |
+| **SLM-bench** | • Water consumption<br>• Carbon footprint<br>• Energy efficiency (FLOPs/Watt) | • **Specialization:** Focused specifically on Small Language Models (SLMs).<br>• **Context:** Benchmarks inference serving efficiency which correlates back to training data quality and model compactness. | arXiv (2025): *Assessing the carbon footprint of language models* |
+
+::: {.callout-tip}
+Public Sector Insight: Data from Hugging Face (2024) indicates that official fine-tunes often consume roughly 2× the energy of comparable community versions. For public projects, prioritizing open-source community merges may offer significant environmental efficiencies.
+:::
+
+## Environmental Impact in Use (Inference)
+
+Operational emissions depend heavily on deployment architecture, request volume, and model selection.
+
+| Benchmark / Tool | Key Metrics | Coverage & Scope | Source |
+|------------------|-------------|------------------|--------|
+| **EcoLogits** | • Real-time energy consumption (Wh)<br>• Estimated carbon emissions per API call<br>• Provider-specific efficiency scores | • **Providers:** OpenAI, Anthropic, Mistral AI, Cohere, and local APIs.<br>• **Granularity:** Tracks per-token and per-request metrics.<br>• **Integration:** Works via Python SDK or direct API monitoring. | [ecologits.ai](https://ecologits.ai/) |
+| **Zeus Library** (Python) | • Energy consumption (kWh) for DL workloads<br>• Power draw per device (Watt)<br>• Optimization recommendations | • **Hardware:** Monitors CPU & GPU devices via RAPL, nvidia-smi, and IPMI.<br>• **Use Case:** Ideal for self-hosted public sector infrastructure.<br>• **Output:** Generates detailed reports on inference energy costs. | [github.com/thunl/zeus](https://github.com/thunl/zeus) |
+| **Vellum / Open LLM Cost Leaderboard** | • I/O pricing ($ per 1M tokens)<br>• Latency (ms)<br>• Throughput (tokens/sec)<br>• Compute intensity correlation | • **Scope:** Major commercial APIs (GPT-4, Claude, Gemini, etc.).<br>• **Data:** Input/output cost breakdowns.<br>• **Context:** Links cost to computational load. | [vellum.ai/open-llm-leaderboard](https://www.vellum.ai/open-llm-leaderboard) |
+| **Onyx LLM Leaderboard** | • Pricing + Performance metrics<br>• Total Cost of Ownership (TCO) analysis<br>• Self-hosted vs. API options | • **Coverage:** Aggregates 40+ models from 16+ providers.<br>• **Focus:** Comparative analysis for procurement decisions.<br>• **Features:** Includes hardware requirement estimates. | [onyx.app/llm-leaderboard](https://onyx.app/llm-leaderboard) |
+
+::: {.callout-tip}
+Public Sector Insight: Smaller models (7B–13B parameters) frequently deliver ~80% of the capabilities of massive models at <30% of the inference energy cost. Task-fit evaluation is critical before scaling up.
+:::
+
+## Hidden Social Cost of Creation
+
+This dimension assesses bias, fairness, and the labor conditions associated with dataset curation and human feedback.
+
+| Benchmark / Initiative | Key Metrics | Coverage & Scope | Source |
+|------------------------|-------------|------------------|--------|
+| **Ethical Biases Leaderboard** (Gomez-Vázquez et al.) | • Quantitative bias scores across demographic categories<br>• Transparent prompt/model answer logs<br>• Fairness metrics per social group | • **Focus:** Multi-category social bias testing.<br>• **Transparency:** Publishes test prompts and raw model outputs for auditability.<br>• **Scope:** Covers major open and closed models. | [ai-sandbox.list.lu](https://ai-sandbox.list.lu/) |
+| **Kaggle LLM Benchmark Dataset** (2024–2026) | • Aggregated benchmark scores (reasoning, safety, fairness)<br>• Model family comparisons<br>• Pricing correlation with performance | • **Scale:** Curated snapshot of 40+ models from 16+ providers.<br>• **Format:** Structured CSV/JSON for comparative analysis.<br>• **Updates:** Regularly updated by community contributors. | [kaggle.com/datasets/prajitdatta/llm-benchmark-leaderboard-dataset-20242026](https://www.kaggle.com/datasets/prajitdatta/llm-benchmark-leaderboard-dataset-20242026) |
+| **Model Cards & Data Cards Framework** | • Training data provenance documentation<br>• Intended use cases and limitations<br>• Known risks and bias disclosures | • **Standard:** Community standard adopted by Hugging Face, Google, Meta.<br>• **Type:** Documentation requirement rather than a ranked leaderboard.<br>• **Adoption:** Variable adoption rates across the industry. | [modelcards-research.github.io](https://modelcards-research.github.io/) |
+
+::: {.callout-tip}
+Gap Analysis: Few automated leaderboards explicitly measure the labor conditions of data annotators, content moderation teams, or the geographic origin of human feedback data. Manual review of vendor supply chains is currently required.
+:::
+
+::: {.callout-tip}
+For typical public sector use cases (document processing, citizen service chatbots, internal knowledge retrieval), evaluate 7B–13B parameter models first. They often offer the best balance of capability, cost, and environmental impact.
+:::
+
+### Key Findings
+
+**SG-Bench Results** {zhang-sgbench-2024}:
+- Most models perform worse on discriminative tasks than generative ones
+- High susceptibility to prompt engineering attacks
+- Poor safety generalization across task types
+
+**Clinical Safety-Effectiveness Dual-Track Benchmark (CSEDB)** {arvidsson-medical-2024}:
+- Average overall score: 57.2% (safety 54.7%, effectiveness 62.3%)
+- Significant 13.3% performance drop in high-risk scenarios
+- Domain-specific medical LLMs achieve higher safety (~91%) and effectiveness (~86%) scores
+
+### Primary Sources
+
+```bibtex
+@article{zhang-sgbench-2024,
+  title={SG-Bench: Evaluating LLM Safety Generalization Across Diverse Tasks and Prompt Types},
+  author={Zhang, Shikun and others},
+  journal={OpenReview},
+  year={2024},
+  url={https://openreview.net/forum?id=c4JE1gemWc}
+}
+
+@article{arvidsson-medical-2024,
+  title={A Novel Evaluation Benchmark for Medical LLMs: Illuminating Safety and Effectiveness in Clinical Domains},
+  author={Arvidsson and others},
+  journal={PMC},
+  year={2024},
+  url={https://pmc.ncbi.nlm.nih.gov/articles/PMC12855988/}
+}

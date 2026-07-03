@@ -1,0 +1,51 @@
+{
+    "timestamp": "2026-06-25T22:42:16.839791",
+    "dataset": "norallm__normistral-7b-warm-instruct",
+    "categories_count": 4,
+    "metrics_by_category": {
+        "Familie og barn": {
+            "row_index": 31.5312,
+            "f1_score": 0.5036,
+            "precision": 0.4592,
+            "recall": 0.6131,
+            "true_positives": 3.0938,
+            "false_positives": 3.6562,
+            "false_negatives": 2.8438,
+            "resp_claims_count": 6.75,
+            "ref_claims_count": 5.8125
+        },
+        "Helse og sykdom": {
+            "row_index": 67.0,
+            "f1_score": 0.4646,
+            "precision": 0.4249,
+            "recall": 0.5502,
+            "true_positives": 2.9231,
+            "false_positives": 3.9231,
+            "false_negatives": 2.6923,
+            "resp_claims_count": 6.8462,
+            "ref_claims_count": 5.6154
+        },
+        "Arbeid": {
+            "row_index": 28.3103,
+            "f1_score": 0.4591,
+            "precision": 0.4081,
+            "recall": 0.6217,
+            "true_positives": 3.5862,
+            "false_positives": 4.4483,
+            "false_negatives": 3.0345,
+            "resp_claims_count": 8.0345,
+            "ref_claims_count": 6.5517
+        },
+        "Pensjon": {
+            "row_index": 68.8333,
+            "f1_score": 0.5128,
+            "precision": 0.5011,
+            "recall": 0.5625,
+            "true_positives": 3.0,
+            "false_positives": 3.6667,
+            "false_negatives": 3.0,
+            "resp_claims_count": 6.6667,
+            "ref_claims_count": 6.0
+        }
+    }
+}

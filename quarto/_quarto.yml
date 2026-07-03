@@ -1,30 +1,50 @@
 project:
-  type: book
-  output-dir: _book
+  type: website
+  render:
+    - leaderboard.qmd
+    - methodology.qmd
+    - benchmarks.qmd
+    - ./baseline_metrics/index.qmd
+    - ./baseline_metrics/per_kategori.qmd
+    - ./guides/ansvarlig-ki-benchmarker.qmd
+    - ./guides/kilderegister-benchmarker.qmd
 date: now
 date-format: DD.MM.YYYY
-author-title: Eier
-book:
-  title: 'Evaluering av språkmodeller mot Bobs svar'
-  description: Evaluering av språkmodeller mot Bobs svar
-  author: Tada
-  chapters:
-  - index.qmd
-  - per_kategori.qmd
-
-  page-navigation: true
-  page-footer: Nav - {{< meta date >}}
-  repo-url: https://github.com/navikt/gavelbench
-  reader-mode: false
-  search: true
+author-title: Team TADA
+website:
+  title: "Gavelbench"
+  favicon: assets/tada-logo.svg
   navbar:
-    logo: assets/nav_logo_hvit.png
-    logo-alt: Logo til Nav - Arbeids- og velferdsetaten
+    icon: "house"
+    left:
+      - href: leaderboard.qmd
+        text: Leaderboard
+      - href: methodology.qmd
+        text: Methodology
+      - href: ./baseline_metrics/index.qmd
+        text: Metrics
+      - href: ./baseline_metrics/per_kategori.qmd
+        text: Navs virkeområder
+      - href: benchmarks.qmd
+        text: Benchmarks
+      - href: ./guides/ansvarlig-ki-benchmarker.qmd
+        text: Guides for praktikere
+
+    right:
+      - icon: github
+        href: "https://github.com/navikt/GAVELbench"
+    page-navigation: true
+    page-footer: Nav - {{< meta date >}}
+    repo-url: https://github.com/navikt/gavelbench
+    reader-mode: false
+    search: true
+    navbar:
+    logo: assets/logo_main.svg
+    logo-alt: Logo til Team TADA
 format:
   html:
-    lang: nb
-    toc: true
-    toc-depth: 3
     theme:
       light: flatly
       dark: darkly
+    #css: styles.css
+    toc: true

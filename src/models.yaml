@@ -3,25 +3,25 @@ defaults:
   location: europe-west1
 
 models:
-  - id: gemini-2.0-flash
-    provider: vertex_ai
-    description: Fast, cost-efficient Gemini model
-    concurrency: 10
+#  - id: gemini-2.0-flash
+#    provider: vertex_ai
+#    description: Fast, cost-efficient Gemini model
+#    concurrency: 10
 
-  - id: gemini-2.5-flash
-    provider: vertex_ai
-    description: Lightweight Gemini Flash model, faster and more concise
-    concurrency: 10
+#  - id: gemini-2.5-flash
+#    provider: vertex_ai
+#    description: Lightweight Gemini Flash model, faster and more concise
+#    concurrency: 10
 
   - id: gemini-2.5-pro
     provider: vertex_ai
     description: Gemini 2.5 Pro with reasoning, most capable available model
     concurrency: 10
 
-  - id: norallm/normistral-7b-warm-instruct
-    provider: huggingface
-    description: Norwegian Mistral 7B instruct model (NorMistral), Q3_K_M GGUF
-    gguf_filename: normistral-7b-warm-instruct.Q3_K_M.gguf
+#  - id: norallm/normistral-7b-warm-instruct
+#    provider: huggingface
+#    description: Norwegian Mistral 7B instruct model (NorMistral), Q3_K_M GGUF
+#    gguf_filename: normistral-7b-warm-instruct.Q3_K_M.gguf
 
   - id: claude-sonnet-4-6
     provider: vertex_anthropic

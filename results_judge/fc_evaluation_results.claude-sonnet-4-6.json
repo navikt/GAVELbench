@@ -1,0 +1,1661 @@
+{
+    "timestamp": "2026-06-17T08:54:49.239830",
+    "total_rows": 50,
+    "results": [
+        {
+            "index": 0,
+            "metrics": {
+                "precision": 0.25,
+                "recall": 0.25,
+                "f1_score": 0.25,
+                "true_positives": 1,
+                "false_positives": 3,
+                "false_negatives": 3,
+                "total_response_claims": 4,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "The user has provided information about a-income.",
+                "The user has not asked a specific question.",
+                "The user is being asked if they have a specific question about a-income.",
+                "More information can be found at nav.no."
+            ],
+            "ref_claims_list": [
+                "{'claim': 'A-inntekt refererer til inntekten som arbeidsgivere rapporterer til Nav gjennom a-meldingen.'}",
+                "{'claim': 'A-inntekt inkluderer opplysninger om ansattes lønnsinntekt, skatt og andre relevante forhold knyttet til ansettelsen.'}",
+                "{'claim': 'A-inntekt er viktig for beregning av ytelser som sykepenger, foreldrepenger og pensjon.'}",
+                "{'claim': 'Man kan kontakte Nav for mer informasjon om a-inntekt.'}"
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 1,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 4,
+                "false_negatives": 7,
+                "total_response_claims": 4,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Det anbefales ikke å bruke STO for å gi samtykke til helsepersonell.",
+                "Samtykke til helsepersonell bør gis direkte til den aktuelle helseinstitusjonen eller behandleren.",
+                "Samtykke til helsepersonell skal ikke gis via NAVs meldingssystem.",
+                "For spørsmål om samtykke, kontakt NAV på nav.no."
+            ],
+            "ref_claims_list": [
+                "Digital fullmakt anbefales ikke for helsepersonell.",
+                "Brukere bør sende en melding via \"Skriv til oss\" (STO) for helsepersonell-relaterte fullmakter.",
+                "Meldingen til \"Skriv til oss\" (STO) bør inneholde navnet på behandleren.",
+                "Meldingen til \"Skriv til oss\" (STO) bør inneholde hvor behandleren jobber.",
+                "Meldingen til \"Skriv til oss\" (STO) bør inneholde hva samtykket gjelder.",
+                "Denne prosessen sikrer at helsepersonell får nødvendig tilgang til relevant informasjon.",
+                "Tilgang til relevant informasjon er nødvendig for å bistå brukeren."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 2,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 4,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Det blir ny arbeidsgiverperiode.",
+                "Foreldrepenger regnes ikke som en sykefraværsperiode.",
+                "Foreldrepenger avbryter opptjeningen av arbeidsgiverperioden.",
+                "Når ny sykemelding starter etter foreldrepenger, begynner arbeidsgiverperioden på nytt."
+            ],
+            "ref_claims_list": [
+                "Det blir ikke en ny arbeidsgiverperiode i dette tilfellet.",
+                "Hvis arbeidsgiver har utbetalt en full arbeidsgiverperiode under det første sykefraværet, og arbeidet ikke er gjenopptatt fullt etter dette, vil det ikke bli en ny arbeidsgiverperiode når personen går fra foreldrepermisjon til ny sykemelding."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 3,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.4,
+                "f1_score": 0.3636,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 3,
+                "total_response_claims": 6,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Det er mulig å søke om norsk alderspensjon selv om man bor i Australia.",
+                "Søknaden om norsk alderspensjon sendes til NAV.",
+                "Man kan søke om norsk alderspensjon digitalt på nav.no.",
+                "Man kan sende inn papirskjema for å søke om norsk alderspensjon.",
+                "Norge og Australia har ikke en trygdeavtale.",
+                "Man kan ha rett til norsk pensjon basert på opptjente rettigheter i Norge, selv uten trygdeavtale."
+            ],
+            "ref_claims_list": [
+                "If you live in Australia and wish to apply for Norwegian old-age pension, you must apply through the pension authorities in Australia.",
+                "Norway has a social security agreement with Australia.",
+                "This agreement requires the application to go through the local pension system.",
+                "If Norway is the last country you have worked in, you can apply directly from Norway by sending the application by post.",
+                "More information on how to apply can be found at nav.no/alderspensjon#soke."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 4,
+            "metrics": {
+                "precision": 0.625,
+                "recall": 0.5,
+                "f1_score": 0.5556,
+                "true_positives": 5,
+                "false_positives": 3,
+                "false_negatives": 5,
+                "total_response_claims": 8,
+                "total_reference_claims": 10
+            },
+            "resp_claims_count": 8,
+            "ref_claims_count": 10,
+            "resp_claims_list": [
+                "If you live in Norway, you must submit your application for Bulgarian old-age pension through NAV.",
+                "NAV Internasjonalt assists with pension rights from other EEA countries.",
+                "NAV forwards the application to Bulgarian authorities (National Social Security Institute – NSSI).",
+                "You must document periods of employment in Bulgaria.",
+                "Norway and Bulgaria are both EEA countries, so social security agreements apply.",
+                "Pension periods from both countries can be coordinated.",
+                "NAV Internasjonalt can be reached by phone at 55 55 33 34.",
+                "More information about Bulgarian pension can be found on NSSI Bulgaria's website."
+            ],
+            "ref_claims_list": [
+                "Bulgaria is an EEA country.",
+                "To apply for old-age pension from Bulgaria, you must fill out a form about residence in an EEA country.",
+                "Nav can send you this form.",
+                "After filling out the form, you must send it back to Nav.",
+                "You must also send a letter with the form, requesting that a claim for old-age pension in Bulgaria be submitted.",
+                "The form can be returned electronically via Nav's services.",
+                "The form can be returned by post to Nav Familie- og pensjonsytelser, Postboks 6600 Etterstad, 0607 Oslo.",
+                "Once Nav receives the completed form, Nav will forward your application to Bulgaria.",
+                "You must provide accurate information about your periods abroad (where you have lived, worked, studied, or other).",
+                "This information is necessary to correctly calculate your pension."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 5,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.2857,
+                "f1_score": 0.3077,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 5,
+                "total_response_claims": 6,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "If you are under 18 years old, a guardian (parent or custodian) must consent to the application for AAP.",
+                "The guardian must confirm/approve the application.",
+                "The guardian can log in to nav.no with their own login and approve the application.",
+                "Alternatively, the guardian can contact NAV directly to approve the application.",
+                "Contact NAV for guidance at nav.no/kontaktoss.",
+                "Call NAV at 55 55 33 33."
+            ],
+            "ref_claims_list": [
+                "Hvis en bruker søker om Arbeidsavklaringspenger (AAP) før de fyller 18 år, må foresatte gi sitt samtykke.",
+                "Foreldrene eller de som har foreldreansvaret fungerer som verge for brukere under 18 år.",
+                "For å gi samtykke, må foresatte fylle ut og signere en samtykkeerklæring.",
+                "Samtykkeerklæringen kan sendes til Nav per post.",
+                "Samtykkeerklæringen kan leveres på et lokalt Nav-kontor.",
+                "Samtykkeerklæringen kan tas med til et avtalt møte med en Nav-veileder.",
+                "Når Nav har mottatt samtykket, vil en Nav-veileder kontakte brukeren for videre oppfølging."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 6,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "true_positives": 2,
+                "false_positives": 0,
+                "false_negatives": 0,
+                "total_response_claims": 2,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 2,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Saksbehandlingstiden for grunn- og hjelpestønad er 6 måneder.",
+                "Fristen passerer 12. juni 2025."
+            ],
+            "ref_claims_list": [
+                "Den forventede saksbehandlingstiden for søknader om grunnstønad er 6 måneder.",
+                "Hvis brukeren søkte 12. desember 2024, vil saksbehandlingstiden være passert 12. juni 2025."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": false
+        },
+        {
+            "index": 7,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 0.6,
+                "f1_score": 0.6,
+                "true_positives": 3,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 5,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Jeg kan hjelpe deg med informasjon om dagpenger.",
+                "Du kan få informasjon om hvem som kan få dagpenger.",
+                "Du kan få informasjon om hvor mye man får i dagpenger.",
+                "Du kan få informasjon om hvordan man søker om dagpenger.",
+                "Mer informasjon finnes på nav.no/dagpenger."
+            ],
+            "ref_claims_list": [
+                "DP står for dagpenger.",
+                "Dagpenger er en pengestøtte.",
+                "Man kan få dagpenger når man er arbeidsledig.",
+                "Man kan få dagpenger når man er permittert.",
+                "Dagpenger skal bidra til å sikre inntekt i perioder hvor man ikke har arbeid."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 8,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.3333,
+                "f1_score": 0.3333,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "It is not sufficient to just journalize when a user wishes to add something to an application for unemployment benefits.",
+                "You must send a task to the processing unit so they are notified of the new information and can include it in the case processing.",
+                "Check routines on [Navet](https://navno.sharepoint.com) or contact the subject matter expert for updated internal procedures."
+            ],
+            "ref_claims_list": [
+                "Hvis en bruker ønsker å tilføye noe i en dagpengesøknad som kan få konsekvenser for dagpengene, bør du sende en oppgave til Nav Arbeid og Ytelser.",
+                "Før du sender en oppgave til Nav Arbeid og Ytelser, sjekk om det allerede ligger en oppgave i saken hos Nav Arbeid og Ytelser.",
+                "Hvis brukeren gir beskjed om endringer, men ennå ikke har fått svar på søknaden, er det tilstrekkelig å journalføre referatet."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 9,
+            "metrics": {
+                "precision": 0.4,
+                "recall": 0.2857,
+                "f1_score": 0.3333,
+                "true_positives": 2,
+                "false_positives": 3,
+                "false_negatives": 5,
+                "total_response_claims": 5,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "If your Nav advisor does not respond, you can send a written complaint to your local Nav office.",
+                "If your Nav advisor does not respond, you can ask to speak with a manager at the office.",
+                "When sending a written complaint, you can include dates and references from previous contact.",
+                "You can contact Nav by phone at 55 55 33 33.",
+                "Nav can be contacted via the website nav.no/kontakt."
+            ],
+            "ref_claims_list": [
+                "En bruker kan klage på manglende respons fra sin veileder ved å sende en serviceklage.",
+                "Klagen bør sendes skriftlig via nav.no/tilbakemelding.",
+                "Det er viktig å inkludere detaljer om situasjonen i klagen.",
+                "Datoer for kontaktforsøk bør inkluderes i klagen.",
+                "Eventuelle referanser til tidligere kommunikasjon bør inkluderes i klagen.",
+                "Brukeren kan be om å få snakke med en leder ved Nav-kontoret.",
+                "Brukeren kan be om å få snakke med en leder for å få hjelp med saken."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 10,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 1,
+                "false_negatives": 1,
+                "total_response_claims": 1,
+                "total_reference_claims": 1
+            },
+            "resp_claims_count": 1,
+            "ref_claims_count": 1,
+            "resp_claims_list": [
+                "Sveits er tilkoblet EESSI."
+            ],
+            "ref_claims_list": [
+                "Sveits vil bli påkoblet EESSI-systemet i slutten av 2023."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 11,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 3,
+                "false_negatives": 4,
+                "total_response_claims": 3,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Det er mulig å trekke fagforeningskontingent fra ytelser fra NAV.",
+                "Man må selv be om å få trukket fagforeningskontingent fra ytelser fra NAV.",
+                "Man kontakter NAV for å be om trekk i ytelser."
+            ],
+            "ref_claims_list": [
+                "Nav kan ikke trekke fagforeningskontingent fra utbetalinger av dagpenger.",
+                "Nav kan ikke trekke fagforeningskontingent fra utbetalinger av arbeidsavklaringspenger (AAP).",
+                "Fagforeningskontingent må ordnes direkte med fagforeningen.",
+                "Hvis du mottar sykepenger, foreldrepenger, pleiepenger eller omsorgspenger, kan arbeidsgiver sende inn skjema med opplysninger om fagforeningstrekk til Nav."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 12,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.2857,
+                "f1_score": 0.3077,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 5,
+                "total_response_claims": 6,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Far/medforelder må dokumentere hvis de ønsker å utsette foreldrepengeperioden sin fordi mor jobber eller studerer.",
+                "Mor må dokumentere arbeid med bekreftelse fra arbeidsgiver.",
+                "Mor må dokumentere studier med bekreftelse fra lærested.",
+                "Mor må dokumentere sykdom/innleggelse med legeerklæring.",
+                "Utsettelse av foreldrepenger er kun tillatt dersom mor er i aktivitet (arbeid, utdanning, eller er syk/innlagt).",
+                "Mor som tar ut sine egne foreldrepenger trenger ikke dokumentere aktivitet på samme måte."
+            ],
+            "ref_claims_list": [
+                "For å kunne utsette foreldrepenger, må det dokumenteres at mor oppfyller aktivitetskravet.",
+                "Aktivitetskravet innebærer at mor enten jobber, studerer, deltar i kvalifiseringsprogrammet eller introduksjonsprogrammet.",
+                "Aktivitetskravet innebærer også at mor kan være syk og helt avhengig av hjelp til å ta seg av barnet.",
+                "Hvis mor ikke oppfyller aktivitetskravet, kan foreldrepenger ikke utsettes.",
+                "Resterende uker med foreldrepenger kan tas ut før barnet fyller 3 år.",
+                "For å ta ut resterende uker med foreldrepenger før barnet fyller 3 år, må mor oppfylle aktivitetskravet i den perioden foreldrepengene ønskes tatt ut.",
+                "Hvis mor begynner å jobbe, kan resterende uker med foreldrepenger tas ut, forutsatt at aktivitetskravet er oppfylt."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 13,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.3333,
+                "f1_score": 0.3333,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "Foreldrepermisjon regnes som likestilt med arbeid når det gjelder opptjening av rett til sykepenger.",
+                "Ansatte som kommer tilbake fra foreldrepermisjon og blir syke, vil ha oppfylt opptjeningskravet på 4 uker.",
+                "Dette forutsetter at permisjonen har vart minst 4 uker."
+            ],
+            "ref_claims_list": [
+                "En ansatt kan bli nektet sykepenger i arbeidsgiverperioden hvis de har vært i foreldrepermisjon og ikke har oppfylt kravet om 4 ukers opptjeningstid etter permisjonen.",
+                "Etter en 100 prosent permisjon som har vart i mer enn 14 dager, må den ansatte arbeide i fire uker for å opptjene ny opptjeningstid.",
+                "Hvis den nye opptjeningstiden på fire uker ikke er oppfylt etter en lang permisjon, betaler ikke arbeidsgiver sykepenger i arbeidsgiverperioden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 14,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 5,
+                "false_negatives": 5,
+                "total_response_claims": 5,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Resultatregnskap alene er vanligvis ikke tilstrekkelig.",
+                "NAV anbefaler at selvstendig næringsdrivende også legger ved skattemelding for siste år.",
+                "NAV anbefaler at selvstendig næringsdrivende også legger ved næringsoppgave.",
+                "NAV anbefaler at selvstendig næringsdrivende også legger ved ligningsattest.",
+                "NAV kan be om dokumentasjon på forventet inntekt fremover siden inntekten kan variere."
+            ],
+            "ref_claims_list": [
+                "Hvis resultatregnskapet for 2024 ikke er klart, kan resultatregnskapet for 2023 sendes inn som dokumentasjon.",
+                "Et foreløpig resultatregnskap for 2024 som viser inntekter og utgifter hittil i år, fram til søknadsdatoen, kan sendes inn.",
+                "Et foreløpig resultatregnskap for 2024 kan gi Nav Familie og pensjon et bedre grunnlag for vurdering.",
+                "Annen dokumentasjon som kan belyse inntektssituasjonen, som for eksempel kvitteringer eller fakturaer, kan også være nyttig.",
+                "Hvis man er usikker på hva som er nødvendig, kan man kontakte Nav for ytterligere veiledning."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 15,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 2,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 2,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Ferietillegg regnes som inntekt.",
+                "Ferietillegg kan påvirke AAP-utbetalingen din."
+            ],
+            "ref_claims_list": [
+                "Feriepenger regnes ikke som inntekt ved beregning av arbeidsavklaringspenger (AAP).",
+                "Utbetaling av opptjente feriepenger fører ikke til reduksjon i AAP."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 16,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.1429,
+                "f1_score": 0.1667,
+                "true_positives": 1,
+                "false_positives": 4,
+                "false_negatives": 6,
+                "total_response_claims": 5,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "The user has provided an explanation of what a follow-up decision is.",
+                "The user has not provided a concrete question.",
+                "The user is asked to specify their question.",
+                "Examples of specific questions are provided: What to do if disagreeing with the decision, what rights the user has, and how to appeal.",
+                "General information about decisions and appeals can be found at nav.no/klage."
+            ],
+            "ref_claims_list": [
+                "{'claim': 'Et oppfølgingsvedtak er en beslutning fra Nav som vurderer ditt behov for bistand for å komme i jobb.'}",
+                "{'claim': 'Når du henvender deg til Nav for hjelp og støtte til å skaffe eller beholde arbeid, har du rett til å få vurdert ditt behov for slik bistand.'}",
+                "{'claim': 'Oppfølgingsvedtaket gir en beskrivelse av dine muligheter for å komme i arbeid.'}",
+                "{'claim': 'Oppfølgingsvedtaket gir en beskrivelse av hva slags arbeid som skal være målet.'}",
+                "{'claim': 'Oppfølgingsvedtaket gir en beskrivelse av behovet ditt for bistand til å nå dette målet.'}",
+                "{'claim': 'Oppfølgingsvedtaket er ikke et vedtak om økonomisk støtte.'}",
+                "{'claim': 'Hvis du er uenig i innholdet i vedtaket, har du mulighet til å klage.'}"
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 17,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.1429,
+                "f1_score": 0.1667,
+                "true_positives": 1,
+                "false_positives": 4,
+                "false_negatives": 6,
+                "total_response_claims": 5,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "For å beregne inntekten som selvstendig næringsdrivende, må all inntekt fra virksomheten registreres.",
+                "Relevante kostnader (varer, leie, utstyr, reise osv.) skal trekkes fra inntekten.",
+                "Nettoinntekten som gjenstår brukes som grunnlag for ytelser fra NAV.",
+                "NAV beregner vanligvis sykepenger basert på gjennomsnittet av de tre siste års pensjonsgivende inntekt.",
+                "Det anbefales å konsultere en regnskapsfører for korrekt rapportering."
+            ],
+            "ref_claims_list": [
+                "Inntekten som selvstendig næringsdrivende beregnes vanligvis ut fra gjennomsnittet av den pensjonsgivende årsinntekten for de tre siste ferdiglignede årene.",
+                "Den pensjonsgivende årsinntekten inkluderer både inntekt fra næringsvirksomhet og annen liknet inntekt.",
+                "Inntekt over 6 ganger grunnbeløpet i folketrygden tas ikke med i beregningen.",
+                "Nav kan vurdere hvilken inntekt som er mest representativ for din nåværende situasjon hvis det har skjedd en varig endring i virksomheten eller arbeidssituasjonen som medfører mer enn 25 prosent avvik fra inntekten de tre siste ferdiglignede årene.",
+                "Du bør dokumentere endringen med for eksempel resultatregnskap eller annen relevant dokumentasjon hvis det har skjedd en varig endring.",
+                "Hvis du nettopp har startet næringsvirksomhet, kan det gjøres en konkret vurdering av inntekten din basert på tilgjengelig dokumentasjon.",
+                "Hvis det siste året ikke er lignet, kan det gjøres en konkret vurdering av inntekten din basert på tilgjengelig dokumentasjon."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 18,
+            "metrics": {
+                "precision": 0.7143,
+                "recall": 0.5556,
+                "f1_score": 0.625,
+                "true_positives": 5,
+                "false_positives": 2,
+                "false_negatives": 4,
+                "total_response_claims": 7,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "For å ha rett til dagpenger må man ha hatt minst 1,5 G i inntekt siste 12 måneder, eller minst 3 G siste 36 måneder.",
+                "For å ha rett til dagpenger må man være registrert som arbeidssøker hos Nav.",
+                "For å ha rett til dagpenger må man være reell arbeidssøker.",
+                "Inntekt fra kortvarige stillinger teller med i beregningen for dagpenger.",
+                "Inntekt fra tilkallingsvikariater teller med i beregningen for dagpenger.",
+                "Man kan søke digitalt på nav.no.",
+                "Man kan kontakte Nav direkte for veiledning."
+            ],
+            "ref_claims_list": [
+                "Man kan søke om dagpenger.",
+                "Det er vilkår som må oppfylles for å søke om dagpenger.",
+                "For å ha rett til dagpenger må man ha mistet minst 50 prosent av sin totale arbeidstid.",
+                "Man må ha hatt en inntekt på minst 186 042 kroner (1,5 G) de siste 12 månedene for å ha rett til dagpenger.",
+                "Man må ha hatt en inntekt på minst 372 084 kroner (3 G) de siste 36 månedene for å ha rett til dagpenger.",
+                "Man må være registrert som arbeidssøker hos Nav.",
+                "Nav vil vurdere total arbeidstid og inntekt selv om man har flere tilkallingsvikarjobber.",
+                "Det er viktig å dokumentere alle arbeidsforhold, inkludert kortvarige stillinger og tilkallingsvikarjobber, når man søker om dagpenger.",
+                "Hvis man oppfyller inntektskravet og har mistet minst 50 prosent av arbeidstiden, kan man ha rett til dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 19,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.2222,
+                "f1_score": 0.2105,
+                "true_positives": 2,
+                "false_positives": 8,
+                "false_negatives": 7,
+                "total_response_claims": 10,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Man kan endre en periode i foreldrepengeplan.",
+                "For å endre en periode i foreldrepengeplan må man logge inn på Ditt NAV.",
+                "Man må finne seksjonen for foreldrepenger på Ditt NAV.",
+                "Man må velge «endre periode» på Ditt NAV.",
+                "Man må oppgi ny dato og bekrefte endringen for å endre foreldrepengeplan.",
+                "Endringer i foreldrepengeplanen bør meldes så tidlig som mulig.",
+                "Endringer i foreldrepengeplanen bør gjerne meldes fire uker i forveien.",
+                "Man kan kontakte NAV for hjelp.",
+                "NAV kan kontaktes på telefonnummer 55 55 33 33.",
+                "NAV kan kontaktes via chat på nav.no."
+            ],
+            "ref_claims_list": [
+                "Man kan endre planen for foreldrepenger på nav.no.",
+                "Man kan logge inn på nav.no for å endre foreldrepengeplanen.",
+                "På nav.no kan man gå til 'Dine foreldrepenger' for å endre planen.",
+                "Man kan finne perioden som inneholder en feilaktig dato.",
+                "Man kan endre tidsrommet for en periode slik at den slutter før en uønsket dato.",
+                "Man kan legge inn en ny periode med foreldrepenger som starter etter en uønsket dato.",
+                "En dato man ikke ønsker å ta ut foreldrepenger for, kan vises som 'periode uten uttak'.",
+                "Hvis man allerede har søkt, kan man sende en endringssøknad via 'Dine foreldrepenger' på nav.no.",
+                "Man bør avtale eventuelle endringer med arbeidsgiveren sin."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 20,
+            "metrics": {
+                "precision": 0.75,
+                "recall": 1.0,
+                "f1_score": 0.8571,
+                "true_positives": 3,
+                "false_positives": 1,
+                "false_negatives": 0,
+                "total_response_claims": 4,
+                "total_reference_claims": 3
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 3,
+            "resp_claims_list": [
+                "You can contact NAV via dialogue on nav.no.",
+                "You can contact NAV by calling them.",
+                "You can stop your AAP application by contacting NAV.",
+                "nav.no is a website."
+            ],
+            "ref_claims_list": [
+                "En søknad om arbeidsavklaringspenger (AAP) kan trekkes tilbake.",
+                "Tilbaketrekking av en søknad om arbeidsavklaringspenger (AAP) krever en skriftlig melding.",
+                "Den skriftlige meldingen for tilbaketrekking sendes via nav.no/send-beskjed."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 21,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.087,
+                "f1_score": 0.1212,
+                "true_positives": 2,
+                "false_positives": 8,
+                "false_negatives": 21,
+                "total_response_claims": 10,
+                "total_reference_claims": 23
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 23,
+            "resp_claims_list": [
+                "Man søker ikke om alderspensjon via Altinn.",
+                "Man søker om alderspensjon direkte på nav.no.",
+                "For å søke om alderspensjon, logg inn på nav.no med MinID eller BankID.",
+                "Etter innlogging, gå til \"Dine pensjoner\" og velg \"Søk om alderspensjon\".",
+                "Man kan velge ønsket uttaksgrad fra 20% til 100%.",
+                "Man kan velge startdato for alderspensjon.",
+                "Man kan tidligst ta ut alderspensjon fra fylte 62 år.",
+                "Det anbefales å søke 2-3 måneder før ønsket startdato.",
+                "Man kan kombinere pensjon og arbeid.",
+                "NAV kan kontaktes på telefonnummer 55 55 33 34."
+            ],
+            "ref_claims_list": [
+                "For å søke om alderspensjon fra folketrygden, må man samle nødvendig informasjon.",
+                "Nødvendig informasjon kan inkludere fødselsnummeret til eventuell samboer.",
+                "Nødvendig informasjon kan inkludere opplysninger om inntekt.",
+                "Nødvendig informasjon kan inkludere opplysninger om pensjonsordninger.",
+                "Hvis man har bodd i utlandet, må man ha informasjon om dette.",
+                "Hvis man har arbeidet i utlandet, må man ha informasjon om dette.",
+                "Man logger inn på Din pensjon via nav.no/dinpensjon.",
+                "Innlogging på Din pensjon kan gjøres med BankID.",
+                "Innlogging på Din pensjon kan gjøres med annen godkjent innlogging.",
+                "Man velger søknad om alderspensjon fra folketrygden.",
+                "Man skal fylle ut et skjema med korrekt informasjon.",
+                "Man må oppgi ønsket uttaksgrad.",
+                "Man må oppgi ønsket startdato for pensjonen.",
+                "Søknaden sendes inn elektronisk.",
+                "Elektronisk innsending er den raskeste måten å få behandlet søknaden på.",
+                "Man mottar normalt en bekreftelse på at søknaden er mottatt i løpet av få minutter.",
+                "Nav vil behandle søknaden.",
+                "Man vil få beskjed om vedtaket.",
+                "Hvis søknaden ikke kan behandles automatisk, vil den bli behandlet manuelt.",
+                "Manuell behandling av søknaden kan ta noe tid.",
+                "Man kan kontakte Nav for hjelp hvis man har spørsmål underveis.",
+                "Det er viktig å søke om alderspensjon i god tid.",
+                "Det anbefales å søke fire måneder før man ønsker å starte uttaket."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 22,
+            "metrics": {
+                "precision": 0.25,
+                "recall": 0.2727,
+                "f1_score": 0.2609,
+                "true_positives": 3,
+                "false_positives": 9,
+                "false_negatives": 8,
+                "total_response_claims": 12,
+                "total_reference_claims": 11
+            },
+            "resp_claims_count": 12,
+            "ref_claims_count": 11,
+            "resp_claims_list": [
+                "For å søke om dagpenger hos NAV trenger man vanligvis identifikasjon.",
+                "Pass kan brukes som identifikasjon for å søke om dagpenger hos NAV.",
+                "Nasjonalt ID-kort kan brukes som identifikasjon for å søke om dagpenger hos NAV.",
+                "For å søke om dagpenger hos NAV trenger man vanligvis dokumentasjon på inntekt.",
+                "Lønnsslipper kan brukes som dokumentasjon på inntekt for å søke om dagpenger hos NAV.",
+                "Skattemelding kan brukes som dokumentasjon på inntekt for å søke om dagpenger hos NAV.",
+                "For å søke om dagpenger hos NAV trenger man vanligvis bekreftelse på oppsigelse eller permittering fra arbeidsgiver.",
+                "For å søke om dagpenger hos NAV trenger man vanligvis andre relevante dokumenter som støtter søknaden.",
+                "Man søker dagpenger digitalt via Min side på nav.no.",
+                "Dokumenter kan lastes opp direkte i søknaden om dagpenger.",
+                "NAV anbefaler å søke dagpenger så raskt som mulig etter man blir ledig.",
+                "Dagpenger gis normalt tidligst fra den dagen man søker."
+            ],
+            "ref_claims_list": [
+                "Ved søknad om dagpenger må oppsigelse vedlegges hvis man har sagt opp selv eller blitt sagt opp.",
+                "Oppsigelsen må inkludere dato og årsak.",
+                "Ved permittering må permitteringsvarsel fra arbeidsgiver vedlegges.",
+                "Permitteringsvarsel må inneholde detaljer om permitteringsårsak, grad, start- og sluttdato.",
+                "Arbeidskontrakt må vedlegges for å bekrefte arbeidsforholdet.",
+                "Arbeidskontrakt må inkludere startdato, stillingsprosent, oppsigelsestid, og sluttdato hvis midlertidig.",
+                "Dokumentasjon av arbeidstid må vedlegges.",
+                "Dokumentasjon av arbeidstid kan være sluttattester eller bekreftelser fra arbeidsforhold de siste 12/36 månedene.",
+                "Dokumentasjon av arbeidstid må vise alle timene man har jobbet.",
+                "Man må sende inn det man har av dokumenter og ettersende resten innen 14 dager.",
+                "Manglende ettersending av dokumenter innen fristen kan føre til avslag på søknaden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 23,
+            "metrics": {
+                "precision": 0.6111,
+                "recall": 1.0,
+                "f1_score": 0.7586,
+                "true_positives": 11,
+                "false_positives": 7,
+                "false_negatives": 0,
+                "total_response_claims": 18,
+                "total_reference_claims": 11
+            },
+            "resp_claims_count": 18,
+            "ref_claims_count": 11,
+            "resp_claims_list": [
+                "For å søke om støtte til utdanning fra NAV, må du generelt oppfylle visse krav.",
+                "Du må være registrert hos NAV for å søke om støtte til utdanning.",
+                "Du må sende meldekort hver 14. dag for å søke om støtte til utdanning.",
+                "Utdanningen må være yrkesrettet for å kunne få støtte fra NAV.",
+                "Utdanningen må bidra til å styrke din arbeidsevne for å kunne få støtte fra NAV.",
+                "Du må levere bekreftelse på studieplass for å søke om støtte til utdanning.",
+                "Du må levere bekreftelse på eventuelle kostnader for å søke om støtte til utdanning.",
+                "Kravene for støtte til utdanning varierer etter hvilken støtteordning som er aktuell.",
+                "Dagpenger under utdanning krever spesielle vilkår.",
+                "Arbeidsavklaringspenger (AAP) kan kombineres med utdanning etter nærmere vurdering.",
+                "Lønnstilskudd har egne regler for støtte til utdanning.",
+                "Tiltakspenger har egne regler for støtte til utdanning.",
+                "Det er ingen universell aldersgrense for støtte til utdanning fra NAV.",
+                "Noen ordninger for støtte til utdanning kan ha spesifikke alderskrav.",
+                "Kravene for støtte til utdanning er individuelle.",
+                "Kravene for støtte til utdanning er situasjonsavhengige.",
+                "Du kan kontakte NAV direkte for å få informasjon om støtte til utdanning.",
+                "Du kan logge inn på nav.no for å se hvilke ordninger du kan ha rett på for utdanning."
+            ],
+            "ref_claims_list": [
+                "Man kan søke om å få dekket utgifter som semesteravgift, eksamensgebyr og skolepenger hvis man deltar på et opplæringstiltak gjennom Nav.",
+                "En søknad om dekning av utgifter må inkludere skriftlig bekreftelse på studieplass samt faktura fra utdanningsstedet.",
+                "Nav kan godkjenne utdanning som et tiltak for personer som står uten rett til opplæring i utdanningssystemet.",
+                "Nav kan godkjenne utdanning som et tiltak for personer over 22 år med nedsatt arbeidsevne.",
+                "Godkjent yrkesrettet opplæring kan gi rett til tilleggsstønader for å dekke utgifter til utdanningen.",
+                "Hvis man er enslig forsørger, må utdanningen være nødvendig for å komme i jobb og forsørge seg selv.",
+                "Utdanning for enslige forsørgere må utgjøre minst 50 % studiebelastning.",
+                "Som hovedregel godkjennes kun offentlig utdanning for enslige forsørgere.",
+                "For å ha rett til omstillingsstønad mens man studerer, må utdanningen være nødvendig for å komme i jobb og forsørge seg selv.",
+                "Utdanning som gir rett til omstillingsstønad må utgjøre minst halvparten av full tid.",
+                "Man trenger ikke å motta en ytelse fra Nav for å ha rett på tilskudd til utdanning."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 24,
+            "metrics": {
+                "precision": 0.4,
+                "recall": 0.4,
+                "f1_score": 0.4,
+                "true_positives": 2,
+                "false_positives": 3,
+                "false_negatives": 3,
+                "total_response_claims": 5,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "For å søke sykepenger trenger du vanligvis sykmeldingen fra legen.",
+                "Du trenger ikke en separat legeerklæring for å søke sykepenger.",
+                "NAV henter mye informasjon automatisk.",
+                "Du trenger normalt ikke legge ved lønnsslipper.",
+                "Du trenger normalt ikke legge ved legitimasjon."
+            ],
+            "ref_claims_list": [
+                "Nav mottar sykmelding direkte fra legen.",
+                "Søknad om sykepenger sendes inn av arbeidstakeren når sykmeldingsperioden er over.",
+                "Arbeidsgiveren sender inn inntektsmelding hvis arbeidstakeren er arbeidstaker.",
+                "Selvstendig næringsdrivende eller frilanser kan trenge ytterligere dokumentasjon om inntekten sin.",
+                "Nav vil kontakte selvstendig næringsdrivende eller frilanser for å be om nødvendig informasjon om inntekt."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 25,
+            "metrics": {
+                "precision": 0.75,
+                "recall": 0.6,
+                "f1_score": 0.6667,
+                "true_positives": 3,
+                "false_positives": 1,
+                "false_negatives": 2,
+                "total_response_claims": 4,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Du bør melde flytting til Folkeregisteret innen 8 dager etter flyttedato.",
+                "Ved flytting 1. juli anbefales det å melde fra så snart som mulig.",
+                "Ved flytting 1. juli anbefales det å melde fra gjerne før flyttedatoen.",
+                "Sørg for at ny adresse er registrert før du søker om bostøtte."
+            ],
+            "ref_claims_list": [
+                "Det er ingen spesifikk frist for å melde flytting til Folkeregisteret før 01.07.",
+                "Det anbefales å melde flytting så snart som mulig før man faktisk flytter.",
+                "Å melde flytting i tide sikrer at man kan søke om bostøtte og andre tjenester uten forsinkelser.",
+                "Det kan ta noen dager for Folkeregisteret å behandle en flyttemelding.",
+                "Det er lurt å melde flytting i god tid før flyttedatoen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 26,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 0.4,
+                "f1_score": 0.5714,
+                "true_positives": 2,
+                "false_positives": 0,
+                "false_negatives": 3,
+                "total_response_claims": 2,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 2,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Ferie regnes som en gyldig grunn til å oppfylle aktivitetskravet for mor.",
+                "Far/medforelder kan ta ut foreldrepenger fra fellesperioden mens mor avvikler ferie."
+            ],
+            "ref_claims_list": [
+                "Aktivitetskravet er oppfylt når mor avvikler ferie.",
+                "Far kan ta ut foreldrepenger fra fellesperioden mens mor har ferie.",
+                "Mor må ha startet i arbeid før hun tar ferie for at aktivitetskravet skal være oppfylt.",
+                "Hvis mor har en stilling på 75% eller mer, regnes hun for å ha full stilling.",
+                "Far kan få utbetalt opptil 100% foreldrepenger hvis mor har full stilling."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": false
+        },
+        {
+            "index": 27,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.4,
+                "f1_score": 0.4444,
+                "true_positives": 2,
+                "false_positives": 2,
+                "false_negatives": 3,
+                "total_response_claims": 4,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Røde dager teller med i sykepengeperioden.",
+                "Du får ikke utbetalt sykepenger for røde dager.",
+                "Røde dager er fridager.",
+                "Sykepenger beregnes kun for arbeidsdager."
+            ],
+            "ref_claims_list": [
+                "Man får sykepenger på offentlige helligdager.",
+                "Offentlige helligdager regnes ikke som ferie.",
+                "Offentlige helligdager regnes ikke som permisjon.",
+                "Offentlige helligdager skal ikke føres opp som ferie i søknaden om sykepenger.",
+                "Hvis man har avtalt ferie med arbeidsgiver på en offentlig helligdag, skal man krysse av for ferie i søknaden."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 28,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.25,
+                "f1_score": 0.2857,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 3,
+                "total_response_claims": 3,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Hvis AAP innvilges på grunn av en godkjent yrkesskade eller yrkessykdom, har du rett til særlige yrkesskadefordeler.",
+                "Særlige yrkesskadefordeler innebærer en høyere kompensasjonsgrad på 100% av inntektsgrunnlaget.",
+                "Særlige yrkesskadefordeler innebærer ingen krav til forutgående medlemstid."
+            ],
+            "ref_claims_list": [
+                "Det er yrkesskadefordeler på arbeidsavklaringspenger (AAP).",
+                "Hvis nedsatt arbeidsevne skyldes godkjent yrkesskade eller yrkessykdom, er 30 prosent nedsatt arbeidsevne tilstrekkelig for rett til AAP.",
+                "Når Nav beregner AAP for del som skyldes godkjent yrkesskade eller yrkessykdom, skal grunnlaget ikke settes lavere enn antatt årlig arbeidsinntekt på skadetidspunktet.",
+                "Dette kan gi et høyere beregningsgrunnlag for AAP."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 29,
+            "metrics": {
+                "precision": 0.2,
+                "recall": 0.1667,
+                "f1_score": 0.1818,
+                "true_positives": 1,
+                "false_positives": 4,
+                "false_negatives": 5,
+                "total_response_claims": 5,
+                "total_reference_claims": 6
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 6,
+            "resp_claims_list": [
+                "Gevinst fra boligsalg er skattefri hvis du har eid boligen i minst ett år.",
+                "Gevinst fra boligsalg er skattefri hvis du har brukt boligen som primærbolig i minst ett av de to siste årene.",
+                "Ellers er gevinsten skattepliktig.",
+                "Gevinsten påvirker ikke nettoformuen direkte.",
+                "Gevinsten kan påvirke nettoformuen indirekte."
+            ],
+            "ref_claims_list": [
+                "Gevinst fra boligsalg kan regnes som en del av netto formue.",
+                "Netto formue beregnes ved å trekke gjeld fra brutto formue.",
+                "Gevinst fra boligsalg kan øke brutto formue.",
+                "Økt brutto formue kan påvirke beregningen av netto formue.",
+                "Netto formue kan ha betydning for beregning av bostøtte.",
+                "Netto formue over et visst fribeløp kan føre til et formuestillegg til inntekten."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 30,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1_score": 0.6667,
+                "true_positives": 2,
+                "false_positives": 0,
+                "false_negatives": 2,
+                "total_response_claims": 2,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 2,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "Pleiepenger gir pensjonsopptjening.",
+                "Pensjonsrettigheter tjenes opp basert på pensjonsgivende inntekt som ligger til grunn for pleiepengebeløpet."
+            ],
+            "ref_claims_list": [
+                "Pleiepenger gir pensjonsopptjening.",
+                "Pleiepenger regnes som pensjonsgivende inntekt.",
+                "Pleiepenger kan bidra til å øke din pensjonsopptjening.",
+                "Det er viktig å registrere pleiepengene som forventet inntekt i Navs inntektsplanlegger for korrekt beregning."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": false
+        },
+        {
+            "index": 31,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.5,
+                "f1_score": 0.4,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 2,
+                "total_response_claims": 6,
+                "total_reference_claims": 4
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 4,
+            "resp_claims_list": [
+                "NAV kan be om helseopplysninger fra lege.",
+                "Legen kan utlevere helseopplysninger til NAV dersom brukeren har gitt samtykke.",
+                "Legen kan utlevere helseopplysninger til NAV dersom det følger av lovhjemmel.",
+                "Folketrygdloven er et eksempel på en lovhjemmel.",
+                "NAV kan kreve nødvendige helseopplysninger med hjemmel i loven.",
+                "Taushetsplikten er ikke til hinder for at NAV kan kreve nødvendige helseopplysninger med hjemmel i loven."
+            ],
+            "ref_claims_list": [
+                "Det finnes unntak når Nav har bedt om helseopplysninger fra lege eller behandler.",
+                "I slike tilfeller kan lege- og behandlertelefonen være unntatt fra taushetsplikt etter forvaltningsloven § 13 b.",
+                "Legen kan få nødvendige opplysninger fra Nav for å kunne besvare forespørselen og utføre sin jobb.",
+                "Hvis Nav har bedt om opplysninger fra lege/behandler, kan det gis informasjon som er nødvendig for at legen skal kunne gi en korrekt vurdering eller erklæring."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 32,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "true_positives": 5,
+                "false_positives": 0,
+                "false_negatives": 0,
+                "total_response_claims": 5,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Gjenopptakelse av AAP etter foreldrepenger skjer ikke automatisk.",
+                "Du må selv ta kontakt med NAV for å gjenoppta AAP-perioden når foreldrepengeperioden er over.",
+                "Det er viktig å melde fra til NAV i god tid før foreldrepengeperioden avsluttes.",
+                "Å melde fra i god tid unngår opphold i utbetalingene.",
+                "NAV.no – Arbeidsavklaringspenger (AAP) er en kilde til informasjon."
+            ],
+            "ref_claims_list": [
+                "If you went directly from AAP to parental leave, you can resume AAP without submitting a new application.",
+                "You must contact Nav before the last payment of parental leave to inform them that you wish to resume AAP.",
+                "If you want child supplement, it is important that you also give notice of this.",
+                "If less than 52 weeks have passed since you last received parental leave, you can continue in the same AAP period as before.",
+                "If more than 52 weeks have passed, your case will be reassessed according to the general rules."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": false
+        },
+        {
+            "index": 33,
+            "metrics": {
+                "precision": 0.6667,
+                "recall": 1.0,
+                "f1_score": 0.8,
+                "true_positives": 2,
+                "false_positives": 1,
+                "false_negatives": 0,
+                "total_response_claims": 3,
+                "total_reference_claims": 2
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 2,
+            "resp_claims_list": [
+                "Arbeidsgiverperioden gjelder fra første sykedag.",
+                "Den ansatte må ha vært ansatt i minst 4 uker for å ha rett til sykepenger.",
+                "En ansatt som kun har jobbet 1 uke, har ikke opptjent rett til sykepenger ennå."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til sykepenger i arbeidsgiverperioden, må den ansatte ha vært i arbeid hos arbeidsgiveren i minst fire uker.",
+                "Hvis den ansatte har jobbet kun én uke, har de ikke oppfylt kravet til opptjeningstid for sykepenger i arbeidsgiverperioden."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 34,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.1667,
+                "f1_score": 0.2222,
+                "true_positives": 2,
+                "false_positives": 4,
+                "false_negatives": 10,
+                "total_response_claims": 6,
+                "total_reference_claims": 12
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 12,
+            "resp_claims_list": [
+                "{'claim': 'NAV har digitale løsninger for leger og andre helsepersonell'}",
+                "{'claim': 'Disse løsningene inkluderer elektronisk innsending av sykemeldinger og legeerklæringer'}",
+                "{'claim': 'NAV har en nettside med informasjon for leger og helsepersonell på nav.no/samarbeidspartner/leger'}",
+                "{'claim': 'NAV har en nettside med digitale tjenester for leger på nav.no/no/nav-og-samfunn/samarbeid/leger-og-andre-behandlere'}",
+                "{'claim': 'NAV kan kontaktes direkte for mer presis informasjon'}",
+                "{'claim': 'NAV sin linje for samarbeidspartnere kan ringes på 55 55 33 36'}"
+            ],
+            "ref_claims_list": [
+                "Leger kan sende og motta henvendelser elektronisk med Nav.",
+                "For elektronisk kommunikasjon med Nav, må det være opprettet en e-dialog med legens EPJ-leverandør.",
+                "Legen må ha en oppgjørsavtale med Helfo for å kunne kommunisere elektronisk med Nav.",
+                "Uten en oppgjørsavtale med Helfo, vil legen ikke ha en aktiv TSS-id.",
+                "Nav kan ikke sende forespørsler elektronisk til en lege uten en aktiv TSS-id.",
+                "Leger kan sende elektroniske sykmeldinger til Nav.",
+                "Leger kan sende dialogmeldinger til Nav.",
+                "Nav kan ikke svare elektronisk til en lege hvis det ikke er opprettet e-dialog.",
+                "Feil TSS-ident kan være en årsak til at en lege ikke har mottatt en forespørsel.",
+                "Manglende opprettelse av e-dialog med EPJ-leverandøren kan være en årsak til at en lege ikke har mottatt en forespørsel.",
+                "Det er viktig å sjekke om riktig adresse er registrert for e-dialog.",
+                "Det er viktig å sjekke om det er haket av for e-dialog i systemene."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 35,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.4,
+                "f1_score": 0.4444,
+                "true_positives": 2,
+                "false_positives": 2,
+                "false_negatives": 3,
+                "total_response_claims": 4,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Hjelpemiddelsentralen har ansvar for å formidle hjelpemidler som er innvilget.",
+                "Hjelpemiddelsentralen har ansvar for å levere ut hjelpemidler som er innvilget.",
+                "Hjelpemiddelsentralen har ansvar for å følge opp hjelpemidler som er innvilget.",
+                "Hjelpemiddelsentralen har ansvar for opplæring i bruk av hjelpemidlet."
+            ],
+            "ref_claims_list": [
+                "Nav hjelpemiddelsentral har ansvar for å behandle søknader om tekniske hjelpemidler.",
+                "Nav hjelpemiddelsentral har ansvar for å levere tekniske hjelpemidler til kommunen.",
+                "Når et hjelpemiddel er innvilget, blir det først sendt fra Nav hjelpemiddelsentral til et kommunalt lager.",
+                "Kommunen tar kontakt med brukeren for videre levering av hjelpemiddelet.",
+                "Brukeren kan avtale å hente hjelpemiddelet selv på Nav hjelpemiddelsentral hvis det haster."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 36,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 0.6,
+                "f1_score": 0.6,
+                "true_positives": 3,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 5,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Man kan ha rett til kontantstøtte hvis man sier opp barnehageplassen før oppstart.",
+                "Kontantstøtte gis til barn mellom 1 og 2 år.",
+                "Barn som mottar kontantstøtte, skal ikke bruke barnehageplass med offentlig støtte.",
+                "Hvis man sier opp barnehageplassen før barnet begynner, regnes ikke barnet som en bruker av barnehageplass.",
+                "Kontantstøtten starter fra måneden etter at retten til foreldrepenger opphører."
+            ],
+            "ref_claims_list": [
+                "Du kan ha rett til kontantstøtte selv om du har fått tilbud om barnehageplass, så lenge du sier opp plassen før oppstart.",
+                "Mange barnehager har oppsigelsestid.",
+                "Oppsigelsestid i barnehagen kan medføre at du ikke har rett til kontantstøtte under oppsigelsestiden.",
+                "Kommunen må bekrefte at barnet ikke er registrert med plass for at du skal ha rett til kontantstøtte.",
+                "Hvis du har sagt opp plassen før barnet starter i barnehagen, og kommunen bekrefter dette, kan du søke om kontantstøtte."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 37,
+            "metrics": {
+                "precision": 0.5,
+                "recall": 0.25,
+                "f1_score": 0.3333,
+                "true_positives": 3,
+                "false_positives": 3,
+                "false_negatives": 9,
+                "total_response_claims": 6,
+                "total_reference_claims": 12
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 12,
+            "resp_claims_list": [
+                "Man kan ha rett til foreldrepenger selv om arbeidsavtalen slutter 31. juli, forutsatt at man oppfyller opptjeningskravet.",
+                "Man må ha vært i arbeid minst 6 av de siste 10 månedene før stønadsperioden starter for å oppfylle kravet.",
+                "Man kan søke om foreldrepenger fra uke 22 i svangerskapet.",
+                "Det anbefales å søke tidlig for å unngå forsinkelser.",
+                "Foreldrepenger må som hovedregel tas ut innen tre år etter fødsel.",
+                "Selv om arbeidsavtalen slutter før termin, beregnes foreldrepengene basert på inntekten de siste 3 månedene eller årsinntekten."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til foreldrepenger må du ha hatt inntekt i minst seks av de siste ti månedene før foreldrepengeperioden starter.",
+                "Arbeidsforholdet avsluttes 31. juli.",
+                "Termin er 11. november.",
+                "Det kan være aktuelt å starte uttaket av foreldrepenger tidligere for å sikre at du oppfyller opptjeningskravet.",
+                "Du kan tidligst starte foreldrepengene 12 uker før termin.",
+                "12 uker før termin er rundt midten av august.",
+                "Å starte foreldrepengene tidlig kan være en løsning for å sikre at du har opptjent rett til foreldrepenger når du søker.",
+                "Det anbefales å sende søknad om foreldrepenger 4-6 uker før du ønsker å starte foreldrepengeperioden.",
+                "Det kan være lurt å søke i løpet av juli.",
+                "Å søke i juli kan gjøre at du kan starte uttaket i august.",
+                "Å starte uttaket i august kan oppfylle opptjeningskravet.",
+                "Du må sende inn søknaden senest tre måneder etter måneden du ønsker å starte foreldrepengeperioden for å ikke miste dager med foreldrepenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 38,
+            "metrics": {
+                "precision": 0.6,
+                "recall": 0.4286,
+                "f1_score": 0.5,
+                "true_positives": 3,
+                "false_positives": 2,
+                "false_negatives": 4,
+                "total_response_claims": 5,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 5,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Du kan ha rett til feriepenger av sykepenger.",
+                "Feriepenger av sykepenger fra arbeidsgiver er begrenset til de første 16 dagene.",
+                "NAV betaler feriepenger av sykepenger for de første 48 sykepengedagene i opptjeningsåret.",
+                "Feriepengene utgjør 10,2% av sykepengegrunnlaget.",
+                "Feriepengene utgjør 12% av sykepengegrunnlaget for arbeidstakere over 60 år."
+            ],
+            "ref_claims_list": [
+                "Arbeidstakere som mottar sykepenger fra Nav har rett til feriepenger for de første 48 sykepengedagene i opptjeningsåret.",
+                "Feriepengene utgjør 10,2 % av de sykepengene som gir rett til feriepenger.",
+                "For arbeidstakere som har fylt 59 år i opptjeningsåret, er prosentsatsen forhøyet til 12,5 %.",
+                "Hvis arbeidsgiveren din har forskuttert sykepengene, vil Nav utbetale feriepengene til arbeidsgiveren.",
+                "Feriepenger utbetales i mai året etter at de er opptjent.",
+                "Hvis stønadsperioden går fra ett kalenderår til neste, får du i år kun utbetalt feriepenger av de dagene du hadde sykepenger forrige kalenderår.",
+                "Du kan maksimalt få utbetalt feriepenger for 48 sykepengedager for hvert opptjeningsår."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 39,
+            "metrics": {
+                "precision": 1.0,
+                "recall": 0.6,
+                "f1_score": 0.75,
+                "true_positives": 3,
+                "false_positives": 0,
+                "false_negatives": 2,
+                "total_response_claims": 3,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Du kan søke om foreldrepenger i flere omganger.",
+                "Du trenger ikke dekke hele perioden i én søknad.",
+                "Du kan sende nye søknader underveis for gjenværende uker."
+            ],
+            "ref_claims_list": [
+                "Du kan legge inn søknad for de resterende ukene med foreldrepenger på et senere tidspunkt.",
+                "Du må ta ut foreldrepengene før barnet fyller 3 år.",
+                "Det er ikke nødvendig at den allerede sendte søknaden dekker hele perioden med foreldrepenger.",
+                "Du kan justere planen din og legge til nye perioder med foreldrepenger når du vet når du ønsker å ta dem ut.",
+                "Du må sende inn søknad om de resterende ukene i god tid før du ønsker å starte uttaket."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": false
+        },
+        {
+            "index": 40,
+            "metrics": {
+                "precision": 0.7143,
+                "recall": 0.5556,
+                "f1_score": 0.625,
+                "true_positives": 5,
+                "false_positives": 2,
+                "false_negatives": 4,
+                "total_response_claims": 7,
+                "total_reference_claims": 9
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 9,
+            "resp_claims_list": [
+                "Det har ingen betydning for foreldrepengene at du ikke er registrert som arbeidssøker.",
+                "Foreldrepenger er en egen ytelse som ikke krever at du er arbeidssøker.",
+                "Foreldrepenger avsluttes når stønadsperioden er brukt opp.",
+                "Foreldrepenger avsluttes når barnet fyller 3 år.",
+                "3 år er siste frist for å ta ut foreldrepenger.",
+                "Den konkrete sluttdatoen for foreldrepenger avhenger av din individuelle plan og hvilke uker som er tatt ut.",
+                "Du kan se din eksakte sluttdato ved å logge inn på Din side på nav.no."
+            ],
+            "ref_claims_list": [
+                "Det at du ikke er registrert som arbeidssøker har ingen direkte betydning for utbetalingen av foreldrepenger.",
+                "Foreldrepenger beregnes basert på inntekten din før foreldrepengeperioden starter.",
+                "Foreldrepenger beregnes ikke på din status som arbeidssøker.",
+                "Avslutning av foreldrepenger avhenger av hvor lenge du har valgt å ta ut foreldrepenger.",
+                "Avslutning av foreldrepenger avhenger av hvilken dekningsgrad du har valgt.",
+                "Foreldrepenger kan tas ut i en periode på 49 uker med 100 % dekningsgrad.",
+                "Foreldrepenger kan tas ut i en periode på 59 uker med 80 % dekningsgrad.",
+                "Du kan finne den nøyaktige sluttdatoen for din foreldrepengeperiode ved å logge inn på \"Dine foreldrepenger\" på nav.no.",
+                "På \"Dine foreldrepenger\" på nav.no kan du se din utbetalingsplan."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 41,
+            "metrics": {
+                "precision": 0.7857,
+                "recall": 1.1,
+                "f1_score": 0.9167,
+                "true_positives": 11,
+                "false_positives": 3,
+                "false_negatives": 0,
+                "total_response_claims": 14,
+                "total_reference_claims": 10
+            },
+            "resp_claims_count": 14,
+            "ref_claims_count": 10,
+            "resp_claims_list": [
+                "Fellesperioden kan fordeles fleksibelt mellom foreldrene.",
+                "Foreldre kan endre fordelingen av fellesperioden underveis.",
+                "Deler av fellesperioden kan tas ut senere i permisjonen.",
+                "Fellesperioden må tas ut innen barnet fyller 3 år.",
+                "Det er mulig å jobbe gradert og motta graderte foreldrepenger samtidig.",
+                "Hvis du jobber 20%, kan du motta 80% foreldrepenger.",
+                "Du kan motta lønn fra arbeidsgiver for arbeidsdelen ved gradert uttak.",
+                "Gradert uttak kalles kombinasjon av arbeid og foreldrepenger.",
+                "Ved næringsinntekt i tillegg til fast lønn, baseres beregningsgrunnlaget for foreldrepenger på samlet inntekt.",
+                "Samlet inntekt for beregningsgrunnlaget inkluderer lønn og næringsinntekt.",
+                "Samlet inntekt for beregningsgrunnlaget er begrenset oppad til 6G.",
+                "6G er ca. 744 168 kr i 2024.",
+                "Næringsinntekten tas med i beregningen av foreldrepenger.",
+                "Næringsinntekten kan påvirke utbetalingen dersom du fortsetter næringsvirksomhet under permisjonen."
+            ],
+            "ref_claims_list": [
+                "Det er mulig å endre fordelingen av fellesperioden underveis i foreldrepermisjonen.",
+                "Hvis far må tidligere tilbake i jobb, kan mor ta over ukene fra fellesperioden som far opprinnelig skulle ha.",
+                "Endring av fordeling av fellesperioden kan gjøres ved å sende inn en endringssøknad til Nav.",
+                "Det er lov å jobbe 20% og motta lønn fra arbeidsgiver samtidig som man får 80% utbetaling av foreldrepenger.",
+                "Foreldrepenger blir redusert etter hvor mye du jobber.",
+                "Man kan kombinere delvis arbeid med foreldrepenger.",
+                "Når man er selvstendig næringsdrivende ved siden av en fast 100% jobb, vil næringsinntekten kunne påvirke beregningen av foreldrepenger.",
+                "Foreldrepenger beregnes ut fra inntekten din.",
+                "Hvis næringsinntekten ikke er med i beregningen, kan det påvirke utbetalingen av foreldrepenger.",
+                "Det er viktig å oppgi all relevant inntekt i søknaden for å få en korrekt beregning av foreldrepenger."
+            ],
+            "has_missing_facts": false,
+            "has_hallucinations": true
+        },
+        {
+            "index": 42,
+            "metrics": {
+                "precision": 0.5714,
+                "recall": 0.5,
+                "f1_score": 0.5333,
+                "true_positives": 4,
+                "false_positives": 3,
+                "false_negatives": 4,
+                "total_response_claims": 7,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Engangsstønad og foreldrepenger er to separate ytelser.",
+                "Engangsstønad er et engangsbeløp til de som ikke har rett på foreldrepenger.",
+                "Man velger ikke varighet på foreldrepenger i søknaden om engangsstønad.",
+                "Hvis man ønsker å søke om foreldrepenger, må man sende en egen søknad for det.",
+                "Man kan velge 49 uker med 100% dekningsgrad for foreldrepenger.",
+                "Man kan velge 59 uker med 80% dekningsgrad for foreldrepenger.",
+                "Man kan søke om foreldrepenger på nav.no."
+            ],
+            "ref_claims_list": [
+                "Engangsstønad er en engangsutbetaling.",
+                "Engangsstønad er ikke avhengig av permisjonens lengde.",
+                "For å søke om foreldrepenger må du sende inn en egen søknad.",
+                "I søknaden om foreldrepenger kan du legge inn periodene du ønsker å ta ut foreldrepenger.",
+                "I søknaden om foreldrepenger kan du justere tidsrommet for hver periode.",
+                "Du kan ikke få både engangsstønad og foreldrepenger.",
+                "Du må velge én av ytelsene: engangsstønad eller foreldrepenger.",
+                "Hvis du har sendt inn søknad om engangsstønad, kan du ikke ombestemme deg etter at du har fått et vedtak."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 43,
+            "metrics": {
+                "precision": 0.7143,
+                "recall": 0.7143,
+                "f1_score": 0.7143,
+                "true_positives": 5,
+                "false_positives": 2,
+                "false_negatives": 2,
+                "total_response_claims": 7,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 7,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "EØS-borgere fra Polen trenger ikke å ha 5 års sammenhengende medlemskap i norsk folketrygd alene.",
+                "EØS-reglene tillater sammenlegging av trygdetid fra flere EØS-land.",
+                "Trygdeperioder opptjent i Polen kan legges sammen med norsk trygdetid for å oppfylle kravet om 5 års medlemskap.",
+                "For å få AAP må man være medlem i folketrygden på søknadstidspunktet.",
+                "Trygdetid fra Polen kan medregnes for AAP.",
+                "For å få AAP må man ha nedsatt arbeidsevne med minst 50% på grunn av sykdom eller skade.",
+                "NAV vurderer hver sak individuelt."
+            ],
+            "ref_claims_list": [
+                "For å ha rett til arbeidsavklaringspenger (AAP) er det som hovedregel krav om at du har vært medlem i norsk folketrygd sammenhengende i minst 5 år.",
+                "Det finnes unntak for personer som har vært medlem av trygdeordningen i et annet EU/EØS-land, som Polen.",
+                "Perioder med medlemskap i et annet EU/EØS-land kan legges sammen med perioder med medlemskap i norsk folketrygd for å oppfylle kravet om minst 5 års medlemskap.",
+                "Du må ha vært medlem i minst ett år før du søker om AAP.",
+                "Du må tidligere ha vært medlem av folketrygden, eller ha vært medlem av trygdeordningen i et annet EU/EØS-land i løpet av de siste fem årene før du søker.",
+                "For å få en konkret vurdering av din situasjon, må du sende inn en søknad om AAP.",
+                "Avdelingen som behandler søknaden vil vurdere om du oppfyller vilkårene."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 44,
+            "metrics": {
+                "precision": 0.3636,
+                "recall": 0.5,
+                "f1_score": 0.4211,
+                "true_positives": 4,
+                "false_positives": 7,
+                "false_negatives": 4,
+                "total_response_claims": 11,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 11,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Brukeren ønsker å sjekke status på sin henvendelse om fornyelse av dagpenger.",
+                "Avsender har ikke tilgang til NAVs systemer.",
+                "Avsender har ikke tilgang til brukerens personlige sak.",
+                "Avsender kan ikke bekrefte om brukerens henvendelse er mottatt.",
+                "Brukeren kan logge inn på Ditt NAV på nav.no for å se status på sin sak.",
+                "Brukeren kan logge inn på Ditt NAV på nav.no for å se eventuelle meldinger.",
+                "Brukeren kan sjekke «Mine henvendelser» i innboksen sin på nav.no.",
+                "Brukeren kan kontakte NAV direkte på telefon 55 55 33 33.",
+                "NAV har åpent på telefon 55 55 33 33 på hverdager fra 09:00 til 15:00.",
+                "NAVs behandlingstid for dagpengesøknader er vanligvis noen uker.",
+                "NAVs behandlingstid for dagpengesøknader kan variere."
+            ],
+            "ref_claims_list": [
+                "Du kan følge med på statusen for saken din ved å logge inn på nav.no/arbeid/dagpenger/mine-dagpenger.",
+                "På nav.no/arbeid/dagpenger/mine-dagpenger kan du se om dokumentasjonen er mottatt.",
+                "På nav.no/arbeid/dagpenger/mine-dagpenger kan du se om det er behov for ytterligere informasjon.",
+                "Saksbehandlingstiden kan variere avhengig av om all nødvendig dokumentasjon er mottatt.",
+                "Informasjon om saksbehandlingstider finnes på nav.no/saksbehandlingstider#dagpenger.",
+                "Hvis saksbehandlingstiden er utgått, kan Nav sende en henvendelse til saksbehandlende enhet.",
+                "Du må sende meldekort hver 14. dag mens du venter på svar, dersom du har meldeplikt.",
+                "Hvis du ikke har meldeplikt, må du bekrefte din status som arbeidssøker hver 14. dag."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 45,
+            "metrics": {
+                "precision": 0.4,
+                "recall": 0.3077,
+                "f1_score": 0.3478,
+                "true_positives": 4,
+                "false_positives": 6,
+                "false_negatives": 9,
+                "total_response_claims": 10,
+                "total_reference_claims": 13
+            },
+            "resp_claims_count": 10,
+            "ref_claims_count": 13,
+            "resp_claims_list": [
+                "Both mother and father/co-parent can be entitled to parental benefits.",
+                "To be entitled to parental benefits, you must have been employed and had pensionable income for at least 6 of the last 10 months.",
+                "Log in to nav.no with BankID or other electronic ID to apply.",
+                "Fill out the digital application for parental benefits.",
+                "Each parent must submit their application separately.",
+                "Apply no later than 6 weeks after childbirth.",
+                "It is recommended to apply early to avoid payment delays.",
+                "The employer must submit an income statement to NAV.",
+                "You must have a parental benefit plan showing who is taking leave and when.",
+                "The benefit period is a total of 49 weeks (100%) or 59 weeks (80%)."
+            ],
+            "ref_claims_list": [
+                "Søknad om foreldrepenger bør sendes 4-6 uker før foreldrepengeperioden starter.",
+                "Søknaden om foreldrepenger kan sendes digitalt via Nav sine nettsider.",
+                "Foreldrepenger må tas ut innen barnet fyller tre år.",
+                "Foreldrepenger må tas ut før en ny stønadsperiode for et nytt barn starter.",
+                "Man kan ha rett til foreldrepenger opptil tre kalendermåneder tilbake i tid fra måneden Nav mottok søknaden.",
+                "Hvis man er arbeidstaker, må arbeidsgiver sende inntektsmelding tidligst 4 uker før perioden med uttak eller utsettelse starter.",
+                "For å ha rett til fedrekvote eller medmorkvote, må mor også ha opptjent rett til foreldrepenger.",
+                "For å ha rett til fedrekvote eller medmorkvote, må mor ikke ha valgt engangsstønad.",
+                "Man kan ta ut fedrekvote/medmorkvote og eventuell fellesperiode som mor ikke har brukt opp.",
+                "Foreldrepenger kan tas ut i kombinasjon med delvis arbeid.",
+                "Kombinasjon av foreldrepenger og delvis arbeid må oppgis i søknaden.",
+                "Mer informasjon og søknad om foreldrepenger finnes på Nav sine nettsider.",
+                "Man kan kontakte Nav direkte for spørsmål eller hjelp med søknadsprosessen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 46,
+            "metrics": {
+                "precision": 0.3333,
+                "recall": 0.2,
+                "f1_score": 0.25,
+                "true_positives": 1,
+                "false_positives": 2,
+                "false_negatives": 4,
+                "total_response_claims": 3,
+                "total_reference_claims": 5
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 5,
+            "resp_claims_list": [
+                "Helsepersonell kan sende søknad om sykepenger på vegne av en bruker.",
+                "Dette gjøres via fullmakt.",
+                "Brukeren må ikke være i stand til å gjøre det selv for at helsepersonell skal kunne sende søknad om sykepenger på vegne av dem."
+            ],
+            "ref_claims_list": [
+                "Helsepersonell kan sende en søknad om sykepenger på papir på vegne av brukeren.",
+                "Dette er mulig dersom brukeren er for syk til å fylle ut søknaden selv.",
+                "Det er viktig at det legges ved dokumentasjon som bekrefter medisinske grunner til at brukeren ikke selv kan undertegne søknaden.",
+                "Legen kan gi utfyllende informasjon på sykmeldingen.",
+                "Legen kan skrive et vedlegg."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 47,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 6,
+                "false_negatives": 7,
+                "total_response_claims": 6,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 6,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "En søknad om utsettelse av foreldrepenger kan trekkes/slettes ved å kontakte NAV direkte.",
+                "Man kan ringe NAV på telefonnummer 55 55 33 33 for å trekke/slette en søknad om utsettelse av foreldrepenger.",
+                "Man kan skrive til NAV via «Skriv til oss» på nav.no (innlogging kreves) for å trekke/slette en søknad om utsettelse av foreldrepenger.",
+                "Man kan møte opp på sitt lokale NAV-kontor for å trekke/slette en søknad om utsettelse av foreldrepenger.",
+                "Hvis far søker overtakelse, anbefales det å informere NAV om dette samtidig.",
+                "Informasjon om at far søker overtakelse kan bidra til at sakene behandles i sammenheng."
+            ],
+            "ref_claims_list": [
+                "Du kan slette søknaden din om utsettelse av foreldrepenger ved å logge inn på din Nav-konto.",
+                "Du kan gå til søknaden for å avbryte eller slette den.",
+                "Når du sletter søknaden, vil du starte på nytt hvis det er første gang du søker.",
+                "Hvis du allerede har fått innvilget foreldrepenger, slettes kun endringene du hadde lagt inn.",
+                "Tidligere innvilgede perioder vises under \"Din plan\" i søknaden etter sletting av endringer.",
+                "Du trenger ikke å endre din plan for foreldrepenger hvis far søker om overtakelse.",
+                "Far kan søke om foreldrepenger i den aktuelle perioden han skal overta."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 48,
+            "metrics": {
+                "precision": 0.75,
+                "recall": 0.375,
+                "f1_score": 0.5,
+                "true_positives": 3,
+                "false_positives": 1,
+                "false_negatives": 5,
+                "total_response_claims": 4,
+                "total_reference_claims": 8
+            },
+            "resp_claims_count": 4,
+            "ref_claims_count": 8,
+            "resp_claims_list": [
+                "Overgangsstønad kan forlenges utover tre år i noen tilfeller.",
+                "Overgangsstønad kan forlenges hvis du er under utdanning som er nødvendig for å bli selvforsørget.",
+                "Overgangsstønad kan forlenges hvis barnet ditt har særlige omsorgsbehov som hindrer deg i å jobbe.",
+                "Du må søke om forlengelse via NAV før stønaden utløper."
+            ],
+            "ref_claims_list": [
+                "Du kan søke om å forlenge overgangsstønaden din ut skoleåret.",
+                "Forlengelse kan innvilges for inntil 9 måneder.",
+                "Formålet med forlengelsen er å fullføre studiet ditt.",
+                "Du må sende inn en søknad til Nav for å få forlengelse.",
+                "I søknaden må du spesifisere at du ønsker forlengelse på grunn av pågående utdanning.",
+                "Du må dokumentere at du er i utdanning.",
+                "Du må dokumentere at utdanningen varer til juni.",
+                "Du kan kontakte Nav for veiledning om prosessen."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        },
+        {
+            "index": 49,
+            "metrics": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "true_positives": 0,
+                "false_positives": 3,
+                "false_negatives": 7,
+                "total_response_claims": 3,
+                "total_reference_claims": 7
+            },
+            "resp_claims_count": 3,
+            "ref_claims_count": 7,
+            "resp_claims_list": [
+                "Jeg har ikke tilgang til å søke på nav.no eller andre nettsteder i sanntid.",
+                "Jeg kan ikke hente oppdatert informasjon om denne spesifikke endringen.",
+                "NAV kan kontaktes på telefon 55 55 33 33."
+            ],
+            "ref_claims_list": [
+                "Fra 20. mars vil det være endringer for arbeidssøkere registrert hos Nav.",
+                "Hver 14. dag vil arbeidssøkere få en oppgave på Min side.",
+                "Oppgaven på Min side vil be om bekreftelse på at man fortsatt ønsker å være registrert som arbeidssøker.",
+                "Fristene for bekreftelsen vil være de samme som tidligere.",
+                "Hvis man mottar pengestøtte, må man også sende inn meldekort for den aktuelle pengestøtten.",
+                "Dagpengemottakere skal fortsette å bekrefte sin status som arbeidssøkere gjennom dagpengemeldekortet.",
+                "Dagpengemottakere vil ikke få bekreftelsesoppgave på Min side så lenge de har meldekort for dagpenger."
+            ],
+            "has_missing_facts": true,
+            "has_hallucinations": true
+        }
+    ]
+}

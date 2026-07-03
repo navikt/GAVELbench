@@ -64,11 +64,11 @@ lint:
 
 # Lag et preview med Quarto
 preview:
-    uv run --group quarto quarto preview .
+    uv run --group quarto quarto preview quarto
 
 # Bygg Quarto-prosjektet
 render:
-    uv run --group quarto quarto render .
+    uv run --group quarto quarto render quarto
 
 # ── Misc ──────────────────────────────────────────────────────────────────────
 
