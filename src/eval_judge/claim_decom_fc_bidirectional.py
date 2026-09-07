@@ -202,7 +202,7 @@ async def evaluate_dataset_batch(
     """Evaluate the entire dataset in batches to manage concurrency and rate limits.
 
     Args:
-        dataset (Dataset): The HuggingFace Dataset to evaluate.
+        dataset (Dataset): The (HuggingFace) style dataset to evaluate.
         client (genai.Client): The GenAI client for making requests.
         model (str): The model to use for evaluation.
         batch_size (int): The number of rows to process in each batch.

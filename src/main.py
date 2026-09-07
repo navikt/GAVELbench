@@ -32,7 +32,7 @@ import json as _json
 import os
 import sys
 
-from evaluate import evaluate
+from evaluate_stat import evaluate
 from fetch_data import fetch_bob_data, sample_by_overkategori
 from generate import answered_questions, run_pipeline
 from models import active_model_ids

@@ -38,6 +38,8 @@ except ImportError:
 # ==================== Configuration ====================
 CONFIG_PATH = "src/config.yml"
 cfg = _load_cfg(CONFIG_PATH)
+RESULTS_DIR = "./data/results_judge"
+UPLOAD_TO_STORAGE = True  # upload results to cloud storage
 
 _PROJECT_ID = cfg["project"]
 _LOCATION = cfg["location"]
@@ -79,7 +81,7 @@ def load_evaluation_dataset(
             DataSourceManager("config/data_sources.json")
         ).get_dataset(key=model, categories_key=categories_key, mapping_key=mapping_key)
 
-        print(f"📦 Loaded {len(raw_data)} total rows from dataset '{model}'")
+        print(f"Loaded {len(raw_data)} total rows from dataset '{model}'")
 
         # Check if we have overkategori column
         if "overkategori" not in raw_data.column_names:
@@ -367,8 +369,8 @@ async def run_judge_eval() -> None:
             return
 
     # Create results directory if it doesn't exist
-    results_dir = "./data/results_judge"
-    os.makedirs(results_dir, exist_ok=True)
+    # results_dir = "./data/results_judge"
+    os.makedirs(RESULTS_DIR, exist_ok=True)
 
     # Track aggregate results across multiple datasets
     all_mean_results: Dict[str, Any] = {}
@@ -461,14 +463,14 @@ async def run_judge_eval() -> None:
 
             # Save main results
             output_filename = f"fc_eval_results.{dataset_name}.json"
-            output_path = os.path.join(results_dir, output_filename)
+            output_path = os.path.join(RESULTS_DIR, output_filename)
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(full_results, f, indent=4, ensure_ascii=False, default=str)
             print(f"\n✓ Detailed results saved to {output_path}")
 
             # Save mean results (overall)
             output_filename = f"fc_eval_mean_results.{dataset_name}.json"
-            output_path = os.path.join(results_dir, output_filename)
+            output_path = os.path.join(RESULTS_DIR, output_filename)
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(mean_results_dict, f, indent=4, ensure_ascii=False)
             print(f"✓ Mean results saved to {output_path}")
@@ -476,7 +478,7 @@ async def run_judge_eval() -> None:
             # Save per-overkategori summary if available
             if per_overkategori_summary:
                 output_filename = f"fc_eval_overkategori_summary.{dataset_name}.json"
-                output_path = os.path.join(results_dir, output_filename)
+                output_path = os.path.join(RESULTS_DIR, output_filename)
                 with open(output_path, "w", encoding="utf-8") as f:
                     json.dump(
                         {
@@ -514,7 +516,7 @@ async def run_judge_eval() -> None:
             "datasets_processed": [name for name, _ in datasets_to_process],
             "individual_results": all_mean_results,
         }
-        combined_path = os.path.join(results_dir, "combined_eval_summary.json")
+        combined_path = os.path.join(RESULTS_DIR, "combined_eval_summary.json")
         with open(combined_path, "w", encoding="utf-8") as f:
             json.dump(combined_summary, f, indent=4, ensure_ascii=False)
         print(f"\n📊 Combined summary saved to {combined_path}")
@@ -522,7 +524,7 @@ async def run_judge_eval() -> None:
         # Save combined overkategori results
         if all_overkategori_results:
             combined_overkat_path = os.path.join(
-                results_dir, "combined_overkategori_summary.json"
+                RESULTS_DIR, "combined_overkategori_summary.json"
             )
             with open(combined_overkat_path, "w", encoding="utf-8") as f:
                 json.dump(
@@ -540,10 +542,16 @@ async def run_judge_eval() -> None:
     # Print final summary
     print(f"\n{'=' * 80}")
     print("🎉 Evaluation completed!")
-    print(f"Results stored in: {results_dir}")
+    print(f"Results stored in: {RESULTS_DIR}")
     print("=" * 80)
 
 
 if __name__ == "__main__":
     # Run the evaluation asynchronously
     asyncio.run(run_judge_eval())
+
+    if UPLOAD_TO_STORAGE:
+        from storage import upload_dir
+
+        print("Uploading results to storage...")
+        upload_dir(RESULTS_DIR, RESULTS_DIR, CONFIG_PATH)
