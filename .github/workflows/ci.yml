@@ -19,3 +19,25 @@ jobs:
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
       - run: uv run --only-dev ruff check .
       - run: uv run --only-dev ruff format --check .
+
+  build-and-deploy:
+    name: Build and deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build and push image
+        id: docker-build-push
+        uses: nais/docker-build-push@v0
+        with:
+          team: tada
+      - name: Deploy to NAIS
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/app.yaml
+          WORKLOAD_IMAGE: ${{ steps.docker-build-push.outputs.image }}
