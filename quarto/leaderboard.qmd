@@ -1,0 +1,16 @@
+---
+# Denne filen inneholder innbyggingen av det separat hostede leaderboardet
+---
+
+# Leaderboard
+
+<iframe
+  src="https://llm-leaderboard.ansatt.nav.no"
+  title="Interaktiv modell-leaderboard"
+  width="100%"
+  height="900"
+  style="border: 0;"
+></iframe>
+
+Åpne [leaderboardet i eget vindu](https://llm-leaderboard.ansatt.nav.no) hvis
+det ikke vises over.

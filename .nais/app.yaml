@@ -1,0 +1,28 @@
+apiVersion: nais.io/v1
+kind: Application
+metadata:
+  name: llm-leaderboard
+  namespace: tada
+  labels:
+    team: tada
+spec:
+  port: 8080
+  ingresses:
+    - https://llm-leaderboard.ansatt.nav.no
+  liveness:
+    path: /
+    initialDelay: 5
+    periodSeconds: 10
+    failureThreshold: 3
+  readiness:
+    path: /
+    initialDelay: 5
+    periodSeconds: 10
+    failureThreshold: 3
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "100m"
+      memory: "256Mi"

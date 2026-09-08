@@ -15,17 +15,25 @@ pipeline *ARGS:
 skip-fetch *ARGS:
     uv run python src/main.py --skip-bq-fetch {{ARGS}}
 
-# Only generate answers from all models (no fetch, evaluate or report)
-generate:
-    uv run python src/generate.py
+# Sample fresh unanswered questions and generate answers (no evaluate or report)
+generate *ARGS:
+    uv run python src/main.py --skip-eval {{ARGS}}
 
 # Skip fetch and generation; re-evaluate existing generated answers and write report
-eval *ARGS:
+evaluate *ARGS:
     uv run python src/main.py --skip-generation {{ARGS}}
 
 # Only regenerate report artifacts from existing JSON results in data/results/
 report:
     uv run python src/main.py --only-report
+
+# Create aggregate and per-overcategory leaderboard CSV files
+leaderboard *ARGS:
+    uv run python src/create_leaderboard.py {{ARGS}}
+
+# Start the standalone interactive Dash leaderboard
+leaderboard-app:
+    uv run python src/leaderboard_app.py
 
 # ── Tests ─────────────────────────────────────────────────────────────────────
 
@@ -68,11 +76,11 @@ lint:
 
 # Lag et preview med Quarto
 preview:
-    uv run --group quarto quarto preview .
+    uv run --group quarto quarto preview quarto
 
 # Bygg Quarto-prosjektet
 render:
-    uv run --group quarto quarto render .
+    uv run --group quarto quarto render quarto
 
 # ── Misc ──────────────────────────────────────────────────────────────────────
 

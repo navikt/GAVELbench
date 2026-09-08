@@ -2,6 +2,10 @@
 
 Benchmark for å evaluere hvor godt LLM-er svarer på spørsmål om Navs tjenester, ved hjelp av ekte spørsmål og referansesvar fra Bob (Navs KI-støtte til kontaktsenteret).
 
+## Tanken bak
+
+Vi ønsker å evaluere språkmodeller på spørsmål opp mot en referanse i form av gode svar på spørsmål Nav får fra borgere.
+
 ## Hva programmet gjør
 
 Pipelinen er delt i fire tydelige steg:
@@ -81,6 +85,23 @@ just render
 
 QMD-filene er statiske (ingen Python-kode) og genereres automatisk av `src/report.py`. De trenger ikke redigeres manuelt.
 
+### Interaktivt leaderboard
+
+Det interaktive leaderboardet er en separat Dash-app, som kan startes lokalt:
+
+```bash
+just leaderboard-app
+```
+
+Appen leser resultater fra `data/results/` og kjører som standard på
+`http://localhost:8080`. Quarto-boken bygger inn den deployede tjenesten på
+`https://llm-leaderboard.ansatt.nav.no`; tjenesten må tillate innbygging fra
+Quarto-vertsstedet.
+
+NAIS-konfigurasjonen ligger i `.nais/app.yaml` og definerer applikasjonen
+`llm-leaderboard` i teamet `tada`. Bygge- og deployflyten skal sette manifestets
+container-image ved deploy.
+
 ### Metrikker
 
 | Metrikk | Beskrivelse | Retning |
@@ -91,7 +112,7 @@ QMD-filene er statiske (ingen Python-kode) og genereres automatisk av `src/repor
 | Jensen-Shannon-divergens | Avstand mellom ordfordelinger | ↓ lavere er bedre |
 | NLI entailment | Sannsynlighet for at generert svar impliserer referansesvaret (`alexandrainst/scandi-nli-base`) | ↑ høyere er bedre |
 
-Nye metrikker legges til ved å dekorere en funksjon med `@register_metric("navn")` i `src/evaluate.py`.
+Nye metrikker legges til ved å dekorere en funksjon med `@register_metric("navn")` i `src/evaluate.py`. Metrikkfunksjonen returnerer per-par-skårer (`dict[str, list[float]]`); rammeverket regner selv ut gjennomsnitt og standardfeil (vist som feilstolper på søyleplottene).
 
 ## Kodestruktur
 
@@ -125,10 +146,14 @@ data/
 ├── kategorier_mapping.json        ← mapping kategori → overkategori (i git)
 ├── bob_data.json                  ← samplet treningssett (privat, ikke i git)
 ├── generated/                     ← genererte svar per modell (privat, ikke i git)
-└── results/                       ← evalueringsresultater
+├── results/                       ← evalueringsresultater
     ├── evaluation_report.json              ← aggregerte scores (i git)
     ├── evaluation_report_scores_per_overkategori.json  ← per-kategori scores (i git)
+├── report/                        ← rapportartefakter
     └── *.png                               ← radar- og søyleplott (i git)
+└── leaderboard/                   ← ledertabeller
+    ├── leaderboard.csv                     ← samlet leaderboard
+    └── leaderboard_<kategori>.csv          ← leaderboard per overkategori
 ```
 
 ## Modeller
@@ -145,10 +170,13 @@ models:
     provider: vertex_ai
     description: Rask og kostnadseffektiv Gemini-modell
     concurrency: 10
+    display_on_leaderboard: false
 ```
 
 Støttede tilbydere: `vertex_ai`, `vertex_anthropic`, `huggingface`.
 For å legge til en ny tilbyder, legg til en branch i `run_model()` i `src/generate.py`.
+Sett `display_on_leaderboard: true` for modeller som skal vises av
+`src/create_leaderboard.py`; modellen er skjult som standard.
 
 ## Utvikling
 
